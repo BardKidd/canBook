@@ -1,0 +1,52 @@
+<template>
+  <div>
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              管理控制台
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <router-link to="/admin/products" class="nav-link" active-class="active">
+              <i class="fas fa-shopping-cart"></i>
+              商品列表
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/admin/orderlist" class="nav-link" active-class="active">
+              <i class="fas fa-list"></i>
+              訂單列表
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/admin/coupon" class="nav-link" active-class="active">
+              <i class="fas fa-ticket-alt"></i>
+              優惠券
+            </router-link>
+          </li>
+        </ul>
+
+        <h6
+          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+        >
+          <span>客戶購物</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              模擬訂單
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</template>
