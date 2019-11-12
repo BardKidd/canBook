@@ -29,15 +29,15 @@
             <span v-else>未啟用</span>
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm">編輯</button>
-            <button type="button" class="btn btn-danger btn-sm">刪除</button>
+            <button type="button" class="btn btn-primary btn-sm" @click.prevent="openCouponModal(false, item)">編輯</button>
+            <button type="button" class="btn btn-danger btn-sm" @click.prevent="openDelCouponModal">刪除</button>
           </td>
         </tr>
       </tbody>
     </table>
 
     <!-- 分頁 -->
-    <!-- <Pagination :pagination = pagination @emitPage = getProducts></Pagination> -->
+    <Pagination :pagination = pagination @emitPage = getCoupons></Pagination>
 
     <!-- 新增/編輯 -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog"
@@ -96,7 +96,7 @@
     </div>
 
     <!-- 刪除 -->
-    <!-- <div class="modal fade" id="delProductModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="delCouponModal" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
@@ -109,28 +109,33 @@
             </button>
           </div>
           <div class="modal-body">
-            是否刪除 <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
+            是否刪除 <strong class="text-danger">{{ tempCoupon.title }}</strong> 商品(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger" @click="delProduct"
+            <button type="button" class="btn btn-danger" @click="delCoupon"
               >確認刪除</button>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import $ from 'jquery';
+import Pagination from './Pagination';
 export default {
+    components: {
+      Pagination,
+    },
     data() {
       return {
         isLoading: false,
         coupons: {},
         tempCoupon: {},
         isNew: false,
+        pagination: {},
       }
     },
     methods: {
@@ -142,21 +147,45 @@ export default {
                 console.log(response.data);
                 vm.isLoading = false;
                 vm.coupons = response.data.coupons;
+                vm.pagination = response.data.pagination;
             })
         },
-        openCouponModal(isNew) {
+        openCouponModal(isNew, item) {
           if(isNew){
             this.tempCoupon = {};
             $('#couponModal').modal('show');
           }
+          else{
+            this.tempCoupon = Object.assign({}, item);
+            $('#couponModal').modal('show');
+          }
         },
         updataCoupon() {
-          const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
+          let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
+          let httpMethod = 'post';
           const vm = this;
-          this.$http.post(api).then((response) => {
+          if(vm.isNew === false){
+              api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+              httpMethod = 'put';
+          }
+          this.$http[httpMethod](api, {data: vm.tempCoupon}).then((response) => {
             console.log(response.data);
             if(response.data.success) {
               $('#couponModal').modal('hide');
+              vm.getCoupons();
+            }
+          })
+        },
+        openDelCouponModal() {
+          $('#delCouponModal').modal('show');
+        },
+        delCoupon() {
+          const vm = this;
+          const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+          this.$http.delete(api).then((response) => {
+            console.log(response.data);
+            if(response.data.success){
+              $('#delCouponModal').modal('hide');
               vm.getCoupons();
             }
           })

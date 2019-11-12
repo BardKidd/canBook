@@ -5,6 +5,7 @@ import Login from '@/components/pages/Login';
 import Products from '@/components/pages/Products';
 import Orderlist from '@/components/pages/Orderlist';
 import Coupon from '@/components/pages/Coupon';
+import CustomerOrder from '@/components/pages/CustomerOrder';
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,12 @@ export default new VueRouter({
                     path: 'coupon',
                     name: 'Coupon',
                     component: Coupon,
+                    meta: { requiresAuth: true },
+                },
+                {
+                    path: 'customerorder',
+                    nameL: 'CustomerOrder',
+                    component: CustomerOrder,
                     meta: { requiresAuth: true },
                 }
             ]
