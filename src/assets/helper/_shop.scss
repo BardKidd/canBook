@@ -1,0 +1,223 @@
+@import './mixins';
+
+.shopPaddingTop {
+    padding-top: 10rem;
+}
+// .classificationAndCart {
+//     position: fixed;
+// }
+
+.booksClassification {
+    padding-bottom: 1rem;
+    border-bottom: 0.5px dotted #95a5a6;
+    > strong {
+        font-size: fontSize(22px);
+        font-family: '微軟正黑體', sans-serif;
+        font-weight: bolder;
+        color: #863f20;
+        margin-right: 6rem;
+    }
+    > select {
+        appearance: none;
+        margin-top: 1rem;
+    }
+    .classificationStyle {
+        font-family: '微軟正黑體', sans-serif;
+        font-size: fontSize(16px);
+        background-color: white;
+        color: #863f20;
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        border-radius: 5px;
+        border: 0.5px solid #863f20;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        i {
+            padding-right: 0.5rem;
+        }
+    }
+    .classificationStyle:hover {
+        background-color: #eee;
+    }
+}
+.shoppingCartList {
+    > .shoppingCartListTitle {
+        padding-top: 1rem;
+        > strong {
+            font-size: fontSize(22px);
+            font-family: '微軟正黑體', sans-serif;
+            font-weight: bolder;
+            color: #863f20;
+            margin-right: 6rem;
+        }
+        > button {
+            font-family: '微軟正黑體', sans-serif;
+            font-weight: bolder;
+        }
+        > div {
+            margin-left: 0.5rem;
+        }
+    }
+}
+.countRound {
+    color: white;
+    display: inline-block;
+    border-radius: 30px;
+    background: #555;
+    padding: 0.05rem 0.5rem;
+    font-weight: bolder;
+}
+.lumpSum {
+    @extend %boxStyle;
+    position: relative;
+    > strong {
+        font-size: fontSize(16px);
+        font-family: '微軟正黑體', sans-serif;
+        color: #555;
+    }
+    > span {
+        display: inline-block;
+        color: #863f20;
+        font-size: fontSize(16px);
+        font-family: '微軟正黑體', sans-serif;
+        font-weight: bolder;
+        text-align: right;
+        position: absolute;
+        right: 1rem;
+    }
+}
+.shoppingCartContent {
+    @extend %boxStyle;
+    position: relative;
+    > button {
+        vertical-align: text-bottom;
+    }
+    > div {
+        display: inline-block;
+        font-size: fontSize(15px);
+        font-family: '微軟正黑體', sans-serif;
+        color: #555;
+        font-weight: bolder;
+        margin-left: 1rem;
+        > p {
+            margin: 0;
+        }
+    }
+    > span {
+        color: #863f20;
+        font-size: fontSize(16px);
+        font-family: '微軟正黑體', sans-serif;
+        font-weight: bolder;
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+.enterCoupon {
+    @extend %boxStyle;
+    position: relative;
+    > input {
+        width: 82%;
+        display: inline-block;
+        font-weight: bolder;
+    }
+    > div {
+        display: inline-block;
+        right: 1rem;
+        top: 0.5rem;
+        position: absolute;
+        > button {
+            color: white;
+            background-color: #863f20;
+        }
+        > button:hover {
+            background-color: #552814;
+            color: white;
+        }
+    }
+}
+// .totalBooks {
+//     position: relative;
+//     left: 38.5%;
+// }
+.totalBooksTitle {
+    font-size: fontSize(28px);
+    font-weight: 500;
+    font-family: '微軟正黑體', sans-serif;
+    color: black;
+    margin-bottom: 1rem;
+}
+.totalBooksCard {
+    display: inline-grid;
+    margin-bottom: 3rem;
+    > .cardImg {
+        overflow: hidden;
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        cursor: pointer;
+        > img {
+            width: 100%;
+        }
+    }
+    .totalBooksCardFontStyle {
+        width: 100%;
+        > strong {
+            font-size: fontSize(18px);
+            font-weight: bolder;
+            font-family: '微軟正黑體', sans-serif;
+            display: block;
+        }
+        > span {
+            font-family: Arial, sans-serif;
+            font-weight: bolder;
+            color: #d13f2f;
+            font-size: fontSize(16px);
+        }
+        > i {
+            position: absolute;
+            right: 10%;
+            font-size: fontSize(16px);
+            color: gray;
+            cursor: pointer;
+        }
+    }
+}
+.shoppingCartIcon {
+    border: 3px solid#aaa;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 99;
+    background-color: white;
+    cursor: pointer;
+    > i {
+        position: absolute;
+        @extend %center-vertically;
+        font-size: fontSize(28px);
+        color: #777;
+    }
+    > .shoppingCartQty {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-color:#555;
+        color:white;
+        border-radius: 30px;
+        right: -13%;
+        text-align: center;
+        top: 0%;
+        font-weight: bold;
+    }
+}
+.shoppingCartIcon:hover {
+    background-color: #aaa;
+    > i {
+        color: white;
+    }
+}

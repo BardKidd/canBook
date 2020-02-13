@@ -1,0 +1,84 @@
+@import './mixins';
+
+.shopPaddingBottom {
+    padding-bottom: 1rem;
+}
+.backShop {
+    font-size: fontSize(18px);
+}
+.shopCheckBox {
+    padding-bottom: 2rem;
+    border-bottom: 0.5px dotted #bfcece;
+    margin-bottom: 3rem;
+}
+.productShop {
+    font-family: '微軟正黑體', Arial, sans-serif;
+    color: #424949;
+    font-weight: bolder;
+    > .productShopTitle {
+        border-bottom: 0.5px dotted #424949;
+        margin-bottom: 1rem;
+        > span {
+            background-color: #863f20;
+            color: white;
+            border-radius: 5px;
+            padding: 0.2rem;
+        }
+        > h2 {
+            margin-top: 1rem;
+        }
+    }
+    > .productShopContent {
+        > span {
+            font-size: fontSize(18px);
+            color: #863f20;
+        }
+        > p {
+            margin-top: 1rem;
+        }
+    }
+    > .productShopPrice {
+        > strong {
+            color: #863f20;
+            font-size: fontSize(20px);
+            display: inline-block;
+            padding-right: 1rem;
+        }
+        > p {
+            display: inline-block;
+            text-decoration: line-through;
+        }
+    }
+    > .productShopQuantity {
+        > select {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: fontSize(17px);
+            color: black;
+            border-radius: 5px;
+        }
+        > p {
+            text-align: right;
+            font-size: fontSize(20px);
+            color: #424949;
+            margin-top: 1rem;
+            > strong {
+                color: #863f20;
+            }
+        }
+    }
+    > .productShopAdd {
+        border-top: 0.5px dotted #424949;
+        padding-top: 1rem;
+        > div {
+            > button {
+                background-color: #863f20;
+                color: white;
+                width: 100%;
+            }
+            > button:hover {
+                background-color: #632d16;
+            }
+        }
+    }
+}

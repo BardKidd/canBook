@@ -15,7 +15,7 @@
                 </h5>
                 <p class="card-text">{{ item.content }}</p>
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <div class="h5" v-if="item.price === item.origin_price">{{ item.origin_price }} 元</div>
+                    <div class="h5" v-if="item.price === item.origin_price">售價 {{ item.origin_price }} 元</div>
                     <del class="h6" v-if="item.price !== item.origin_price">原價 {{ item.origin_price }} 元</del>
                     <div class="h5" v-if="item.price !== item.origin_price">現在只要 {{ item.price }} 元</div>
                 </div>
@@ -25,7 +25,7 @@
                     <i class="fas fa-spinner fa-spin" v-if="item.id === productId"></i>
                     查看更多
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm ml-auto">
+                <button type="button" class="btn btn-outline-danger btn-sm ml-auto" @click.prevent="addToShippingCart(item.id)">
                     <i class="fas fa-spinner fa-spin" v-if="item.id === productId"></i>
                     加到購物車
                 </button>
@@ -36,7 +36,7 @@
 
       <!-- 分頁 -->
       <Pagination :pagination = pagination @emitPage = getCustomerOrder></Pagination>
-      
+
       <!-- 產品 -->
       <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -52,7 +52,7 @@
                 </div>
                 <p class="card-text">{{ product.content }}</p>
                 <div class="d-flex justify-content-between align-items-baseline">
-                    <div class="h5" v-if="product.price === product.origin_price">{{ product.origin_price }} 元</div>
+                    <div class="h5" v-if="product.price === product.origin_price">售價 {{ product.origin_price }} 元</div>
                     <del class="h6" v-if="product.price !== product.origin_price">原價 {{ product.origin_price }} 元</del>
                     <div class="h5" v-if="product.price !== product.origin_price">現在只要 {{ product.price }} 元</div>
                 </div>
@@ -63,14 +63,104 @@
             <div class="modal-footer">
                 <div class="text-muted text-nowrap mr-3">
                     小計
-                    <p>{{ product.num * product.price }}</p>
+                    <span>{{ product.num * product.price }}</span> 元
                 </div>
-                <button type="button" class="btn btn-primary">加入購物車</button>
+                <button type="button" class="btn btn-primary" @click.prevent="addToShippingCart(product.id, product.num)">加入購物車</button>
             </div>
             </div>
         </div>
       </div>
 
+      
+      <div class="col-6 mx-auto">
+        <!-- 購物車 -->
+        <table class="table mt-5">
+            <thead>
+                <th width="40"></th>
+                <th>品名</th>
+                <th width="120">數量</th>
+                <th width="100">單價</th>
+            </thead>
+            <tbody>
+                <tr v-for="(item, key) in shippingCart.carts" :key="key">
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="delShippingCartProduct(item.id)">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
+                    <td class="align-middle">
+                        {{ item.product.title }}
+                        <div class="text-success" v-if="item.coupon">
+                            已套用優惠券
+                        </div>
+                    </td>
+                    <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
+                    <td class="align-middle text-right">{{ Math.round(item.final_total) }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">總計</td>
+                    <td class="text-right">{{ shippingCart.total }}</td>
+                </tr>
+                <tr v-if="shippingCart.total !== shippingCart.final_total">
+                    <td colspan="3" class="text-right text-success">折扣價</td>
+                    <td class="text-right text-success">{{ Math.round(shippingCart.final_total) }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- 優惠券 -->
+        <div class="input-group mb-3 input-group-sm">
+            <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" @click.prevent="useCoupon">
+                    套用優惠碼
+                </button>
+            </div>
+        </div>
+
+        <!-- 個人資料 -->
+        <div class="my-5 row justify-content-center">
+            <form class="col-md" @submit.prevent="sendOrder">
+                <div class="form-group">
+                <label for="useremail">Email</label>
+                <input type="email" class="form-control" name="email" id="useremail" v-model="form.user.email" v-validate="'required|email'"
+                    placeholder="請輸入 Email" :class="{'is-invalid': errors.has('email')}">
+                <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
+                </div>
+            
+                <div class="form-group">
+                <label for="username">收件人姓名</label>
+                <input type="text" class="form-control" name="name" id="username" v-model="form.user.name"
+                    placeholder="輸入姓名" v-validate="'required'" :class="{'is-invalid ': errors.has('name')}">
+                <span class="text-danger" v-if="errors.has('name')">請輸入姓名</span>
+                </div>
+            
+                <div class="form-group">
+                <label for="usertel">收件人手機</label>
+                <input type="tel" class="form-control" id="usertel" name="tel" placeholder="請輸入手機" v-model="form.user.tel"
+                     v-validate="'phone'" :class="{'is-invalid': errors.has('tel')}">
+                <span class="text-danger" v-if="errors.has('tel')">{{ '手機' + errors.first('tel') }}</span>
+                </div>
+            
+                <div class="form-group">
+                <label for="useraddress">收件人地址</label>
+                <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
+                    placeholder="請輸入地址" v-validate="'required'" :class="{'is-invalid': errors.has('address')}">
+                <span class="text-danger" v-if="errors.has('address')">請輸入收件人地址</span>
+                </div>
+            
+                <div class="form-group">
+                <label for="comment">留言</label>
+                <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
+                </div>
+                <div class="text-right">
+                <button class="btn btn-danger">送出訂單</button>
+                </div>
+            </form>
+        </div>
+      </div>
       
   </div>
 </template>
@@ -89,11 +179,24 @@ export default {
             cardProducts: [],
             product: {},
             productId: '',
+            shippingCart: {
+                carts: {}
+            },
+            coupon_code: '',
+            form: {
+                user: {
+                    name: '',
+                    email: '',
+                    tel: '',
+                    address: '',
+                },
+                message: '',
+            }
         }
     },
     methods: {
-        getCustomerOrder(page = 2) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?${page}`;
+        getCustomerOrder(page = 1) {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             const vm = this;
             vm.isLoading = true;
             this.$http.get(api).then((response) => {
@@ -110,16 +213,84 @@ export default {
             this.$http.get(api).then((response) => {
                 console.log(response.data);
                 if(response.data.success) {
-                    vm.product = response.data.product;
                     response.data.product.num = 1;
+                    vm.product = response.data.product;
                     $('#productModal').modal('show');
                     vm.productId = '';
+                }
+            })
+        },
+        addToShippingCart(id, num = 1) {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+            const vm = this;
+            const shippingCart = {
+                product_id: id,
+                qty: num,
+            }
+            this.$http.post(api, { data: shippingCart }).then((response) => {
+                console.log(response.data);
+                vm.getShippingCart();
+                $('#productModal').modal('hide');
+            })
+        },
+        getShippingCart() {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+            const vm = this;
+            vm.isLoading = true;
+            this.$http.get(api).then((response) => {
+                console.log(response.data);
+                vm.isLoading = false;
+                vm.shippingCart = response.data.data;
+            })
+        },
+        delShippingCartProduct(id) {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+            const vm = this;
+            this.$http.delete(api).then((response) => {
+                if(response.data.success) {
+                    console.log(response.data);
+                    vm.getShippingCart();
+                }
+            })
+        },
+        useCoupon() {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+            const vm = this;
+            vm.isLoading = true;
+            const coupon = {
+                code: vm.coupon_code,
+            }
+            this.$http.post(api, { data: coupon }).then((response) => {
+                console.log(response.data);
+                vm.getShippingCart();
+                vm.isLoading = false;
+            })
+        },
+        sendOrder() {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
+            const vm = this;
+            const order = vm.form;
+            vm.isLoading = true;
+            this.$validator.validate().then((result) => {
+                if(result) {
+                    this.$http.post(api, { data: order }).then((response) => {
+                        console.log('訂單已建立', response.data);
+                        if(response.data.success) {
+                            vm.$router.push(`customerorder_check/${response.data.orderId}`);
+                        }
+                        vm.isLoading = false;
+                    })
+                }
+                else{
+                    console.log('欄位不完整');
+                    vm.isLoading = false;
                 }
             })
         }
     },
     created() {
         this.getCustomerOrder();
+        this.getShippingCart();
     }
 }
 </script>

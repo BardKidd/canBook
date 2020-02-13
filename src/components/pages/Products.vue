@@ -29,7 +29,7 @@
             <span v-else>未啟用</span>
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm" @click.prevent="openProductModal(false, item)">編輯</button>
+            <button type="button" class="btn btn-info btn-sm" @click.prevent="openProductModal(false, item)">編輯</button>
             <button type="button" class="btn btn-danger btn-sm" @click.prevent="openDelProductModal(item)">刪除</button>
           </td>
         </tr>

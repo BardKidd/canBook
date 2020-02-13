@@ -11,22 +11,21 @@
           <th>購買款項</th>
           <th width="120">應付金額</th>
           <th width="100">是否付款</th>
-          <th width="100">編輯</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, key) in orders" :key="key">
-          <td>{{ item.paid_date }}</td>
+          <td>{{ item.create_at[0] }}-{{ item.create_at[1] }}-{{ item.create_at[2] }}</td>
           <td>{{ item.user.email }}</td>
-          <td>{{ item.title }}</td>
+          <td>
+            <ul>
+              <li style="list-style: none;" v-for="(item, key) in item.products" :key="key">{{ item.product.title }}{{ item.qty }}{{ item.product.unit }}</li>
+            </ul>
+          </td>
           <td>{{ item.total | currency }}</td>
           <td>
-            <span v-if="item.is_enabled" class="text-success">已付款</span>
+            <span v-if="item.is_paid" class="text-success">已付款</span>
             <span v-else>未付款</span>
-          </td>
-          <td>
-            <button type="button" class="btn btn-primary btn-sm">編輯</button>
-            <button type="button" class="btn btn-danger btn-sm">刪除</button>
           </td>
         </tr>
       </tbody>
@@ -39,6 +38,7 @@
 </template>
 
 <script>
+import $ from 'jquery';
 import Pagination from './Pagination';
 export default {
     components: {
@@ -52,17 +52,26 @@ export default {
         }
     },
     methods: {
-        getOrderlist() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders`;
+        getOrderlist(page = 1) {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
             const vm = this;
             vm.isLoading = true;
             this.$http.get(api).then((response) => {
                 console.log(response.data);
-                vm.pagination = response.data.pagination;
                 vm.orders = response.data.orders;
+                vm.orders.forEach(function(item){
+                  const timestamp = new Date(item.create_at * 1000);
+                  const timestampValue = [
+                    timestamp.getFullYear(),
+                    timestamp.getMonth() + 1,
+                    timestamp.getDate(),
+                  ]
+                  item.create_at = timestampValue;
+                })
+                vm.pagination = response.data.pagination;
                 vm.isLoading = false;
             })
-        }
+        },
     },
     created() {
         this.getOrderlist();

@@ -3,7 +3,7 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" :class="{'disabled': !pagination.has_pre}">
-          <a class="page-link" href="#" aria-label="Previous" @click.prevent="pageComponent(pagination.has_pre - 1)">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="pageComponent(pagination.current_page - 1)">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -11,7 +11,7 @@
           <a class="page-link" href="#" @click.prevent="pageComponent(page)">{{ page }}</a>
         </li>
         <li class="page-item" :class="{'disabled': !pagination.has_next}">
-          <a class="page-link" href="#" aria-label="Next" @click.prevent="pageComponent(pagination.has_next + 1)">
+          <a class="page-link" href="#" aria-label="Next" @click.prevent="pageComponent(pagination.current_page + 1)">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

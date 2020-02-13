@@ -1,0 +1,105 @@
+@import './mixins';
+
+// nav Layout
+.l-nav-table {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    display: inline-block;
+    z-index: 99;
+    @extend %boxSizing;
+    > .l-logo {
+        width: 20%;
+        display: inline-block;
+        // > .l-english {
+        //     font-family: 'EB Garamond', serif;
+        // }
+    }
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    > .l-nav-icon {
+        display: inline-block;
+        position: absolute;
+        right: 15%;
+        top: 10%;
+        > li {
+            @extend %liStyle;
+            letter-spacing: fontSize(16px);
+            font-size: fontSize(20px);
+        }
+    }
+    > .l-nav-mainOption {
+        display: inline-block;
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        > li {
+            @extend %liStyle;
+            font-size: fontSize(18px);
+            font-family: 'Noto Sans TC', serif;
+            padding-right: 2.5rem;
+        }
+        > li:hover {
+            font-weight: bolder;
+        }
+    }
+}
+
+// footer Layout
+footer {
+    overflow: hidden;
+}
+.l-footer-table {
+    background-color: #322922;
+    @extend %boxSizing;
+    padding: 1% 0;
+    position: relative;
+    > .l-footer-widthCalc {
+        > div {
+            width: calc(100%/4);
+        }
+        > .l-logo2 {
+            display: inline-block;
+            position: absolute;
+            @extend %vertically;
+            padding-left: 5rem;
+            > a {
+                color: white;
+                text-decoration: none;
+                width: 100%;
+                display: inline-block;
+                overflow: hidden;
+                > i {
+                    font-size: fontSize(32px);
+                    display: inline-block;
+                    position: absolute;
+                    @include topFineTuning(47%);
+                }
+                > img {
+                    width: 200%;
+                    display: inline-block;
+                    padding-left: 1.1rem;
+                }
+            }
+        }
+        > .l-footer-news {
+            text-align: center;
+            margin: 0.5rem 0 0.5rem 8rem;
+            > li {
+                padding-left: 5rem;
+                display: inline-block;
+                color: white;
+                font-size: fontSize(16px);
+                width: calc(100%/3.5);
+            } 
+            > li:hover {
+                color: darken(white, 15%);
+                cursor: pointer;
+            }
+        }
+    }
+    
+}

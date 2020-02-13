@@ -29,8 +29,8 @@
             <span v-else>未啟用</span>
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm" @click.prevent="openCouponModal(false, item)">編輯</button>
-            <button type="button" class="btn btn-danger btn-sm" @click.prevent="openDelCouponModal">刪除</button>
+            <button type="button" class="btn btn-info btn-sm" @click.prevent="openCouponModal(false, item)">編輯</button>
+            <button type="button" class="btn btn-danger btn-sm" @click.prevent="openDelCouponModal(item)">刪除</button>
           </td>
         </tr>
       </tbody>
@@ -153,10 +153,12 @@ export default {
         openCouponModal(isNew, item) {
           if(isNew){
             this.tempCoupon = {};
+            this.isNew = true;
             $('#couponModal').modal('show');
           }
           else{
             this.tempCoupon = Object.assign({}, item);
+            this.isNew = false;
             $('#couponModal').modal('show');
           }
         },
@@ -176,7 +178,8 @@ export default {
             }
           })
         },
-        openDelCouponModal() {
+        openDelCouponModal(item) {
+          this.tempCoupon = item;
           $('#delCouponModal').modal('show');
         },
         delCoupon() {
