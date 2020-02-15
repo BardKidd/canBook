@@ -6,9 +6,9 @@
             <div class="classificationAndCart col-4">
                 <div class="booksClassification">
                     <strong>書籍類別</strong>
-                    <select class="classificationStyle" v-model="classification">
-                        <option value="全部好書" class="classificationStyle" @click.prevent="bookFilter"><i class="fas fa-bookmark"></i>全部好書</option>
-                        <option :value="item" class="classificationStyle" @click.prevent="bookFilter" v-for="(item, key) in allCategoryFilter" :key="key"><i class="fas fa-bookmark"></i>{{ item }}</option>
+                    <select class="classificationStyle" v-model="classification" @click.prevent="bookFilter">
+                        <option value="全部好書" class="classificationStyle"><i class="fas fa-bookmark"></i>全部好書</option>
+                        <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key"><i class="fas fa-bookmark"></i>{{ item }}</option>
                     </select>
                 </div>
                 <div class="shoppingCartList">
@@ -55,7 +55,7 @@
                         <i class="fas fa-shopping-basket" @click.prevent="addToShopingCart(item.id)"></i>
                     </div>
                 </div>
-                <Pagination :pagination = pagination @emitPage = getShop></Pagination>
+                <Pagination :pagination = pagination @emitPage = bookFilter></Pagination>
             </div>
         </div>
         <router-link to="./cart">
@@ -178,10 +178,9 @@ export default {
                 })
             })
         },
-        bookFilter() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+        bookFilter(page = 1) {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             const vm = this;
-            vm.isLoading = true;
             this.$http.get(api).then((response) => {
                 let allProduct = response.data.products;
                 // vm.pagination = response.data.pagination;
@@ -191,7 +190,7 @@ export default {
                 }
                 else {
                     vm.totalBooks = allProduct.filter(function(item){
-                        vm.isLoading = false;
+                        vm.pagination = response.data.pagination;
                         return vm.classification === item.category;
                     })
                 }

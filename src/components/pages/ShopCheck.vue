@@ -2,9 +2,9 @@
   <div class="container">
     <loading :active.sync="isLoading"></loading>
     <div class="row shopPaddingTop shopPaddingBottom">
-      <router-link class="backShop" to="/canbook/shop">
+      <a class="backShop" @click.prevent="backPage">
         <i class="fas fa-backward"></i> 回到商品區
-      </router-link>
+      </a>
     </div>
     <div class="row shopCheckBox">
       <!-- 產品照片 -->
@@ -156,6 +156,9 @@ export default {
         console.log(response.data);
         vm.isLoading = false;
       })
+    },
+    backPage() {
+      this.$router.back();
     }
   },
   created() {
