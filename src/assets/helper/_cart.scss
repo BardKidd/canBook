@@ -1,5 +1,14 @@
 @import './mixins';
 
+.scheduleShow {
+    @include scheduleShowStyle(#aaa, 0);
+    li:nth-child(1) {
+        color: #34495e;
+        > p {
+            border-bottom: 3px solid #34495e;
+        }
+    }
+}
 .cartData {
     > .shoppingCartList {
         display: inline-block;

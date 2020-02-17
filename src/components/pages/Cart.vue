@@ -1,9 +1,18 @@
 <template>
   <div class="container">
     <div class="row shopPaddingTop">
+      <div class="scheduleShow col-12">
+        <ul>
+          <li><p>1.填寫訂購資料</p></li>
+          <li><p>2.付款確認</p></li>
+          <li><p>3.完成訂單</p></li>
+        </ul>
+      </div>
+      
       <router-link class="backShop" to="/canbook/shop">
         <i class="fas fa-backward"></i> 回到商品區
       </router-link>
+
       <div class="col-12 cartData">
         <!-- 購物車內容 -->
         <div class="shoppingCartList col-4">

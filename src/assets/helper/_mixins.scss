@@ -51,3 +51,23 @@ $basicFontSize: 16px;
        font-size: fontSize(16px);
     }
 }
+
+@mixin scheduleShowStyle($liColor, $borderSize) {
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    > ul {
+        list-style: none;
+        > li {
+            display: inline-block;
+            font-weight: bolder;
+            width: calc(100% / 3);
+            text-align: center;
+            font-size: fontSize(18px);
+            padding: 0 6rem;
+            color: $liColor;
+            > p {
+                border-bottom: $borderSize solid black;
+                margin: 0;
+            }
+        }
+    }
+}

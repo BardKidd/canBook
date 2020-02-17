@@ -14,7 +14,7 @@
                 <div class="shoppingCartList">
                     <div class="shoppingCartListTitle">
                         <strong>購物車清單</strong>
-                        <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList(totalShoppingList.carts.id)">清空購物車</button>
+                        <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
                         <div class="countRound">{{ totalShoppingList.carts.length }}</div>
                     </div>
                     <div class="lumpSum">
@@ -55,7 +55,7 @@
                         <i class="fas fa-shopping-basket" @click.prevent="addToShopingCart(item.id)"></i>
                     </div>
                 </div>
-                <Pagination :pagination = pagination @emitPage = bookFilter></Pagination>
+                <Pagination :pagination = pagination @emitPage = getShop v-if="classification === '全部好書'"></Pagination>
             </div>
         </div>
         <router-link to="./cart">
@@ -94,12 +94,11 @@ export default {
         getShop(page = 1) {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             const vm = this;
-            vm.isLoading = true;
+            // vm.isLoading = true;
             this.$http.get(api).then((response) => {
-                // console.log(response.data);
                 vm.totalBooks = response.data.products;
                 vm.pagination = response.data.pagination;
-                vm.isLoading = false;
+                // vm.isLoading = false;
             })
         },
         seeMore(id) {
@@ -178,35 +177,36 @@ export default {
                 })
             })
         },
-        bookFilter(page = 1) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
+        bookFilter() {
+            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
             this.$http.get(api).then((response) => {
                 let allProduct = response.data.products;
-                // vm.pagination = response.data.pagination;
-                console.log(response.data);
                 if(vm.classification === '全部好書') {
                     vm.getShop();
                 }
                 else {
                     vm.totalBooks = allProduct.filter(function(item){
-                        vm.pagination = response.data.pagination;
                         return vm.classification === item.category;
                     })
                 }
+                // console.log(vm.totalBooks);
             })
         },
         delAllShoppingCartList() {
-            // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-            // const vm = this;
-            // console.log(id);
-            // this.$http.delete(api).then((response) => {
-            //     console.log(response.data);
-            //     vm.ShoppingCartList();
-            // })
-            console.log(this.totalShoppingList);
-            this.totalShoppingList.carts = {};
-            // this.totalShoppingList = {};
+            const vm = this;
+            let getAllID = vm.totalShoppingList.carts;
+            getAllID.forEach(function(item){
+                let itisID = item.id;
+                console.log(itisID);
+                itisID.forEach(function(id){
+                    let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+                    this.$http.delete(api).then((response) => {
+                        console.log(response.data);
+                    })
+                }) 
+            })
+            vm.ShoppingCartList();
         }
     },
     created() {
