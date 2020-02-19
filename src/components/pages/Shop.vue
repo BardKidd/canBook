@@ -82,7 +82,9 @@ export default {
             isLoading: false,
             shopId: '',
             totalShoppingList: {
-                carts: {}
+                carts: {
+                    id: []
+                },
             },
             coupon_code: '',
             classification: '全部好書',
@@ -146,7 +148,7 @@ export default {
             const vm = this;
             vm.isLoading = true;
             this.$http.delete(api).then((response) => {
-                console.log(response.data);
+                // console.log(id);
                 vm.ShoppingCartList();
                 vm.isLoading = false;
                 if(response.data.success) {
@@ -195,18 +197,34 @@ export default {
         },
         delAllShoppingCartList() {
             const vm = this;
-            let getAllID = vm.totalShoppingList.carts;
-            getAllID.forEach(function(item){
-                let itisID = item.id;
-                console.log(itisID);
-                itisID.forEach(function(id){
-                    let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-                    this.$http.delete(api).then((response) => {
-                        console.log(response.data);
-                    })
-                }) 
+            // let getAllID = vm.totalShoppingList.carts;
+            vm.totalShoppingList.carts.id = vm.totalShoppingList.carts.map(function(item){
+                return item.id;
             })
-            vm.ShoppingCartList();
+            // console.log(vm.totalShoppingList.carts.id);
+            vm.totalShoppingList.carts.id.forEach(function(item){
+                vm.isLoading = true;
+                let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`;
+                vm.$http.delete(api).then((response) => {
+                    // console.log(item, response.data);
+                    vm.ShoppingCartList();
+                    vm.isLoading = false;
+                    if(response.data) {
+                        vm.$bus.$emit('message:push', '已全部刪除', 'danger');
+                    }
+                })
+            })
+            
+            // getAllID.forEach(function(item){
+            //     let itisID = item.id;
+            //     console.log(itisID);
+            //     // itisID.forEach(function(id){
+            //     //     let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+            //     //     this.$http.delete(api).then((response) => {
+            //     //         console.log(response.data);
+            //     //     })
+            //     // }) 
+            // })
         }
     },
     created() {
