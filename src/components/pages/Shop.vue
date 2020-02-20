@@ -82,9 +82,7 @@ export default {
             isLoading: false,
             shopId: '',
             totalShoppingList: {
-                carts: {
-                    id: []
-                },
+                carts: {},
             },
             coupon_code: '',
             classification: '全部好書',
@@ -125,7 +123,7 @@ export default {
             }
             vm.isLoading = true;
             this.$http.post(api, { data: shopData }).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 vm.ShoppingCartList();
                 vm.isLoading = false;
                 if(response.data.success) {
@@ -197,34 +195,44 @@ export default {
         },
         delAllShoppingCartList() {
             const vm = this;
-            // let getAllID = vm.totalShoppingList.carts;
-            vm.totalShoppingList.carts.id = vm.totalShoppingList.carts.map(function(item){
-                return item.id;
+            let getAllID = vm.totalShoppingList.carts;
+            let itisID = [];
+            vm.isLoading = true;
+            getAllID.forEach(function(item){
+                itisID.push(item.id);
             })
-            // console.log(vm.totalShoppingList.carts.id);
-            vm.totalShoppingList.carts.id.forEach(function(item){
-                vm.isLoading = true;
-                let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`;
-                vm.$http.delete(api).then((response) => {
-                    // console.log(item, response.data);
-                    vm.ShoppingCartList();
-                    vm.isLoading = false;
-                    if(response.data) {
-                        vm.$bus.$emit('message:push', '已全部刪除', 'danger');
-                    }
-                })
+            let apiary = [];
+            itisID.forEach(function(id){
+                let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+                apiary.push(vm.$http.delete(api).then((response) => {
+                    console.log(response);
+                }))
             })
-            
-            // getAllID.forEach(function(item){
-            //     let itisID = item.id;
-            //     console.log(itisID);
-            //     // itisID.forEach(function(id){
-            //     //     let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-            //     //     this.$http.delete(api).then((response) => {
-            //     //         console.log(response.data);
-            //     //     })
-            //     // }) 
+            Promise.all(apiary).then(res => {
+                console.log(res)
+                vm.isLoading = false
+                vm.ShoppingCartList();
+                if(vm.isLoading == false) {
+                    vm.$bus.$emit('message:push', '已全部刪除', 'danger');
+                }
+            })
+
+            // const vm = this;
+            // vm.totalShoppingList.carts.id = vm.totalShoppingList.carts.map(function(item){
+            //     return item.id;
             // })
+            // vm.totalShoppingList.carts.id.forEach(function(item){
+            //     vm.isLoading = true;
+            //     let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`;
+            //     vm.$http.delete(api).then((response) => {
+            //         vm.ShoppingCartList();
+            //         vm.isLoading = false;
+            //         if(response.data) {
+            //             vm.$bus.$emit('message:push', '已全部刪除', 'danger');
+            //         }
+            //     })
+            // })
+
         }
     },
     created() {
