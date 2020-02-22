@@ -46,6 +46,9 @@
             font-weight: bolder;
         }
     }
+    > .dropdown {
+        display: none;
+    }
 }
 
 // footer Layout
@@ -103,3 +106,37 @@ footer {
     }
     
 }
+
+@media (max-width: 500px) { 
+    .l-nav-table {
+        > .l-nav-icon {
+            display: none;
+        }
+        > .l-nav-mainOption {
+            display: none;
+        }
+        > .dropdown {
+            display: block;
+            > #dropdownMenuButton {
+                background-color: transparent;
+                border: none;
+                > i {
+                    color: white;
+                    font-size: fontSize(20px);
+                }
+            }
+            > .dropdown-menu {
+                > a {
+                    display: block;
+                    color: #555;
+                    font-size: fontSize(18px);
+                    font-family: 'Noto Sans TC', serif;
+                    text-align: center;
+                }
+                > a:hover {
+                    background-color: #eee;
+                }
+            }
+        }
+    }
+ }

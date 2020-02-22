@@ -23,6 +23,19 @@
             </router-link>
           </li>
         </ul>
+
+        <!-- phone mode -->
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <router-link to="/canbook/shop">優秀好書</router-link>
+            <router-link to="/canbook/shop">最新消息</router-link>
+            <router-link to="/canbook/shop">優惠驚喜</router-link>
+            <router-link to="/canbook/shop">關於我們</router-link>
+          </div>
+        </div>
       </div>
     </nav>
 
