@@ -107,8 +107,15 @@ footer {
     
 }
 
+// phone mode
 @media (max-width: 500px) { 
     .l-nav-table {
+        > .l-logo {
+            position: relative;
+            top: 50%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+        }
         > .l-nav-icon {
             display: none;
         }
@@ -117,6 +124,8 @@ footer {
         }
         > .dropdown {
             display: block;
+            text-align: right;
+            bottom: 70%;
             > #dropdownMenuButton {
                 background-color: transparent;
                 border: none;
@@ -135,6 +144,26 @@ footer {
                 }
                 > a:hover {
                     background-color: #eee;
+                }
+            }
+        }
+    }
+    .l-footer-table {
+        > .l-footer-widthCalc {
+            > .l-logo2 {
+                padding-left: 2.5rem;
+                > a {
+                    > img {
+                        display: none;
+                    }
+                }
+            }
+            > .l-footer-news {
+                text-align: left;
+                margin: 0;
+                li {
+                    display: block;
+                    width: 100%;
                 }
             }
         }
