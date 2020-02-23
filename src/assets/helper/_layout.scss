@@ -112,7 +112,7 @@ footer {
     .l-nav-table {
         > .l-logo {
             position: relative;
-            top: 50%;
+            top: 75%;
             left: 25%;
             transform: translate(-50%, -50%);
         }
@@ -131,7 +131,7 @@ footer {
                 border: none;
                 > i {
                     color: white;
-                    font-size: fontSize(20px);
+                    font-size: fontSize(28px);
                 }
             }
             > .dropdown-menu {
