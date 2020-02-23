@@ -112,9 +112,10 @@ footer {
     .l-nav-table {
         > .l-logo {
             position: relative;
-            top: 75%;
+            top: 50%;
             left: 25%;
             transform: translate(-50%, -50%);
+            display: inline-block;
         }
         > .l-nav-icon {
             display: none;
