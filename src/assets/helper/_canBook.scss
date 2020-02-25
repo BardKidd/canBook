@@ -35,13 +35,13 @@
 // phone mode
 @media (max-width: 640px) {
     .indexCover {
-        height: 100vh;
+        height: 80vh;
     }
 }
 
 // iPad mode
 @media (min-width: 641px) and (max-width: 960px) {
     .indexCover {
-        height: 80vh;
+        height: 100vh;
     }
 }
