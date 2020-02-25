@@ -33,7 +33,14 @@
 }
 
 // phone mode
-@media (max-width: 500px) {
+@media (max-width: 400px) {
+    .indexCover {
+        height: 80vh;
+    }
+}
+
+// iPad mode
+@media (min-width: 401px) and (max-width: 800px) {
     .indexCover {
         height: 80vh;
     }

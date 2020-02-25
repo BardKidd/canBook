@@ -54,7 +54,7 @@
 }
 
 // phone mode
-@media (max-width: 500px) {
+@media (max-width: 400px) {
     #featuredBooks {
         > div {
             max-width: 100%;
@@ -73,5 +73,22 @@
         > img {
             width: 100%;
         } 
+    }
+}
+
+//iPad mode
+@media (min-width: 401px) and (max-width: 800px) {
+    .cardBox {
+        > img {
+            width: 100%;
+        } 
+    }
+    .cardFontStyle {
+        p {
+            margin-top: 1.5rem;
+        }
+        span {
+            display: block;
+        }
     }
 }

@@ -108,7 +108,7 @@ footer {
 }
 
 // phone mode
-@media (max-width: 500px) { 
+@media (max-width: 400px) { 
     .l-nav-table {
         > .l-logo {
             position: relative;
@@ -163,6 +163,64 @@ footer {
                 li {
                     display: block;
                     width: 100%;
+                }
+            }
+        }
+    }
+ }
+
+ // iPad mode
+ @media (min-width: 401px) and (max-width: 800px) {
+    .l-nav-table {
+        height: 10vh;
+        > .l-nav-icon {
+            display: none;
+        }
+        > .l-nav-mainOption {
+            display: none;
+        }
+        > .dropdown {
+            display: inline-block;
+            text-align: right;
+            left: 70%;
+            > #dropdownMenuButton {
+                background-color: transparent;
+                border: none;
+                > i {
+                    color: white;
+                    font-size: fontSize(28px);
+                }
+            }
+            > .dropdown-menu {
+                > a {
+                    display: block;
+                    color: #555;
+                    font-size: fontSize(18px);
+                    font-family: 'Noto Sans TC', serif;
+                    text-align: center;
+                }
+                > a:hover {
+                    background-color: #eee;
+                }
+            }
+        }
+    }
+    .l-footer-table {
+        > .l-footer-widthCalc {
+            > .l-logo2 {
+                padding-left: 2.5rem;
+                > a {
+                    > img {
+                        display: none;
+                    }
+                }
+            }
+            > .l-footer-news {
+                text-align: left;
+                margin: 0;
+                padding: 2rem 0;
+                li {
+                    display: inline;
                 }
             }
         }
