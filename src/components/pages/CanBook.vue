@@ -81,6 +81,15 @@ $(document).ready(function(){
       $('.l-nav-table').fadeIn(200).stop();
     }
   })
+
+  $(window).swipe(function(){
+    if($(window).scrollTop() >= 100) {
+      $('.l-nav-table').fadeOut(200).stop();
+    }
+    else {
+      $('.l-nav-table').fadeIn(200).stop();
+    }
+  })
 })
 
 </script>
