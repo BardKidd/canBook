@@ -78,7 +78,7 @@
       </div>
 
       <!-- 結帳 Icon -->
-      <router-link to="./cart">
+      <router-link to="../cart">
           <div class="shoppingCartIcon">
               <i class="fas fa-shopping-cart"></i>
               <div class="shoppingCartQty">{{ shopCartList.carts.length }}</div>

@@ -72,3 +72,63 @@
         margin-bottom: 1rem;
     }
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .scheduleShowCheck {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .CheckStyle {
+        padding-left: 0;
+        > table {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        > .CheckTotal {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+    .CheckBtn {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .scheduleShowCheck {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .CheckStyle {
+        padding-left: 0;
+        > table {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        > .CheckTotal {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+    .CheckBtn {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}

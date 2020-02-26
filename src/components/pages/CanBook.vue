@@ -74,22 +74,12 @@ export default {
 
 $(document).ready(function(){
   $(window).scroll(function(){
-    if($(window).scrollTop() >= 100) {
-      $('.l-nav-table').fadeOut(200).stop();
+    if($('html, body').scrollTop() >= 230) {
+      $('.l-nav-table').hide().stop();
     }
     else {
-      $('.l-nav-table').fadeIn(200).stop();
-    }
-  })
-
-  $(window).touchmove(function(){
-    if($(window).scrollTop() >= 100) {
-      $('.l-nav-table').fadeOut(200).stop();
-    }
-    else {
-      $('.l-nav-table').fadeIn(200).stop();
+      $('.l-nav-table').show().stop();
     }
   })
 })
-
 </script>

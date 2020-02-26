@@ -37,3 +37,75 @@
         }
     }
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .scheduleShow {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .cartData {
+        > .shoppingCartList {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+            > .shoppingCartListTitle {
+                > strong {
+                    margin-right: 4rem;
+                }
+            }
+            > .shoppingCartContent {
+                > span {
+                    bottom: 0.5rem;
+                }
+            }
+        }
+        > .orderData {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .scheduleShow {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .cartData {
+        > .shoppingCartList {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+            > .shoppingCartListTitle {
+                > strong {
+                    margin-right: 4rem;
+                }
+            }
+            > .shoppingCartContent {
+                > span {
+                    bottom: 0.5rem;
+                }
+            }
+        }
+        > .orderData {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+}

@@ -58,7 +58,7 @@
                 <Pagination :pagination = pagination @emitPage = getShop v-if="classification === '全部好書'"></Pagination>
             </div>
         </div>
-        <router-link to="./cart">
+        <router-link to="/canbook/cart">
             <div class="shoppingCartIcon">
                 <i class="fas fa-shopping-cart"></i>
                 <div class="shoppingCartQty">{{ totalShoppingList.carts.length }}</div>

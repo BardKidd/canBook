@@ -116,3 +116,17 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+  @media (max-width: 640px) {
+    .backShop {
+      display: none;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 960px) {
+    .backShop {
+      display: none;
+    }
+  }
+</style>
