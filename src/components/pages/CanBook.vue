@@ -82,7 +82,7 @@ $(document).ready(function(){
     }
   })
 
-  $(window).swipe(function(){
+  $(window).touchmove(function(){
     if($(window).scrollTop() >= 100) {
       $('.l-nav-table').fadeOut(200).stop();
     }
