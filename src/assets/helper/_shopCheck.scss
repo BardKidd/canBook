@@ -83,3 +83,54 @@
         }
     }
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .shoppingCartList {
+        display: none;
+    }
+    .shopCheckBox {
+        > div {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        > .productShop {
+            > .productShopContent {
+                > span {
+                    font-size: fontSize(20px);
+                }
+                > p {
+                    font-size: fontSize(18px);
+                }
+            }
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .shoppingCartList {
+        display: none;
+    }
+    .backShop {
+        font-size: fontSize(26px);
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .shopCheckBox {
+        > div {
+            max-width: 50%;
+            flex: 0 0 50%;
+        }
+        > .productShop {
+            > .productShopContent {
+                > span {
+                    font-size: fontSize(20px);
+                }
+                > p {
+                    font-size: fontSize(18px);
+                }
+            }
+        }
+    }
+}

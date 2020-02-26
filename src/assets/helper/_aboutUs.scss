@@ -55,3 +55,53 @@
     background-size: cover;
     background-position: center;
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .aboutUsImageSmall {
+        display: none;
+    }
+    .aboutUsImage {
+        display: inline-block;
+        > .aboutUsImageBigBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsImageBig {
+                margin-bottom: 2rem;
+                padding-bottom: 100%;
+            }
+        }
+        > .aboutUsContentBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            background-color: #eee;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .aboutUsImageSmall {
+        display: none;
+    }
+    .aboutUsImage {
+        display: inline-block;
+        > .aboutUsImageBigBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsImageBig {
+                margin-bottom: 2rem;
+                margin-top: 2rem;
+                padding-bottom: 70%;
+            }
+        }
+        > .aboutUsContentBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            background-color: #eee;
+            > .aboutUsContent {
+                font-size: fontSize(26px);
+            }
+        }
+    }
+}

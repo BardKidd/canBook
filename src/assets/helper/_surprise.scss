@@ -39,3 +39,24 @@
         }
     }
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .surpriseCode {
+        max-width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        > .surpriseBox {
+            max-width: 100%;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .surpriseCode {
+        > .surpriseBox {
+            max-width: 80%;
+        }
+    }
+}

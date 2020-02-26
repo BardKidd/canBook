@@ -3,10 +3,6 @@
 .shopPaddingTop {
     padding-top: 10rem;
 }
-// .classificationAndCart {
-//     position: fixed;
-// }
-
 .booksClassification {
     padding-bottom: 1rem;
     border-bottom: 0.5px dotted #95a5a6;
@@ -17,11 +13,9 @@
         color: #863f20;
         margin-right: 6rem;
     }
-    > select {
+    .classificationStyle {
         appearance: none;
         margin-top: 1rem;
-    }
-    .classificationStyle {
         font-family: '微軟正黑體', sans-serif;
         font-size: fontSize(16px);
         background-color: white;
@@ -138,15 +132,11 @@
         }
     }
 }
-// .totalBooks {
-//     position: relative;
-//     left: 38.5%;
-// }
 .totalBooksTitle {
     font-size: fontSize(28px);
     font-weight: 500;
     font-family: '微軟正黑體', sans-serif;
-    color: black;
+    color: #863f20;
     margin-bottom: 1rem;
 }
 .totalBooksCard {
@@ -219,5 +209,97 @@
     background-color: #aaa;
     > i {
         color: white;
+    }
+}
+
+// phone mode
+@media (max-width: 640px) {
+    .classificationAndCart {
+        max-width: 100%;
+        flex: 0 0 100%;
+        > .booksClassification {
+            > strong {
+                margin-right: 0;
+                text-align: center;
+            }
+            > .classificationStyle {
+                padding: 0.5rem 0.1rem 0.5rem 0.8rem;
+            }
+        }
+        > .shoppingCartList {
+            display: none;
+        }
+    }
+    .totalBooks {
+        max-width: 100%;
+        flex: 0 0 100%;
+        > .totalBooksCard {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .totalBooksCardFontStyle {
+                > strong {
+                    font-size: fontSize(22px);
+                }
+                > span {
+                    font-size: fontSize(20px);
+                }
+                > i {
+                    font-size: fontSize(20px);
+                    bottom: 1%;
+                }
+            }
+        }
+    }
+    .pagination {
+        font-size: fontSize(20px);
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .classificationAndCart {
+        max-width: 100%;
+        flex: 0 0 100%;
+        > .booksClassification {
+            > strong {
+                margin-right: 0;
+                text-align: center;
+                font-size: fontSize(52px);
+            }
+            > .classificationStyle {
+                padding: 0.5rem 0.1rem 0.5rem 0.8rem;
+                font-size: fontSize(32px);
+            }
+        }
+        > .shoppingCartList {
+            display: none;
+        }
+    }
+    .totalBooks {
+        max-width: 100%;
+        flex: 0 0 100%;
+        > .totalBooksTitle {
+            font-size: fontSize(52px);
+            font-weight: bold;
+        }
+        > .totalBooksCard {
+            max-width: 50%;
+            flex: 0 0 50%;
+            > .totalBooksCardFontStyle {
+                > strong {
+                    font-size: fontSize(30px);
+                }
+                > span {
+                    font-size: fontSize(28px);
+                }
+                > i {
+                    font-size: fontSize(28px);
+                    bottom: 1%;
+                }
+            }
+        }
+    }
+    .pagination {
+        font-size: fontSize(32px);
     }
 }

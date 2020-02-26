@@ -36,7 +36,7 @@ export default {
             const vm = this;
             vm.isLoading = true;
             this.$http.get(api).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 vm.featuredBooksProducts = response.data.products;
                 vm.isLoading = false;
             })
@@ -53,7 +53,7 @@ export default {
             vm.shopId = id;
             vm.isLoading = false;
             this.$http.get(api).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 if(response.data.success) {
                     vm.$router.push(`shop/${vm.shopId}`);
                 }

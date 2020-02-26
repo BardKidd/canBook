@@ -64,10 +64,23 @@
 </template>
 
 <script>
+import $ from 'jquery';
 import Alert from './Alert';
 export default {
   components: {
     Alert,
   }
 }
+
+$(document).ready(function(){
+  $(window).scroll(function(){
+    if($(window).scrollTop() >= 100) {
+      $('.l-nav-table').fadeOut(200).stop();
+    }
+    else {
+      $('.l-nav-table').fadeIn(200).stop();
+    }
+  })
+})
+
 </script>
