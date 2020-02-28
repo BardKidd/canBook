@@ -146,7 +146,6 @@ export default {
             const vm = this;
             vm.isLoading = true;
             this.$http.delete(api).then((response) => {
-                // console.log(id);
                 vm.ShoppingCartList();
                 vm.isLoading = false;
                 if(response.data.success) {
@@ -190,7 +189,6 @@ export default {
                         return vm.classification === item.category;
                     })
                 }
-                // console.log(vm.totalBooks);
             })
         },
         delAllShoppingCartList() {
@@ -216,23 +214,6 @@ export default {
                     vm.$bus.$emit('message:push', '已全部刪除', 'danger');
                 }
             })
-
-            // const vm = this;
-            // vm.totalShoppingList.carts.id = vm.totalShoppingList.carts.map(function(item){
-            //     return item.id;
-            // })
-            // vm.totalShoppingList.carts.id.forEach(function(item){
-            //     vm.isLoading = true;
-            //     let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item}`;
-            //     vm.$http.delete(api).then((response) => {
-            //         vm.ShoppingCartList();
-            //         vm.isLoading = false;
-            //         if(response.data) {
-            //             vm.$bus.$emit('message:push', '已全部刪除', 'danger');
-            //         }
-            //     })
-            // })
-
         }
     },
     created() {

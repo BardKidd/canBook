@@ -18,7 +18,7 @@
         <div class="shoppingCartList col-4">
           <div class="shoppingCartListTitle">
               <strong>購物車清單</strong>
-              <button type="button" class="btn btn-outline-danger">清空購物車</button>
+              <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
               <div class="countRound" v-if="totalShoppingList.carts.length !== 0">{{ totalShoppingList.carts.length }}</div>
               <div class="countRound" v-if="totalShoppingList.carts.length === 0">0</div>
           </div>
@@ -93,7 +93,10 @@
 export default {
   data() {
     return {
-      totalShoppingList: {},
+      isLoading: false,
+      totalShoppingList: {
+        carts: {}
+      },
       form: {
         user: {
           name: '',
@@ -104,6 +107,7 @@ export default {
         message: ''
       },
       cartId: '',
+      coupon_code: '',
     }
   },
   methods: {
@@ -135,8 +139,53 @@ export default {
         }
       })
       
+    },
+    delShopingCartList(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      this.$http.delete(api).then((response) => {
+          vm.getShoppingCartList();
+          vm.isLoading = false;
+          if(response.data.success) {
+              vm.$bus.$emit('message:push', response.data.message, 'danger');
+          }
+      })
+    },
+    delAllShoppingCartList() {
+      const vm = this;
+      let getAllID = vm.totalShoppingList.carts;
+      let itisID = [];
+      vm.isLoading = true;
+      getAllID.forEach(function(item){
+          itisID.push(item.id);
+      })
+      let apiary = [];
+      itisID.forEach(function(id){
+          let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+          apiary.push(vm.$http.delete(api).then(function() {
+              // console.log(response);
+          }))
+      })
+      Promise.all(apiary).then(function() {
+          // console.log(res)
+          vm.isLoading = false
+          vm.getShoppingCartList();
+          if(vm.isLoading == false) {
+              vm.$bus.$emit('message:push', '已全部刪除', 'danger');
+          }
+      })
+    },
+    useCoupon() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+      const vm = this;
+      const coupon = {
+          code: vm.coupon_code,
+      }
+      this.$http.post(api, { data: coupon }).then((response) => {
+          console.log(response.data);
+      })
     }
-
   },
   created() {
     this.getShoppingCartList()

@@ -13,6 +13,9 @@
     > .shoppingCartList {
         display: inline-block;
         vertical-align: top;
+        .countRound {
+            margin-left: 0.2rem; 
+        }
     }
     > .orderData {
         display: inline-block;
