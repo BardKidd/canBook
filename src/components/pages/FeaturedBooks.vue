@@ -35,8 +35,7 @@ export default {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
             const vm = this;
             vm.isLoading = true;
-            this.$http.get(api).then((response) => {
-                // console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 vm.featuredBooksProducts = response.data.products;
                 vm.isLoading = false;
             })
@@ -52,8 +51,7 @@ export default {
             const vm = this;
             vm.shopId = id;
             vm.isLoading = false;
-            this.$http.get(api).then((response) => {
-                // console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 if(response.data.success) {
                     vm.$router.push(`shop/${vm.shopId}`);
                 }

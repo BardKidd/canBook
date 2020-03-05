@@ -95,7 +95,7 @@ export default {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
             const vm = this;
             // vm.isLoading = true;
-            this.$http.get(api).then((response) => {
+            vm.$http.get(api).then((response) => {
                 vm.totalBooks = response.data.products;
                 vm.pagination = response.data.pagination;
                 // vm.isLoading = false;
@@ -106,8 +106,7 @@ export default {
             const vm = this;
             vm.shopId = id
             vm.isLoading = true;
-            this.$http.get(api).then((response) => {
-                // console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 if(response.data.success) {
                     vm.$router.push(`shop/${vm.shopId}`);
                 }
@@ -122,8 +121,7 @@ export default {
                 qty: num
             }
             vm.isLoading = true;
-            this.$http.post(api, { data: shopData }).then((response) => {
-                // console.log(response.data);
+            vm.$http.post(api, { data: shopData }).then((response) => {
                 vm.ShoppingCartList();
                 vm.isLoading = false;
                 if(response.data.success) {
@@ -134,18 +132,16 @@ export default {
         ShoppingCartList() {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
             const vm = this;
-            this.$http.get(api).then((response) => {
-                // console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 vm.totalShoppingList = response.data.data;
                 vm.totalShoppingList.carts = response.data.data.carts;
-                // console.log(vm.totalShoppingList.carts);
             })
         },
         delShoppingCartList(id) {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
             const vm = this;
             vm.isLoading = true;
-            this.$http.delete(api).then((response) => {
+            vm.$http.delete(api).then((response) => {
                 vm.ShoppingCartList();
                 vm.isLoading = false;
                 if(response.data.success) {
@@ -159,14 +155,12 @@ export default {
             const coupon = {
                 code: vm.coupon_code,
             }
-            this.$http.post(api, { data: coupon }).then((response) => {
-                console.log(response.data);
-            })
+            vm.$http.post(api, { data: coupon }).then()
         },
         categoryShow() {
             const vm = this;
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-            this.$http.get(api).then((response) => {
+            vm.$http.get(api).then((response) => {
                 let allProduct = response.data.products;
                 vm.allCategory = allProduct.map(function(item){
                     return item.category
@@ -179,7 +173,7 @@ export default {
         bookFilter() {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
             const vm = this;
-            this.$http.get(api).then((response) => {
+            vm.$http.get(api).then((response) => {
                 let allProduct = response.data.products;
                 if(vm.classification === '全部好書') {
                     vm.getShop();
@@ -202,12 +196,9 @@ export default {
             let apiary = [];
             itisID.forEach(function(id){
                 let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-                apiary.push(vm.$http.delete(api).then((response) => {
-                    console.log(response);
-                }))
+                apiary.push(vm.$http.delete(api).then())
             })
-            Promise.all(apiary).then(res => {
-                console.log(res)
+            Promise.all(apiary).then(function() {
                 vm.isLoading = false
                 vm.ShoppingCartList();
                 if(vm.isLoading == false) {

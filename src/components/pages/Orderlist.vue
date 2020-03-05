@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
 import Pagination from './Pagination';
 export default {
     components: {
@@ -56,8 +55,7 @@ export default {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
             const vm = this;
             vm.isLoading = true;
-            this.$http.get(api).then((response) => {
-                console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 vm.orders = response.data.orders;
                 vm.orders.forEach(function(item){
                   const timestamp = new Date(item.create_at * 1000);

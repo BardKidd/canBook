@@ -184,8 +184,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.get(api).then(response => {
-        console.log(response.data);
+      vm.$http.get(api).then(response => {
         vm.products = response.data.products;
         vm.isLoading = false;
         vm.pagination = response.data.pagination;
@@ -211,7 +210,7 @@ export default {
           api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
           httpMethod = 'put';
         }
-        this.$http[httpMethod](api, {data: vm.tempProduct}).then((response) => {
+        vm.$http[httpMethod](api, {data: vm.tempProduct}).then((response) => {
             if(response.data.success) {
                 $('#productModal').modal('hide');
                 vm.getProducts();
@@ -220,7 +219,6 @@ export default {
                 $('#productModal').modal('hide');
                 vm.getProducts();
             }
-            console.log(vm.tempProduct);
         })
     },
     openDelProductModal(item) {
@@ -230,8 +228,7 @@ export default {
     delProduct() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      this.$http.delete(api).then((response) => {
-        console.log(response.data);
+      vm.$http.delete(api).then(function() {
         $('#delProductModal').modal('hide');
         vm.getProducts();
       })
@@ -243,7 +240,7 @@ export default {
       const formData = new FormData();
       formData.append('file-to-upload', uploadFile);
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      this.$http.post(api, formData, {headers:{'Content-Type': 'multipart/form-data'}}).then((response) => {
+      vm.$http.post(api, formData, {headers:{'Content-Type': 'multipart/form-data'}}).then((response) => {
         vm.status = false;
         if(response.data.success) {
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);

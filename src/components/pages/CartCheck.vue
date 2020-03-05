@@ -96,16 +96,14 @@ export default {
         getOneCartData() {
             const vm = this;
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.cartId}`;
-            this.$http.get(api).then((response) => {
+            vm.$http.get(api).then((response) => {
                 vm.orderData = response.data.order;
-                console.log(vm.orderData);
             })
         },
         OkeyIWantPaid() {
             const vm = this;
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.cartId}`;
-            this.$http.post(api).then((response) => {
-                console.log(response.data);
+            vm.$http.post(api).then(function() {
                 vm.getOneCartData();
             })
         }

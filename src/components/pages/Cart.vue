@@ -114,8 +114,7 @@ export default {
     getShoppingCartList() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
-      this.$http.get(api).then((response) => {
-        // console.log(response.data);
+      vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data;
       })
     },
@@ -126,7 +125,7 @@ export default {
       this.$validator.validate().then((result) => {
         if(result) {
           if(vm.totalShoppingList.carts.length >= 1){
-            this.$http.post(api, {data: order}).then((response) => {
+            vm.$http.post(api, {data: order}).then((response) => {
               if(response.data.success) {
                 vm.cartId = response.data.orderId;
                 vm.$router.push(`cart/${vm.cartId}`);
@@ -144,7 +143,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.delete(api).then((response) => {
+      vm.$http.delete(api).then((response) => {
           vm.getShoppingCartList();
           vm.isLoading = false;
           if(response.data.success) {
@@ -163,12 +162,9 @@ export default {
       let apiary = [];
       itisID.forEach(function(id){
           let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-          apiary.push(vm.$http.delete(api).then(function() {
-              // console.log(response);
-          }))
+          apiary.push(vm.$http.delete(api).then(function() {}))
       })
       Promise.all(apiary).then(function() {
-          // console.log(res)
           vm.isLoading = false
           vm.getShoppingCartList();
           if(vm.isLoading == false) {
@@ -182,9 +178,7 @@ export default {
       const coupon = {
           code: vm.coupon_code,
       }
-      this.$http.post(api, { data: coupon }).then((response) => {
-          console.log(response.data);
-      })
+      vm.$http.post(api, { data: coupon }).then();
     }
   },
   created() {

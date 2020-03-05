@@ -28,7 +28,6 @@ export default new VueRouter({
         },
         {
             path: '/canbook',
-            name: 'CanBook',
             component: CanBook,
             children: [
                 {
@@ -80,7 +79,6 @@ export default new VueRouter({
         },
         {
             path: '/admin',
-            name: 'Dashboard',
             component: Dashboard,
             meta: { requiresAuth: true },
             children: [

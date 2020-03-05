@@ -104,8 +104,7 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.shopId}`;
       vm.isLoading = true;
-      this.$http.get(api).then(response => {
-        // console.log(response.data);
+      vm.$http.get(api).then(response => {
         response.data.product.num = 1;
         vm.productData = response.data.product;
         vm.isLoading = false;
@@ -119,8 +118,7 @@ export default {
         product_id: shopId,
         qty: num
       }
-      this.$http.post(api, { data: shopData }).then((response) => {
-        console.log(response.data);
+      vm.$http.post(api, { data: shopData }).then(function() {
         vm.getShopCartContent();
         vm.isLoading = false;
       })
@@ -128,17 +126,15 @@ export default {
     getShopCartContent() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
-      this.$http.get(api).then((response) => {
-        console.log(response.data);
+      vm.$http.get(api).then((response) => {
         vm.shopCartList = response.data.data;
-        console.log(vm.shopCartList);
       })
     },
     delShopingCartList(id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.delete(api).then((response) => {
+      vm.$http.delete(api).then((response) => {
         if(response.data.success) {
           vm.getShopCartContent();
           vm.isLoading = false;
@@ -155,8 +151,7 @@ export default {
         code: vm.coupon_code,
       }
       vm.isLoading = true;
-      this.$http.post(api, {data: coupon}).then((response) => {
-        console.log(response.data);
+      vm.$http.post(api, {data: coupon}).then(function() {
         vm.isLoading = false;
       })
     },
@@ -166,7 +161,6 @@ export default {
     delAllShoppingCartList() {
       const vm = this;
       let getAllID = vm.shopCartList.carts;
-      // console.log(getAllID)
       let itisID = [];
       vm.isLoading = true;
       getAllID.forEach(function(item){
@@ -175,12 +169,10 @@ export default {
       let apiary = [];
       itisID.forEach(function(id){
           let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-          apiary.push(vm.$http.delete(api).then((response) => {
-              console.log(response);
+          apiary.push(vm.$http.delete(api).then(function() {
           }))
       })
-      Promise.all(apiary).then(res => {
-          console.log(res)
+      Promise.all(apiary).then(function() {
           vm.isLoading = false
           vm.getShopCartContent();
           if(vm.isLoading == false) {

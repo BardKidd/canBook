@@ -41,7 +41,7 @@ const myValidate = {
 };
 Validator.extend('phone', myValidate);
 
-
+Vue.component('loading', Loading);
 new Vue({
   i18n,
   router,
@@ -49,13 +49,12 @@ new Vue({
 }).$mount('#app')
 
 axios.defaults.withCredentials = true;
-Vue.component('loading', Loading);
+
 
 Vue.filter('currency', currency);
 
 
 router.beforeEach((to, from, next) => {
-  // console.log('to:',to,'from:', from,'next:', next);
 
   if(to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;

@@ -143,8 +143,7 @@ export default {
             const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`;
             const vm = this;
             vm.isLoading = true;
-            this.$http.get(api).then((response) => {
-                console.log(response.data);
+            vm.$http.get(api).then((response) => {
                 vm.isLoading = false;
                 vm.coupons = response.data.coupons;
                 vm.pagination = response.data.pagination;
@@ -170,8 +169,7 @@ export default {
               api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
               httpMethod = 'put';
           }
-          this.$http[httpMethod](api, {data: vm.tempCoupon}).then((response) => {
-            console.log(response.data);
+          vm.$http[httpMethod](api, {data: vm.tempCoupon}).then((response) => {
             if(response.data.success) {
               $('#couponModal').modal('hide');
               vm.getCoupons();
@@ -185,8 +183,7 @@ export default {
         delCoupon() {
           const vm = this;
           const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-          this.$http.delete(api).then((response) => {
-            console.log(response.data);
+          vm.$http.delete(api).then((response) => {
             if(response.data.success){
               $('#delCouponModal').modal('hide');
               vm.getCoupons();
