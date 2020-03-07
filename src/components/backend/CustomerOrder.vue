@@ -165,7 +165,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import $ from 'jquery';
 import Pagination from './Pagination';
 export default {

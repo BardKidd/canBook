@@ -1,22 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Dashboard from '@/components/pages/Dashboard';
-import Login from '@/components/pages/Login';
-import Products from '@/components/pages/Products';
-import Orderlist from '@/components/pages/Orderlist';
-import Coupon from '@/components/pages/Coupon';
-import CustomerOrder from '@/components/pages/CustomerOrder';
-import CustomerOrderCheck from '@/components/pages/CustomerOrderCheck';
+import Dashboard from '@/components/backend/Dashboard';
+import Login from '@/components/frontend/Login';
+import Products from '@/components/backend/Products';
+import Orderlist from '@/components/backend/Orderlist';
+import Coupon from '@/components/frontend/Coupon';
+import CustomerOrder from '@/components/backend/CustomerOrder';
+import CustomerOrderCheck from '@/components/backend/CustomerOrderCheck';
 
-import CanBook from '@/components/pages/CanBook';
-import FeaturedBooks from '@/components/pages/FeaturedBooks';
-import Shop from '@/components/pages/Shop';
-import ShopCheck from '@/components/pages/ShopCheck';
-import News from '@/components/pages/News';
-import Surprise from '@/components/pages/Surprise';
-import AboutUs from '@/components/pages/AboutUs';
-import Cart from '@/components/pages/Cart';
-import CartCheck from '@/components/pages/CartCheck';
+import CanBook from '@/components/frontend/CanBook';
+import FeaturedBooks from '@/components/frontend/FeaturedBooks';
+import Shop from '@/components/frontend/Shop';
+import ShopCheck from '@/components/frontend/ShopCheck';
+import News from '@/components/frontend/News';
+import Surprise from '@/components/frontend/Surprise';
+import AboutUs from '@/components/frontend/AboutUs';
+import Cart from '@/components/frontend/Cart';
+import CartCheck from '@/components/frontend/CartCheck';
 
 Vue.use(VueRouter);
 
