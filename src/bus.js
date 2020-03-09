@@ -1,2 +1,2 @@
-import Vue from 'vue';
-Vue.prototype.$bus = new Vue();
+import Vue from 'vue'
+Vue.prototype.$bus = new Vue()

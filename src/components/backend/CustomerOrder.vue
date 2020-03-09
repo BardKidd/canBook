@@ -165,9 +165,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import $ from 'jquery';
-import Pagination from './Pagination';
+import Pagination from '../frontend/Pagination';
 export default {
     components: {
         Pagination,
