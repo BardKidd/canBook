@@ -8,7 +8,7 @@
           <li><p>3.完成訂單</p></li>
         </ul>
       </div>
-      
+
       <router-link class="backShop" to="/canbook/shop">
         <i class="fas fa-backward"></i> 回到商品區
       </router-link>
@@ -36,7 +36,7 @@
                   <p>{{ item.product.title }}</p>
                   <p>{{ item.qty }} / {{ item.product.unit }}</p>
               </div>
-              <span>NT: {{ item.product.price * item.qty }}</span>
+              <span>NT$: {{ item.product.price * item.qty }}</span>
           </div>
           <div class="enterCoupon">
               <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code">
@@ -91,7 +91,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       isLoading: false,
       totalShoppingList: {
@@ -107,81 +107,79 @@ export default {
         message: ''
       },
       cartId: '',
-      coupon_code: '',
+      coupon_code: ''
     }
   },
   methods: {
-    getShoppingCartList() {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
+    getShoppingCartList () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
       vm.$http.get(api).then((response) => {
-        vm.totalShoppingList = response.data.data;
+        vm.totalShoppingList = response.data.data
       })
     },
-    sendOrder() {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-      const vm = this;
-      const order = vm.form;
+    sendOrder () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const vm = this
+      const order = vm.form
       this.$validator.validate().then((result) => {
-        if(result) {
-          if(vm.totalShoppingList.carts.length >= 1){
-            vm.$http.post(api, {data: order}).then((response) => {
-              if(response.data.success) {
-                vm.cartId = response.data.orderId;
-                vm.$router.push(`cart/${vm.cartId}`);
+        if (result) {
+          if (vm.totalShoppingList.carts.length >= 1) {
+            vm.$http.post(api, { data: order }).then((response) => {
+              if (response.data.success) {
+                vm.cartId = response.data.orderId
+                vm.$router.push(`cart/${vm.cartId}`)
               }
             })
-          }
-          else {
-            vm.$bus.$emit('message:push', '購物車沒有商品喔 快去商店看看吧~', 'primary');
+          } else {
+            vm.$bus.$emit('message:push', '購物車沒有商品喔 快去商店看看吧~', 'primary')
           }
         }
       })
-      
     },
-    delShopingCartList(id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      const vm = this;
-      vm.isLoading = true;
+    delShopingCartList (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      const vm = this
+      vm.isLoading = true
       vm.$http.delete(api).then((response) => {
-          vm.getShoppingCartList();
-          vm.isLoading = false;
-          if(response.data.success) {
-              vm.$bus.$emit('message:push', response.data.message, 'danger');
-          }
+        vm.getShoppingCartList()
+        vm.isLoading = false
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+        }
       })
     },
-    delAllShoppingCartList() {
-      const vm = this;
-      let getAllID = vm.totalShoppingList.carts;
-      let itisID = [];
-      vm.isLoading = true;
-      getAllID.forEach(function(item){
-          itisID.push(item.id);
+    delAllShoppingCartList () {
+      const vm = this
+      const getAllID = vm.totalShoppingList.carts
+      const itisID = []
+      vm.isLoading = true
+      getAllID.forEach(function (item) {
+        itisID.push(item.id)
       })
-      let apiary = [];
-      itisID.forEach(function(id){
-          let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-          apiary.push(vm.$http.delete(api).then(function() {}))
+      const apiary = []
+      itisID.forEach(function (id) {
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+        apiary.push(vm.$http.delete(api).then(function () {}))
       })
-      Promise.all(apiary).then(function() {
-          vm.isLoading = false
-          vm.getShoppingCartList();
-          if(vm.isLoading == false) {
-              vm.$bus.$emit('message:push', '已全部刪除', 'danger');
-          }
+      Promise.all(apiary).then(function () {
+        vm.isLoading = false
+        vm.getShoppingCartList()
+        if (vm.isLoading === false) {
+          vm.$bus.$emit('message:push', '已全部刪除', 'danger')
+        }
       })
     },
-    useCoupon() {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      const vm = this;
+    useCoupon () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const vm = this
       const coupon = {
-          code: vm.coupon_code,
+        code: vm.coupon_code
       }
-      vm.$http.post(api, { data: coupon }).then();
+      vm.$http.post(api, { data: coupon }).then()
     }
   },
-  created() {
+  created () {
     this.getShoppingCartList()
   }
 }

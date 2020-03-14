@@ -62,36 +62,36 @@
 
 <script>
 export default {
-    data() {
-        return {
-            order: {},
-            orderId: '',
-            isLoading: false,
-        }
-    },
-    methods: {
-        getOrder() {
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.order = response.data.order;
-                vm.isLoading = false;
-            })
-        },
-        payOrder() {
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-            vm.isLoading = true;
-            vm.$http.post(api).then(function() {
-                vm.isLoading = false;
-                vm.getOrder();
-            })
-        }
-    },
-    created() {
-        this.orderId = this.$route.params.orderId;
-        this.getOrder();
+  data () {
+    return {
+      order: {},
+      orderId: '',
+      isLoading: false
     }
+  },
+  methods: {
+    getOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.order = response.data.order
+        vm.isLoading = false
+      })
+    },
+    payOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
+      vm.isLoading = true
+      vm.$http.post(api).then(function () {
+        vm.isLoading = false
+        vm.getOrder()
+      })
+    }
+  },
+  created () {
+    this.orderId = this.$route.params.orderId
+    this.getOrder()
+  }
 }
 </script>

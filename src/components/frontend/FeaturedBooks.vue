@@ -4,6 +4,9 @@
     <div class="indexCover">
         <div class="round" @click="clickRoundBtn"><i class="fas fa-caret-down"></i></div>
     </div>
+    <div class="homeTitleFontStyleBox my-5">
+        <h2 class="homeTitleFontStyle">FEATURED BOOKS</h2>
+    </div>
     <div class="row mx-5 my-5" id="featuredBooks">
       <div class="col-4" v-for="(item, key) in featuredBooksProducts" :key="key">
           <div class="p-3 cardBox" @click.prevent="oneProductData(item.id)">
@@ -17,50 +20,50 @@
       </div>
     </div>
 </div>
-  
+
 </template>
 
 <script>
-import $ from 'jquery';
+import $ from 'jquery'
 export default {
-    data() {
-        return {
-            featuredBooksProducts: {},
-            isLoading: false,
-            shopId: '',
-        }
-    },
-    methods: {
-        getFeaturedBooks() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
-            const vm = this;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.featuredBooksProducts = response.data.products;
-                vm.isLoading = false;
-            })
-        },
-        clickRoundBtn() {
-            let moveTop = $('#featuredBooks').offset().top;
-            $('body, html').animate({
-                scrollTop: moveTop,
-            }, 500)
-        },
-        oneProductData(id) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-            const vm = this;
-            vm.shopId = id;
-            vm.isLoading = false;
-            vm.$http.get(api).then((response) => {
-                if(response.data.success) {
-                    vm.$router.push(`shop/${vm.shopId}`);
-                }
-                vm.isLoading = true;
-            })
-        }
-    },
-    created() {
-        this.getFeaturedBooks();
+  data () {
+    return {
+      featuredBooksProducts: {},
+      isLoading: false,
+      shopId: ''
     }
+  },
+  methods: {
+    getFeaturedBooks () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.featuredBooksProducts = response.data.products
+        vm.isLoading = false
+      })
+    },
+    clickRoundBtn () {
+      const moveTop = $('#featuredBooks').offset().top
+      $('body, html').animate({
+        scrollTop: moveTop
+      }, 500)
+    },
+    oneProductData (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      const vm = this
+      vm.shopId = id
+      vm.isLoading = false
+      vm.$http.get(api).then((response) => {
+        if (response.data.success) {
+          vm.$router.push(`shop/${vm.shopId}`)
+        }
+        vm.isLoading = true
+      })
+    }
+  },
+  created () {
+    this.getFeaturedBooks()
+  }
 }
 </script>

@@ -37,7 +37,7 @@
                 </table>
                 <p class="CheckTotal col-8">總計<strong>NT$ {{ orderData.total }}</strong></p>
             </div>
-            
+
             <hr class="col-6">
 
             <!-- 個人資訊 -->
@@ -86,32 +86,32 @@
 
 <script>
 export default {
-    data() {
-        return {
-            cartId: '',
-            orderData: {}
-        }
-    },
-    methods: {
-        getOneCartData() {
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.cartId}`;
-            vm.$http.get(api).then((response) => {
-                vm.orderData = response.data.order;
-            })
-        },
-        OkeyIWantPaid() {
-            const vm = this;
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.cartId}`;
-            vm.$http.post(api).then(function() {
-                vm.getOneCartData();
-            })
-        }
-    },
-    created() {
-        this.cartId = this.$route.params.cartId;
-        this.getOneCartData();
+  data () {
+    return {
+      cartId: '',
+      orderData: {}
     }
+  },
+  methods: {
+    getOneCartData () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.cartId}`
+      vm.$http.get(api).then((response) => {
+        vm.orderData = response.data.order
+      })
+    },
+    OkeyIWantPaid () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.cartId}`
+      vm.$http.post(api).then(function () {
+        vm.getOneCartData()
+      })
+    }
+  },
+  created () {
+    this.cartId = this.$route.params.cartId
+    this.getOneCartData()
+  }
 }
 </script>
 

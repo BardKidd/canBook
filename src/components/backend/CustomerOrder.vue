@@ -71,7 +71,6 @@
         </div>
       </div>
 
-      
       <div class="col-6 mx-auto">
         <!-- 購物車 -->
         <table class="table mt-5">
@@ -129,28 +128,28 @@
                     placeholder="請輸入 Email" :class="{'is-invalid': errors.has('email')}">
                 <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
                 </div>
-            
+
                 <div class="form-group">
                 <label for="username">收件人姓名</label>
                 <input type="text" class="form-control" name="name" id="username" v-model="form.user.name"
                     placeholder="輸入姓名" v-validate="'required'" :class="{'is-invalid ': errors.has('name')}">
                 <span class="text-danger" v-if="errors.has('name')">請輸入姓名</span>
                 </div>
-            
+
                 <div class="form-group">
                 <label for="usertel">收件人手機</label>
                 <input type="tel" class="form-control" id="usertel" name="tel" placeholder="請輸入手機" v-model="form.user.tel"
                      v-validate="'phone'" :class="{'is-invalid': errors.has('tel')}">
                 <span class="text-danger" v-if="errors.has('tel')">{{ '手機' + errors.first('tel') }}</span>
                 </div>
-            
+
                 <div class="form-group">
                 <label for="useraddress">收件人地址</label>
                 <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
                     placeholder="請輸入地址" v-validate="'required'" :class="{'is-invalid': errors.has('address')}">
                 <span class="text-danger" v-if="errors.has('address')">請輸入收件人地址</span>
                 </div>
-            
+
                 <div class="form-group">
                 <label for="comment">留言</label>
                 <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
@@ -161,128 +160,127 @@
             </form>
         </div>
       </div>
-      
+
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
-import Pagination from '../frontend/Pagination';
+import $ from 'jquery'
+import Pagination from '../frontend/Pagination'
 export default {
-    components: {
-        Pagination,
-    },
-    data() {
-        return {
-            pagination: {},
-            isLoading: false,
-            cardProducts: [],
-            product: {},
-            productId: '',
-            shippingCart: {
-                carts: {}
-            },
-            coupon_code: '',
-            form: {
-                user: {
-                    name: '',
-                    email: '',
-                    tel: '',
-                    address: '',
-                },
-                message: '',
-            }
-        }
-    },
-    methods: {
-        getCustomerOrder(page = 1) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-            const vm = this;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.isLoading = false;
-                vm.cardProducts = response.data.products;
-                vm.pagination = response.data.pagination;
-            })
+  components: {
+    Pagination
+  },
+  data () {
+    return {
+      pagination: {},
+      isLoading: false,
+      cardProducts: [],
+      product: {},
+      productId: '',
+      shippingCart: {
+        carts: {}
+      },
+      coupon_code: '',
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
         },
-        seeMore(id) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-            const vm = this;
-            vm.productId = id;
-            vm.$http.get(api).then((response) => {
-                if(response.data.success) {
-                    response.data.product.num = 1;
-                    vm.product = response.data.product;
-                    $('#productModal').modal('show');
-                    vm.productId = '';
-                }
-            })
-        },
-        addToShippingCart(id, num = 1) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            const vm = this;
-            const shippingCart = {
-                product_id: id,
-                qty: num,
-            }
-            vm.$http.post(api, { data: shippingCart }).then(function() {
-                vm.getShippingCart();
-                $('#productModal').modal('hide');
-            })
-        },
-        getShippingCart() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-            const vm = this;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.isLoading = false;
-                vm.shippingCart = response.data.data;
-            })
-        },
-        delShippingCartProduct(id) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-            const vm = this;
-            vm.$http.delete(api).then((response) => {
-                if(response.data.success) {
-                    vm.getShippingCart();
-                }
-            })
-        },
-        useCoupon() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-            const vm = this;
-            vm.isLoading = true;
-            const coupon = {
-                code: vm.coupon_code,
-            }
-            vm.$http.post(api, { data: coupon }).then(function() {
-                vm.getShippingCart();
-                vm.isLoading = false;
-            })
-        },
-        sendOrder() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-            const vm = this;
-            const order = vm.form;
-            vm.isLoading = true;
-            this.$validator.validate().then((result) => {
-                if(result) {
-                    vm.$http.post(api, { data: order }).then((response) => {
-                        if(response.data.success) {
-                            vm.$router.push(`customerorder_check/${response.data.orderId}`);
-                        }
-                        vm.isLoading = false;
-                    })
-                }
-                else{
-                    vm.isLoading = false;
-                }
-            })
-        }
-    },
-    created() {
-        this.getCustomerOrder();
-        this.getShippingCart();
+        message: ''
+      }
     }
+  },
+  methods: {
+    getCustomerOrder (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.isLoading = false
+        vm.cardProducts = response.data.products
+        vm.pagination = response.data.pagination
+      })
+    },
+    seeMore (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      const vm = this
+      vm.productId = id
+      vm.$http.get(api).then((response) => {
+        if (response.data.success) {
+          response.data.product.num = 1
+          vm.product = response.data.product
+          $('#productModal').modal('show')
+          vm.productId = ''
+        }
+      })
+    },
+    addToShippingCart (id, num = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
+      const shippingCart = {
+        product_id: id,
+        qty: num
+      }
+      vm.$http.post(api, { data: shippingCart }).then(function () {
+        vm.getShippingCart()
+        $('#productModal').modal('hide')
+      })
+    },
+    getShippingCart () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.isLoading = false
+        vm.shippingCart = response.data.data
+      })
+    },
+    delShippingCartProduct (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      const vm = this
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.getShippingCart()
+        }
+      })
+    },
+    useCoupon () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const vm = this
+      vm.isLoading = true
+      const coupon = {
+        code: vm.coupon_code
+      }
+      vm.$http.post(api, { data: coupon }).then(function () {
+        vm.getShippingCart()
+        vm.isLoading = false
+      })
+    },
+    sendOrder () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const vm = this
+      const order = vm.form
+      vm.isLoading = true
+      this.$validator.validate().then((result) => {
+        if (result) {
+          vm.$http.post(api, { data: order }).then((response) => {
+            if (response.data.success) {
+              vm.$router.push(`customerorder_check/${response.data.orderId}`)
+            }
+            vm.isLoading = false
+          })
+        } else {
+          vm.isLoading = false
+        }
+      })
+    }
+  },
+  created () {
+    this.getCustomerOrder()
+    this.getShippingCart()
+  }
 }
 </script>

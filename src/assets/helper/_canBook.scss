@@ -19,17 +19,17 @@
     left: 50%;
     transition: 0.3s;
     transform: translate(-50%, -50%);
+    &:hover {
+        opacity: 0.75;
+        cursor: pointer;
+        transition: 0.3s;
+    }
     > i {
         font-size: fontSize(32px);
         color: rgba(83, 92, 104, 0.9);
         position: absolute;
         @extend %center-vertically;
     }
-}
-.round:hover {
-    opacity: 0.75;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 // phone mode

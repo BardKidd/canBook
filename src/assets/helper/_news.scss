@@ -10,28 +10,28 @@
 }
 .activityNews {
     margin-bottom: 1rem;
-    > .marquee {
-        height: 1.5rem;
-        margin: 0 auto;
-        overflow: hidden;
-        position: relative;
-        > p {
-            padding-left: 0;
-            position: absolute;
-            animation: marquee 15s linear infinite;
-            color: #34495e;
-            font-weight: bold;
-            font-size: fontSize(16px);
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-    }
+    // > .marquee {
+    //     height: 1.5rem;
+    //     margin: 0 auto;
+    //     overflow: hidden;
+    //     position: relative;
+    //     > p {
+    //         padding-left: 0;
+    //         position: absolute;
+    //         animation: marquee 15s linear infinite;
+    //         color: #34495e;
+    //         font-weight: bold;
+    //         font-size: fontSize(16px);
+    //         font-family: 'Noto Sans TC', sans-serif;
+    //     }
+    // }
 }
 .activityFontStyle1 {
     @include activityFontStyle(white, #3498db, white);
 }
 .activityImage1 {
     background-image: url('~@/assets/image/activity1.png');
-    background-position: center;
+    @extend %activityImage;
 }
 .activityFontStyle2 {
     text-align: right;
@@ -39,7 +39,7 @@
 }
 .activityImage2 {
     background-image: url('~@/assets/image/activity2.png');
-    background-size: cover;
+    @extend %activityImage;
 }
 .activityFontStyle3 {
     text-align: right;
@@ -47,24 +47,22 @@
 }
 .activityImage3 {
     background-image: url('~@/assets/image/activity3.png');
-    background-size: cover;
-    background-position: left 65%;
+    @extend %activityImage;
 }
 .activityFontStyle4 {
     @include activityFontStyle(#017e83, #2f3640, #2f3640);
 }
 .activityImage4 {
     background-image: url('~@/assets/image/activity4.png');
-    background-size: cover;
-    background-position: left 56%;
+    @extend %activityImage;
 }
-@keyframes marquee {
-    0% {
-        left: 100%;
-        transform: translateX(0%);
-    }
-    100% {
-        left: 0%;
-        transform: translateX(-100%);
-    }
-}
+// @keyframes marquee {
+//     0% {
+//         left: 100%;
+//         transform: translateX(0%);
+//     }
+//     100% {
+//         left: 0%;
+//         transform: translateX(-100%);
+//     }
+// }

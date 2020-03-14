@@ -30,6 +30,11 @@ $basicFontSize: 16px;
     margin-top: 1rem;
 }
 
+%activityImage {
+    background-size: cover;
+    background-position: right;
+}
+
 @mixin topFineTuning($percent) {
     top: $percent;
     transform: translateY(-50%);

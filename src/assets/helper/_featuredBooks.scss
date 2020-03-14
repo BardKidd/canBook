@@ -5,13 +5,13 @@
     overflow: hidden;
     position: relative;
     transition: .5s;
-    > img {
-        transition: .5s;
+    &:hover {
+        > img {
+            transform: scale(1.05, 1.05);
+            transition: .5s;
+        }
     }
-}
-.cardBox:hover {
     > img {
-        transform: scale(1.05, 1.05);
         transition: .5s;
     }
 }
@@ -50,6 +50,15 @@
     span {
         position: absolute;
         right: 0;
+    }
+}
+.homeTitleFontStyleBox {
+    display: block;
+    text-align: center;
+    > .homeTitleFontStyle {
+        font-size: fontSize(32px);
+        font-family: Arial, sans-serif;
+        font-weight: bold;
     }
 }
 

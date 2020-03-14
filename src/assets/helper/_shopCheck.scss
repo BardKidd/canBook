@@ -76,9 +76,9 @@
                 background-color: #863f20;
                 color: white;
                 width: 100%;
-            }
-            > button:hover {
-                background-color: #632d16;
+                &:hover {
+                    background-color: #632d16;
+                }
             }
         }
     }

@@ -14,42 +14,42 @@
 <script>
 export default {
   name: 'Navbar',
-  data() {
+  data () {
     return {
-      messages: [],
-    };
+      messages: []
+    }
   },
   methods: {
-    updateMessage(message, status) {
-      const timestamp = Math.floor(new Date() / 1000);
+    updateMessage (message, status) {
+      const timestamp = Math.floor(new Date() / 1000)
       this.messages.push({
         message,
         status,
-        timestamp,
-      });
-      this.removeMessageWithTiming(timestamp);
+        timestamp
+      })
+      this.removeMessageWithTiming(timestamp)
     },
-    removeMessage(num) {
-      this.messages.splice(num, 1);
+    removeMessage (num) {
+      this.messages.splice(num, 1)
     },
-    removeMessageWithTiming(timestamp) {
-      const vm = this;
+    removeMessageWithTiming (timestamp) {
+      const vm = this
       setTimeout(() => {
         vm.messages.forEach((item, i) => {
           if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
+            vm.messages.splice(i, 1)
           }
-        });
-      }, 5000);
-    },
+        })
+      }, 5000)
+    }
   },
-  created() {
-    const vm = this;
-    vm.$bus.$on('message:push', (message, status = 'warning') =>{
-      vm.updateMessage(message, status);
+  created () {
+    const vm = this
+    vm.$bus.$on('message:push', (message, status = 'warning') => {
+      vm.updateMessage(message, status)
     })
-  },
-};
+  }
+}
 </script>
 
 <style scope>

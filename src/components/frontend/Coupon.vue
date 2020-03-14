@@ -123,76 +123,75 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Pagination from './Pagination';
+import $ from 'jquery'
+import Pagination from '@/components/frontend/Alert'
 export default {
-    components: {
-      Pagination,
+  components: {
+    Pagination
+  },
+  data () {
+    return {
+      isLoading: false,
+      coupons: {},
+      tempCoupon: {},
+      isNew: false,
+      pagination: {}
+    }
+  },
+  methods: {
+    getCoupons () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.isLoading = false
+        vm.coupons = response.data.coupons
+        vm.pagination = response.data.pagination
+      })
     },
-    data() {
-      return {
-        isLoading: false,
-        coupons: {},
-        tempCoupon: {},
-        isNew: false,
-        pagination: {},
+    openCouponModal (isNew, item) {
+      if (isNew) {
+        this.tempCoupon = {}
+        this.isNew = true
+        $('#couponModal').modal('show')
+      } else {
+        this.tempCoupon = Object.assign({}, item)
+        this.isNew = false
+        $('#couponModal').modal('show')
       }
     },
-    methods: {
-        getCoupons() {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`;
-            const vm = this;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.isLoading = false;
-                vm.coupons = response.data.coupons;
-                vm.pagination = response.data.pagination;
-            })
-        },
-        openCouponModal(isNew, item) {
-          if(isNew){
-            this.tempCoupon = {};
-            this.isNew = true;
-            $('#couponModal').modal('show');
-          }
-          else{
-            this.tempCoupon = Object.assign({}, item);
-            this.isNew = false;
-            $('#couponModal').modal('show');
-          }
-        },
-        updataCoupon() {
-          let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-          let httpMethod = 'post';
-          const vm = this;
-          if(vm.isNew === false){
-              api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-              httpMethod = 'put';
-          }
-          vm.$http[httpMethod](api, {data: vm.tempCoupon}).then((response) => {
-            if(response.data.success) {
-              $('#couponModal').modal('hide');
-              vm.getCoupons();
-            }
-          })
-        },
-        openDelCouponModal(item) {
-          this.tempCoupon = item;
-          $('#delCouponModal').modal('show');
-        },
-        delCoupon() {
-          const vm = this;
-          const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-          vm.$http.delete(api).then((response) => {
-            if(response.data.success){
-              $('#delCouponModal').modal('hide');
-              vm.getCoupons();
-            }
-          })
+    updataCoupon () {
+      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
+      let httpMethod = 'post'
+      const vm = this
+      if (vm.isNew === false) {
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
+        httpMethod = 'put'
+      }
+      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
+        if (response.data.success) {
+          $('#couponModal').modal('hide')
+          vm.getCoupons()
         }
+      })
     },
-    created() {
-        this.getCoupons();
+    openDelCouponModal (item) {
+      this.tempCoupon = item
+      $('#delCouponModal').modal('show')
+    },
+    delCoupon () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          $('#delCouponModal').modal('hide')
+          vm.getCoupons()
+        }
+      })
     }
+  },
+  created () {
+    this.getCoupons()
+  }
 }
 </script>

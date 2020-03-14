@@ -14,15 +14,15 @@
 <script>
 export default {
   methods: {
-    logout() {
-      const api = `${process.env.VUE_APP_APIPATH}/logout`;
-      const vm = this;
+    logout () {
+      const api = `${process.env.VUE_APP_APIPATH}/logout`
+      const vm = this
       vm.$http.post(api).then(response => {
         if (response.data.success) {
-          vm.$router.push("/login");
+          vm.$router.push('/login')
         }
-      });
+      })
     }
   }
-};
+}
 </script>

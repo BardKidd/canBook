@@ -25,8 +25,8 @@ export default {
   name: 'Pagination',
   props: ['pagination'],
   methods: {
-    pageComponent(page) {
-      this.$emit('emitPage', page);
+    pageComponent (page) {
+      this.$emit('emitPage', page)
     }
   }
 }

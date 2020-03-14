@@ -11,9 +11,9 @@
     color: white;
     padding-right: 0;
     padding-left: 0;
-}
-.navbar-logout:hover {
-    color: white;
-    font-weight: bolder;
-    text-decoration: none;
+    &:hover {
+        color: white;
+        font-weight: bolder;
+        text-decoration: none;
+    }
 }

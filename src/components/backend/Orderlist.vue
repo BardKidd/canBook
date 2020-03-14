@@ -38,41 +38,41 @@
 </template>
 
 <script>
-import Pagination from './Pagination';
+import Pagination from '@/components/frontend/Alert'
 export default {
-    components: {
-        Pagination,
-    },
-    data() {
-        return {
-            pagination: {},
-            isLoading: false,
-            orders: [],
-        }
-    },
-    methods: {
-        getOrderlist(page = 1) {
-            const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
-            const vm = this;
-            vm.isLoading = true;
-            vm.$http.get(api).then((response) => {
-                vm.orders = response.data.orders;
-                vm.orders.forEach(function(item){
-                  const timestamp = new Date(item.create_at * 1000);
-                  const timestampValue = [
-                    timestamp.getFullYear(),
-                    timestamp.getMonth() + 1,
-                    timestamp.getDate(),
-                  ]
-                  item.create_at = timestampValue;
-                })
-                vm.pagination = response.data.pagination;
-                vm.isLoading = false;
-            })
-        },
-    },
-    created() {
-        this.getOrderlist();
+  components: {
+    Pagination
+  },
+  data () {
+    return {
+      pagination: {},
+      isLoading: false,
+      orders: []
     }
+  },
+  methods: {
+    getOrderlist (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.get(api).then((response) => {
+        vm.orders = response.data.orders
+        vm.orders.forEach(function (item) {
+          const timestamp = new Date(item.create_at * 1000)
+          const timestampValue = [
+            timestamp.getFullYear(),
+            timestamp.getMonth() + 1,
+            timestamp.getDate()
+          ]
+          item.create_at = timestampValue
+        })
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
+    }
+  },
+  created () {
+    this.getOrderlist()
+  }
 }
 </script>

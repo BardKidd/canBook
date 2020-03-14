@@ -81,23 +81,23 @@ body {
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       user: {
         username: '',
-        password: '',
+        password: ''
       }
     }
   },
   methods: {
-    login() {
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
-      const vm = this;
+    login () {
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
+      const vm = this
       vm.$http.post(api, vm.user).then((response) => {
-        if(response.data.success) {
-          vm.$router.push('/admin/products');
+        if (response.data.success) {
+          vm.$router.push('/admin/products')
         }
-      });
+      })
     }
   }
 }

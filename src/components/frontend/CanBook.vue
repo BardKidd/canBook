@@ -64,21 +64,20 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import Alert from './Alert';
+import $ from 'jquery'
+import Alert from './Alert'
 export default {
   components: {
-    Alert,
+    Alert
   }
 }
 
-$(document).ready(function(){
-  $(window).scroll(function(){
-    if($('html, body').scrollTop() >= 230) {
-      $('.l-nav-table').hide().stop();
-    }
-    else {
-      $('.l-nav-table').show().stop();
+$(document).ready(function () {
+  $(window).scroll(function () {
+    if ($('html, body').scrollTop() >= 230) {
+      $('.l-nav-table').hide().stop()
+    } else {
+      $('.l-nav-table').show().stop()
     }
   })
 })

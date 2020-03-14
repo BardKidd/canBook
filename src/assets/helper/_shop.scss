@@ -28,12 +28,12 @@
         width: 100%;
         text-align: left;
         cursor: pointer;
+        &:hover {
+            background-color: #eee;
+        }
         i {
             padding-right: 0.5rem;
         }
-    }
-    .classificationStyle:hover {
-        background-color: #eee;
     }
 }
 .shoppingCartList {
@@ -125,10 +125,10 @@
         > button {
             color: white;
             background-color: #863f20;
-        }
-        > button:hover {
-            background-color: #552814;
-            color: white;
+            &:hover {
+                background-color: #552814;
+                color: white;
+            }
         }
     }
 }
@@ -186,6 +186,12 @@
     z-index: 99;
     background-color: white;
     cursor: pointer;
+    &:hover {
+        background-color: #aaa;
+        > i {
+            color: white;
+        }
+    }
     > i {
         position: absolute;
         @extend %center-vertically;
@@ -203,12 +209,6 @@
         text-align: center;
         top: 0%;
         font-weight: bold;
-    }
-}
-.shoppingCartIcon:hover {
-    background-color: #aaa;
-    > i {
-        color: white;
     }
 }
 
