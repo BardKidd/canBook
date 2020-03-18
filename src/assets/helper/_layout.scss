@@ -12,27 +12,20 @@
     > .l-logo {
         width: 20%;
         display: inline-block;
+        position: relative;
+        bottom: 25%;
+        height: 85px;
+        overflow: hidden;
     }
     a {
         text-decoration: none;
         color: $white;
     }
-    > .l-nav-icon {
-        display: inline-block;
-        position: absolute;
-        right: 15%;
-        top: 10%;
-        > li {
-            @extend %liStyle;
-            letter-spacing: fontSize(16px);
-            font-size: fontSize(20px);
-        }
-    }
     > .l-nav-mainOption {
         display: inline-block;
         position: absolute;
         right: 10%;
-        top: 50%;
+        top: 37%;
         > li {
             @extend %liStyle;
             font-size: fontSize(18px);
@@ -55,7 +48,7 @@ footer {
 .l-footer-table {
     background-color: $primary;
     @extend %boxSizing;
-    padding: 1% 0;
+    padding: 3% 0;
     position: relative;
     bottom: 0;
     > .l-footer-widthCalc {
@@ -73,33 +66,36 @@ footer {
                 width: 100%;
                 display: inline-block;
                 overflow: hidden;
-                > i {
-                    font-size: fontSize(32px);
-                    display: inline-block;
-                    position: absolute;
-                    @include topFineTuning(47%);
-                }
                 > img {
-                    width: 200%;
+                    width: 100%;
                     display: inline-block;
                     padding-left: 1.1rem;
                 }
             }
         }
-        > .l-footer-news {
-            text-align: center;
-            margin: 0.5rem 0 0.5rem 8rem;
+        > .l-footer-icon {
+            display: inline-block;
+            position: absolute;
+            right: 15%;
+            top: 23%;
             > li {
-                padding-left: 5rem;
-                display: inline-block;
-                color: $white;
-                font-size: fontSize(16px);
-                width: calc(100%/3.5);
-                &:hover {
-                    color: darken($white, 15%);
-                    cursor: pointer;
+                @extend %liStyle;
+                letter-spacing: fontSize(16px);
+                font-size: fontSize(24px);
+                margin-right: 1.5rem;
+                > a {
+                    padding: 10% 8%;
+                    background-color: $other;
+                    border-radius: 60%;
+                    text-decoration: none;
+                    color: $primary;
+                    > i {
+                        position: relative;
+                        left: 24%;
+                        bottom: 4%;
+                    }
                 }
-            } 
+            }
         }
     }
     
@@ -112,9 +108,6 @@ footer {
             position: relative;
             top: 50%;
             left: 15%;
-        }
-        > .l-nav-icon {
-            display: none;
         }
         > .l-nav-mainOption {
             display: none;
@@ -171,9 +164,6 @@ footer {
  @media (min-width: 641px) and (max-width: 960px) {
     .l-nav-table {
         height: 15vh;
-        > .l-nav-icon {
-            display: none;
-        }
         > .l-nav-mainOption {
             display: none;
         }
