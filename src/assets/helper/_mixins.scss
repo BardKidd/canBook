@@ -42,7 +42,7 @@ $basicFontSize: 16px;
 
 @mixin activityFontStyle($titleColor, $dateColor, $contentColor) {
     padding: 6rem 3.5rem;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: $font-family-chinese2;
     > strong {
         color: $titleColor;
         font-size: fontSize(32px);
@@ -58,7 +58,7 @@ $basicFontSize: 16px;
 }
 
 @mixin scheduleShowStyle($liColor, $borderSize) {
-    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    font-family: $font-family-chinese2;
     > ul {
         list-style: none;
         > li {

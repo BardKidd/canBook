@@ -4,8 +4,18 @@
     padding-bottom: 1rem;
 }
 .backShop {
+    background-color: $gray-300;
     font-size: fontSize(18px);
     cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 30px;
+    transition: .3s;
+    font-family: $font-family-chinese2;
+    &:hover {
+        color: $white;
+        background-color: $primary;
+        transition: .3s;
+    }
 }
 .shopCheckBox {
     padding-bottom: 2rem;
@@ -13,7 +23,7 @@
     margin-bottom: 3rem;
 }
 .productShop {
-    font-family: '微軟正黑體', Arial, sans-serif;
+    font-family: $font-family-chinese;
     color: #424949;
     font-weight: bolder;
     > .productShopTitle {
@@ -21,7 +31,7 @@
         margin-bottom: 1rem;
         > span {
             background-color: #863f20;
-            color: white;
+            color: $white;
             border-radius: 5px;
             padding: 0.2rem;
         }
@@ -74,7 +84,7 @@
         > div {
             > button {
                 background-color: #863f20;
-                color: white;
+                color: $white;
                 width: 100%;
                 &:hover {
                     background-color: #632d16;

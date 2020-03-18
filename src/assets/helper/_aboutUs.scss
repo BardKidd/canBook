@@ -16,7 +16,7 @@
     .aboutUsContent {
         display: inline-block;
         color: #57606f;
-        font-family: 'Noto Sans TC', serif;
+        font-family: $font-family-chinese2;
         font-weight: bold;
         text-indent: 2rem;
         vertical-align: top;
@@ -25,7 +25,7 @@
     }
     .aboutUsContent::selection {
         background-color: #EE5A24;
-        color: white;
+        color: $white;
     }
 }
 

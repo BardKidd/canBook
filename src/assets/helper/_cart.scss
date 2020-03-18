@@ -22,20 +22,20 @@
         margin-bottom: 1rem;
         > .orderTitle {
             font-size: fontSize(22px);
-            color: #863f20;
-            font-family: 'Noto Sans TC', serif;
+            color: $primary;
+            font-family: $font-family-chinese2;
             font-weight: bolder;
         }
         label {
             color: #777;
             font-size: fontSize(15px);
-            font-family: 'Noto Sans TC', serif;
+            font-family: $font-family-chinese2;
             font-weight: bold;
         }
         input, textarea {
             color: #555;
             font-size: fontSize(16px);
-            font-family: 'Noto Sans TC', serif;
+            font-family: $font-family-chinese2;
             font-weight: bold;
         }
     }
