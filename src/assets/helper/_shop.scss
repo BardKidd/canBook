@@ -36,25 +36,25 @@
         }
     }
 }
-.shoppingCartList {
-    > .shoppingCartListTitle {
-        padding-top: 1rem;
-        > strong {
-            font-size: fontSize(22px);
-            font-family: $font-family-chinese;
-            font-weight: bolder;
-            color: $primary;
-            margin-right: 6rem;
-        }
-        > button {
-            font-family: $font-family-chinese;
-            font-weight: bolder;
-        }
-        > div {
-            margin-left: 0.5rem;
-        }
-    }
-}
+// .shoppingCartList {
+//     > .shoppingCartListTitle {
+//         padding-top: 1rem;
+//         > strong {
+//             font-size: fontSize(22px);
+//             font-family: $font-family-chinese;
+//             font-weight: bolder;
+//             color: $primary;
+//             margin-right: 6rem;
+//         }
+//         > button {
+//             font-family: $font-family-chinese;
+//             font-weight: bolder;
+//         }
+//         > div {
+//             margin-left: 0.5rem;
+//         }
+//     }
+// }
 .countRound {
     color: $white;
     display: inline-block;
@@ -133,11 +133,12 @@
     }
 }
 .totalBooksTitle {
-    font-size: fontSize(28px);
-    font-weight: 500;
-    font-family: $font-family-chinese;
+    font-size: $fontSize-title;
+    font-weight: bold;
+    font-family: $font-family-chinese2;
     color: $primary;
     margin-bottom: 1rem;
+    text-align: center;
 }
 .totalBooksCard {
     display: inline-grid;
@@ -209,6 +210,89 @@
         text-align: center;
         top: 0%;
         font-weight: bold;
+    }
+}
+.shoppingSideBar {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -21%;
+    height: 100vh;
+    border-left: 1px solid $primary;
+    box-shadow: 0 0 8px $primary-lighten;
+    width: 20%;
+    z-index: 101;
+    max-width: 20%;
+    background-color: $white;
+    &:before {
+        content: '';
+        width: 450%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 100;
+        display: block;
+        position: absolute;
+        right: 100%;
+    }
+    > .shoppingSideBarTitle {
+        color: $white;
+        background-color: $primary;
+        padding: 6% 8%;
+        font-size: fontSize(18px);
+        font-family: $font-family-chinese2;
+        > span {
+            margin-right: 6.5rem;
+        }
+        > i {
+            font-size: fontSize(32px);
+        }
+    }
+    > .shoppingSideBarContent {
+        background-color: $white;
+        > .shoppingSideBarList {
+            padding: 7% 6%;
+            > img {
+                width: 30%;
+                height: 30%;
+                vertical-align: top;
+            }
+            > .shoppingSideBarData {
+                width: 70%;
+                height: 70%;
+                font-family: $font-family-chinese;
+                display: inline-block;
+                > p {
+                    color: $primary;
+                    font-weight: bolder;
+                }
+                > span {
+                    font-size: fontSize(14px);
+                    margin-right: 2rem;
+                }
+            }
+        }
+        > .shoppingSideBarTotal {
+            font-family: $font-family-english;
+            font-weight: bold;
+            text-align: right;
+            padding: 5% 5%;
+            > p {
+                border-top: 2px solid $gray-100;
+                padding: 6% 0;
+            }
+        }
+    }
+    > .shoppingSideBarGetOrderBtn {
+        background-color: $red;
+        font-family: $font-family-chinese2;
+        font-size: fontSize(20px);
+        border-radius: 30px;
+        text-decoration: none;
+        color: $white;
+        width: 90%;
+        display: block;
+        text-align: center;
+        margin: 0 auto;
     }
 }
 

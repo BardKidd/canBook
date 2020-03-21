@@ -3,7 +3,7 @@
         <loading :active.sync="isLoading"></loading>
         <div class="row shopPaddingTop">
             <!-- sidebar -->
-            <div class="classificationAndCart col-4">
+            <div class="classificationAndCart">
                 <div class="booksClassification">
                     <strong>書籍類別<i class="fas fa-caret-down"></i></strong>
                     <select class="classificationStyle" v-model="classification" @click.prevent="bookFilter">
@@ -11,7 +11,7 @@
                         <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key"><i class="fas fa-bookmark"></i>{{ item }}</option>
                     </select>
                 </div>
-                <div class="shoppingCartList">
+                <!-- <div class="shoppingCartList">
                     <div class="shoppingCartListTitle">
                         <strong>購物車清單</strong>
                         <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
@@ -39,11 +39,11 @@
                             <button class="btn" type="button" id="button-addon2">送出</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- content -->
-            <div class="totalBooks col-8">
+            <div class="totalBooks">
                 <div class="totalBooksTitle">{{ classification }}</div>
                 <div class="col-4 totalBooksCard" v-for="(item, key) in totalBooks" :key="key" id="aBook">
                     <div class="cardImg" @click.prevent="seeMore(item.id)">
@@ -58,18 +58,36 @@
                 <Pagination :pagination = pagination @emitPage = getShop v-if="classification === '全部好書'"></Pagination>
             </div>
         </div>
-        <router-link to="/canbook/cart">
-            <div class="shoppingCartIcon">
-                <i class="fas fa-shopping-cart"></i>
-                <div class="shoppingCartQty">{{ totalShoppingList.carts.length }}</div>
+        <div class="shoppingCartIcon" @click="sideBarOpen">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="shoppingCartQty">{{ totalShoppingList.carts.length }}</div>
+        </div>
+        <div class="shoppingSideBar">
+          <div class="shoppingSideBarTitle">
+            <span>購物車內容</span>
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="shoppingSideBarContent">
+            <div v-for="(item, key) in totalShoppingList.carts" :key="key" class="shoppingSideBarList">
+              <img :src="item.product.imageUrl" alt="">
+              <div class="shoppingSideBarData">
+                <p>{{ item.product.title }}</p>
+                <span>{{ item.qty }}/{{item.product.unit}}</span>
+                <span>NT${{ item.product.price * item.qty }}</span>
+              </div>
             </div>
-        </router-link>
+            <div class="shoppingSideBarTotal">
+              <p>小計: NT${{ totalShoppingList.total }}</p>
+            </div>
+          </div>
+          <a href="#" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></a>
+        </div>
     </div>
 </template>
 
 <script>
 import Pagination from './Pagination'
-
+import $ from 'jquery'
 export default {
   components: {
     Pagination
@@ -206,6 +224,9 @@ export default {
           vm.$bus.$emit('message:push', '已全部刪除', 'danger')
         }
       })
+    },
+    sideBarOpen () {
+      $('.shoppingSideBar').css({ display: 'inline-block', position: 'fixed' }).animate({ right: '0%' }, 200)
     }
   },
   created () {
