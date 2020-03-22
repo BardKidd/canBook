@@ -36,25 +36,6 @@
         }
     }
 }
-// .shoppingCartList {
-//     > .shoppingCartListTitle {
-//         padding-top: 1rem;
-//         > strong {
-//             font-size: fontSize(22px);
-//             font-family: $font-family-chinese;
-//             font-weight: bolder;
-//             color: $primary;
-//             margin-right: 6rem;
-//         }
-//         > button {
-//             font-family: $font-family-chinese;
-//             font-weight: bolder;
-//         }
-//         > div {
-//             margin-left: 0.5rem;
-//         }
-//     }
-// }
 .countRound {
     color: $white;
     display: inline-block;
@@ -217,7 +198,6 @@
     position: absolute;
     top: 0;
     right: -21%;
-    height: 100vh;
     border-left: 1px solid $primary;
     box-shadow: 0 0 8px $primary-lighten;
     width: 20%;
@@ -244,13 +224,28 @@
             margin-right: 6.5rem;
         }
         > i {
+            cursor: pointer;
             font-size: fontSize(32px);
         }
+    }
+    > .shoppingSideBarZero {
+        padding: 6%;
+        font-weight: bold;
+        font-family: $font-family-chinese;
+        height: 100vh;
     }
     > .shoppingSideBarContent {
         background-color: $white;
         > .shoppingSideBarList {
             padding: 7% 6%;
+            > .shoppingSideBarDataDel {
+                position: absolute;
+                font-weight: bolder;
+                color: $red;
+                cursor: pointer;
+                left: 3%;
+                font-size: fontSize(16px);
+            }
             > img {
                 width: 30%;
                 height: 30%;
@@ -292,7 +287,7 @@
         width: 90%;
         display: block;
         text-align: center;
-        margin: 0 auto;
+        margin: 1rem auto;
     }
 }
 

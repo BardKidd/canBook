@@ -11,35 +11,6 @@
                         <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key"><i class="fas fa-bookmark"></i>{{ item }}</option>
                     </select>
                 </div>
-                <!-- <div class="shoppingCartList">
-                    <div class="shoppingCartListTitle">
-                        <strong>購物車清單</strong>
-                        <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
-                        <div class="countRound">{{ totalShoppingList.carts.length }}</div>
-                    </div>
-                    <div class="lumpSum">
-                        <strong>總額</strong>
-                        <span>NT$: {{ totalShoppingList.total }}</span>
-                    </div>
-                    <div class="lumpSum" v-if="totalShoppingList.total !== totalShoppingList.final_total">
-                        <strong>折扣後</strong>
-                        <span>NT$: {{ Math.round(totalShoppingList.final_total) }}</span>
-                    </div>
-                    <div class="shoppingCartContent" v-for="(item, key) in totalShoppingList.carts" :key="key">
-                        <button type="button" class="btn btn-outline-danger" @click.prevent="delShoppingCartList(item.id)"><i class="fas fa-trash-alt"></i></button>
-                        <div>
-                            <p>{{ item.product.title }}</p>
-                            <p>{{ item.qty }} / {{ item.product.unit }}</p>
-                        </div>
-                        <span>NT$: {{ item.product.price * item.qty }}</span>
-                    </div>
-                    <div class="enterCoupon">
-                        <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code">
-                        <div class="input-group-append" @click.prevent="useCoupon">
-                            <button class="btn" type="button" id="button-addon2">送出</button>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
             <!-- content -->
@@ -62,13 +33,14 @@
             <i class="fas fa-shopping-cart"></i>
             <div class="shoppingCartQty">{{ totalShoppingList.carts.length }}</div>
         </div>
-        <div class="shoppingSideBar">
+        <div class="shoppingSideBar" v-if="totalShoppingList.carts.length > 0">
           <div class="shoppingSideBarTitle">
             <span>購物車內容</span>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times" @click="sideBarClose"></i>
           </div>
           <div class="shoppingSideBarContent">
             <div v-for="(item, key) in totalShoppingList.carts" :key="key" class="shoppingSideBarList">
+              <span class="shoppingSideBarDataDel" @click.prevent="delShoppingCartList(item.id)">X</span>
               <img :src="item.product.imageUrl" alt="">
               <div class="shoppingSideBarData">
                 <p>{{ item.product.title }}</p>
@@ -80,7 +52,14 @@
               <p>小計: NT${{ totalShoppingList.total }}</p>
             </div>
           </div>
-          <a href="#" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></a>
+          <router-link to="./cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
+        </div>
+        <div class="shoppingSideBar" v-else>
+          <div class="shoppingSideBarTitle">
+            <span>購物車內容</span>
+            <i class="fas fa-times" @click="sideBarClose"></i>
+          </div>
+          <div class="shoppingSideBarZero">購物車目前是空的! 快去商場逛逛吧~</div>
         </div>
     </div>
 </template>
@@ -226,7 +205,10 @@ export default {
       })
     },
     sideBarOpen () {
-      $('.shoppingSideBar').css({ display: 'inline-block', position: 'fixed' }).animate({ right: '0%' }, 200)
+      $('.shoppingSideBar').css({ display: 'inline-block' }).animate({ right: '0%' }, 100)
+    },
+    sideBarClose () {
+      $('.shoppingSideBar').css({ display: 'none' })
     }
   },
   created () {

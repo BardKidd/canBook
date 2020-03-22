@@ -6,14 +6,16 @@
         <i class="fas fa-backward"></i> 回到商品區
       </a>
     </div>
+
+    <!-- 產品介紹 -->
     <div class="row shopCheckBox">
       <!-- 產品照片 -->
-      <div class="col-4">
+      <div class="col-5">
         <img :src="productData.imageUrl" alt />
       </div>
 
       <!-- 產品內容 -->
-      <div class="col-4 productShop">
+      <div class="col-7 productShop">
         <div class="productShopTitle">
           <span>{{ productData.category }}</span>
           <h2>{{ productData.title }}</h2>
@@ -44,50 +46,58 @@
       </div>
 
       <!-- 購物車 -->
-      <div class="shoppingCartList col-4">
-        <div class="shoppingCartListTitle">
-          <strong>購物車清單</strong>
-          <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
-          <div class="countRound" v-if="shopCartList.carts.length !== 0">{{ shopCartList.carts.length }}</div>
-          <div class="countRound" v-if="shopCartList.carts.length === 0">0</div>
+      <div class="shoppingSideBar" v-if="shopCartList.carts.length > 0">
+        <div class="shoppingSideBarTitle">
+          <span>購物車內容</span>
+          <i class="fas fa-times" @click="sideBarClose"></i>
         </div>
-        <div class="lumpSum">
-          <strong>總額</strong>
-          <span>NT: {{ shopCartList.total }}</span>
-        </div>
-        <div class="lumpSum" v-if="shopCartList.total !== shopCartList.final_total">
-          <strong>折扣後</strong>
-          <span>NT: {{ Math.round(shopCartList.final_total) }}</span>
-        </div>
-        <div class="shoppingCartContent" v-for="(item, key) in shopCartList.carts" :key="key">
-          <button type="button" class="btn btn-outline-danger" @click.prevent="delShopingCartList(item.id)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-          <div>
-            <p>{{ item.product.title }}</p>
-            <p>{{ item.qty }} / {{ item.product.unit }}</p>
+        <div class="shoppingSideBarContent">
+          <div v-for="(item, key) in shopCartList.carts" :key="key" class="shoppingSideBarList">
+            <span class="shoppingSideBarDataDel" @click.prevent="delShopingCartList(item.id)">X</span>
+            <img :src="item.product.imageUrl" alt="">
+            <div class="shoppingSideBarData">
+              <p>{{ item.product.title }}</p>
+              <span>{{ item.qty }}/{{item.product.unit}}</span>
+              <span>NT${{ item.product.price * item.qty }}</span>
+            </div>
           </div>
-          <span>NT: {{ item.total }}</span>
-        </div>
-        <div class="enterCoupon">
-          <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code" />
-          <div class="input-group-append">
-            <button class="btn" type="button" @click.prevent="useCoupon">送出</button>
+          <div class="shoppingSideBarTotal">
+            <p>小計: NT${{ shopCartList.total }}</p>
           </div>
         </div>
+        <router-link to="./cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
+      </div>
+      <div class="shoppingSideBar" v-else>
+        <div class="shoppingSideBarTitle">
+          <span>購物車內容</span>
+          <i class="fas fa-times" @click="sideBarClose"></i>
+        </div>
+        <div class="shoppingSideBarZero">購物車目前是空的! 快去商場逛逛吧~</div>
       </div>
 
-      <!-- 結帳 Icon -->
-      <router-link to="../cart">
-          <div class="shoppingCartIcon">
-              <i class="fas fa-shopping-cart"></i>
-              <div class="shoppingCartQty">{{ shopCartList.carts.length }}</div>
-          </div>
-      </router-link>
+      <!-- 購物車 Icon -->
+      <div class="shoppingCartIcon" @click="sideBarOpen">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="shoppingCartQty">{{ shopCartList.carts.length }}</div>
+      </div>
+    </div>
+
+    <!-- 相關產品 -->
+    <div class="row">
+      <div class="col">
+        <h2 class="relatedProductsTitle">相關產品</h2>
+        <div class="relatedProductsContent col-4">
+          <img src="#" alt="">
+          <p>{{ totalRelatedProducts }}</p>
+          <span>價錢</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
+import $ from 'jquery'
 export default {
   data () {
     return {
@@ -96,7 +106,9 @@ export default {
       shopCartList: {},
       isLoading: false,
       coupon_code: '',
-      totalShoppingList: {}
+      totalShoppingList: {},
+      totalProducts: {},
+      totalRelatedProducts: []
     }
   },
   methods: {
@@ -179,12 +191,29 @@ export default {
           vm.$bus.$emit('message:push', '已全部刪除', 'danger')
         }
       })
+    },
+    sideBarOpen () {
+      $('.shoppingSideBar').css({ display: 'inline-block' }).animate({ right: '0%' }, 100)
+    },
+    sideBarClose () {
+      $('.shoppingSideBar').css({ display: 'none' })
+    },
+    getRelatedProduct () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
+      vm.$http.get(api).then((response) => {
+        vm.totalProducts = response.data.products
+        vm.totalRelatedProducts = vm.totalProducts.filter(function (item) {
+          return vm.productData.category === item.category
+        })
+      })
     }
   },
   created () {
     this.shopId = this.$route.params.shopId
     this.getShopData()
     this.getShopCartContent()
+    this.getRelatedProduct()
   }
 }
 </script>
