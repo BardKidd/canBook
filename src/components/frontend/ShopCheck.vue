@@ -65,7 +65,7 @@
             <p>小計: NT${{ shopCartList.total }}</p>
           </div>
         </div>
-        <router-link to="./cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
+        <router-link to="../cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
       </div>
       <div class="shoppingSideBar" v-else>
         <div class="shoppingSideBarTitle">
@@ -198,14 +198,18 @@ export default {
     sideBarClose () {
       $('.shoppingSideBar').css({ display: 'none' })
     },
-    getRelatedProduct () {
+    getAllProduct () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
       vm.$http.get(api).then((response) => {
-        vm.totalProducts = response.data.products
-        vm.totalRelatedProducts = vm.totalProducts.filter(function (item) {
-          return vm.productData.category === item.category
-        })
+        vm.totalProducts = response.data
+      })
+    },
+    getRelatedProduct () {
+      const vm = this
+      const relatedProduct = vm.totalProducts.totalProducts
+      vm.totalRelatedProducts = relatedProduct.filter(function (item) {
+        return item.category === vm.productData.category
       })
     }
   },
@@ -213,6 +217,7 @@ export default {
     this.shopId = this.$route.params.shopId
     this.getShopData()
     this.getShopCartContent()
+    this.getAllProduct()
     this.getRelatedProduct()
   }
 }

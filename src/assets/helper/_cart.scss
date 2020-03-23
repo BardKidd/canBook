@@ -13,8 +13,19 @@
     > .shoppingCartList {
         display: inline-block;
         vertical-align: top;
+        strong {
+            color: $primary;
+            font-size: fontSize(22px);
+            font-family: $font-family-chinese2;
+            margin-right: 4rem;
+        }
         .countRound {
             margin-left: 0.2rem; 
+        }
+        > .shoppingCartContent {
+            .qtyNum {
+                width: 20%;
+            }
         }
     }
     > .orderData {
@@ -31,6 +42,9 @@
             font-size: fontSize(15px);
             font-family: $font-family-chinese2;
             font-weight: bold;
+            > span {
+                color: $red;
+            }
         }
         input, textarea {
             color: #555;
@@ -59,11 +73,6 @@
             max-width: 100%;
             flex: 0 0 100%;
             margin-bottom: 2rem;
-            > .shoppingCartListTitle {
-                > strong {
-                    margin-right: 4rem;
-                }
-            }
             > .shoppingCartContent {
                 > span {
                     bottom: 0.5rem;
@@ -95,11 +104,6 @@
             max-width: 100%;
             flex: 0 0 100%;
             margin-bottom: 2rem;
-            > .shoppingCartListTitle {
-                > strong {
-                    margin-right: 4rem;
-                }
-            }
             > .shoppingCartContent {
                 > span {
                     bottom: 0.5rem;

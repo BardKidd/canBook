@@ -2,7 +2,7 @@
     <div class="container">
         <loading :active.sync="isLoading"></loading>
         <div class="row shopPaddingTop">
-            <!-- sidebar -->
+            <!-- booksClassification -->
             <div class="classificationAndCart">
                 <div class="booksClassification">
                     <strong>書籍類別<i class="fas fa-caret-down"></i></strong>
