@@ -57,12 +57,12 @@
               <div class="countRound" v-if="totalShoppingList.carts.length !== 0">{{ totalShoppingList.carts.length }}</div>
               <div class="countRound" v-if="totalShoppingList.carts.length === 0">0</div>
           </div>
-          <div class="lumpSum">
+          <div class="lumpSum" v-if="totalShoppingList.total === totalShoppingList.final_total">
               <strong>小計</strong>
               <span>NT: {{ totalShoppingList.total }}</span>
           </div>
           <div class="lumpSum" v-if="totalShoppingList.total !== totalShoppingList.final_total">
-              <strong>折扣後</strong>
+              <strong>折扣後小計</strong>
               <span>NT: {{ Math.round(totalShoppingList.final_total) }}</span>
           </div>
           <div class="shoppingCartContent" v-for="(item, key) in totalShoppingList.carts" :key="key">
@@ -74,10 +74,11 @@
               <span>NT$: {{ item.product.price * item.qty }}</span>
           </div>
           <div class="enterCoupon">
-              <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code">
+              <input type="text" class="form-control" placeholder="請輸入優惠碼" :class="{'is-invalid': errors.has('coupon')}" v-validate="'required'" name="coupon" v-model="coupon_code">
               <div class="input-group-append" @click.prevent="useCoupon">
                   <button class="btn" type="button" id="button-addon2">送出</button>
               </div>
+              <span class="text-danger" v-if="errors.has('coupon')">無效的優惠碼</span>
           </div>
         </div>
       </div>

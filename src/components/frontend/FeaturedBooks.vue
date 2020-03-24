@@ -1,9 +1,12 @@
 <template>
 <div>
     <loading :active.sync="isLoading"></loading>
+    <!-- 封面大圖 -->
     <div class="indexCover">
         <div class="round" @click="clickRoundBtn"><i class="fas fa-caret-down"></i></div>
     </div>
+
+    <!-- 精選書籍 -->
     <div class="homeTitleFontStyleBox my-5">
         <h2 class="homeTitleFontStyle">FEATURED BOOKS</h2>
     </div>
@@ -17,6 +20,26 @@
               <span>{{ item.category }}</span>
               <p class="moreFontStyle" @click.prevent="oneProductData(item.id)">More <i class="fas fa-angle-double-right"></i></p>
           </div>
+      </div>
+    </div>
+
+    <!-- 優惠驚喜 -->
+    <div class="bg-primaryDark">
+      <div class="container">
+        <div class="row">
+            <div class="col-12 surpriseTitle">優惠驚喜</div>
+            <div class="col-12 surpriseCode">
+                <div class="surpriseBox">
+                  <strong>[好書優惠]</strong>
+                  <span>神秘優惠驚喜</span>
+                  <p>- ilovebook2020 -</p>
+                  <span>享5折優惠</span>
+                </div>
+            </div>
+            <div class="col-12 surpriseBtn">
+              <router-link to="./shop">GO SHOPPING</router-link>
+            </div>
+        </div>
       </div>
     </div>
 </div>

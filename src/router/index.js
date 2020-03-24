@@ -13,7 +13,6 @@ import FeaturedBooks from '@/components/frontend/FeaturedBooks'
 import Shop from '@/components/frontend/Shop'
 import ShopCheck from '@/components/frontend/ShopCheck'
 import News from '@/components/frontend/News'
-import Surprise from '@/components/frontend/Surprise'
 import AboutUs from '@/components/frontend/AboutUs'
 import Cart from '@/components/frontend/Cart'
 import CartCheck from '@/components/frontend/CartCheck'
@@ -49,11 +48,6 @@ export default new VueRouter({
           path: 'news',
           name: 'News',
           component: News
-        },
-        {
-          path: 'surprise',
-          name: 'Surprise',
-          component: Surprise
         },
         {
           path: 'aboutUs',

@@ -112,6 +112,9 @@
             }
         }
     }
+    > span {
+        display: block;
+    }
 }
 .totalBooksTitle {
     font-size: $fontSize-title;

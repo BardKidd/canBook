@@ -9,7 +9,6 @@
         <ul class="l-nav-mainOption">
           <li><router-link to="/canbook/shop">優秀好書</router-link></li>
           <li><router-link to="/canbook/news">最新消息</router-link></li>
-          <li><router-link to="/canbook/surprise">優惠驚喜</router-link></li>
           <li><router-link to="/canbook/aboutUs">關於我們</router-link></li>
           <li class="l-nav-user">
             <router-link to="/login">
@@ -26,7 +25,6 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <router-link to="/canbook/shop">優秀好書</router-link>
             <router-link to="/canbook/news">最新消息</router-link>
-            <router-link to="/canbook/surprise">優惠驚喜</router-link>
             <router-link to="/canbook/aboutUs">關於我們</router-link>
           </div>
         </div>

@@ -10,10 +10,6 @@
         </ul>
       </div>
 
-      <router-link class="backShop" to="/canbook/shop">
-        <i class="fas fa-backward"></i> 回到商品區
-      </router-link>
-
       <form action="" class="col-12">
         <div>
             <!-- 購買列表 -->
@@ -76,6 +72,9 @@
                 </table>
                 <div class="text-right col-8 CheckBtn" v-if="orderData.is_paid == 0" @click="OkeyIWantPaid">
                     <button class="btn btn-primary">確認付款去</button>
+                </div>
+                <div class="text-right col-8 CheckBtn" v-if="orderData.is_paid == 1">
+                    <router-link to="/canbook/featuredBooks" class="btn btn-primary">返回首頁 繼續購物去</router-link>
                 </div>
             </div>
         </div>
