@@ -1,66 +1,97 @@
 @import './mixins';
 .aboutUsImage {
-    margin-bottom: 1.5rem;
-    display: inline-flex;
-    .aboutUsImageBig {
-        background-image: url('~@/assets/image/AboutBig.png');
-        background-size: cover;
-        background-position: center 60%;
-        width: 100%;
-        height: 0;
-        padding-bottom: 70%;
-        border-radius: 10px;
-        box-shadow: 0 0 10px gray;
-        display: inline-block;
+    display: inline-block;
+    background-color: $black;
+    padding: 8rem 0 3rem;
+    > .aboutUsImageBigBox {
+        margin-bottom: 3.5rem;
+        > h2 {
+            color: $white;
+            font-family: $font-family-chinese;
+            font-size: $fontSize-title;
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+        > .aboutUsImageBig {
+            background-image: url('~@/assets/image/starCity.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            width: 50%;
+            padding-bottom: 15%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px $primary-lighten;
+            display: block;
+            margin: 0 auto;
+        }
     }
-    .aboutUsContent {
-        display: inline-block;
-        color: #57606f;
-        font-family: $font-family-chinese2;
-        font-weight: bold;
-        text-indent: 2rem;
-        vertical-align: top;
-        margin-bottom: 1rem;
-        font-size: fontSize(17px);
+    > .aboutUsContentBox {
+        > .aboutUsContent {
+            width: 50%;
+            display: block;
+            color: $white;
+            font-family: $font-family-chinese2;
+            text-indent: 2rem;
+            margin: 0 auto 1rem;
+            font-size: fontSize(17px);
+        }
+        > .aboutUsContent::selection {
+            background-color: $white;
+            color: $other;
+        }
     }
-    .aboutUsContent::selection {
-        background-color: #EE5A24;
+}
+.weAreHere {
+    display: inline-block;
+    background-color: $primary;
+    padding: 3rem 0;
+    width: 100%;
+    > h2 {
         color: $white;
+        font-family: $font-family-chinese;
+        font-size: $fontSize-title;
+        margin-bottom: 3.5rem;
+        text-align: center;
+    }
+    > .OurMap {
+        background-image: url('~@/assets/image/weAreHere.png');
+        width: 50%;
+        background-size: cover;
+        padding-bottom: 40%;
+        margin: 0 auto;
     }
 }
-
-.aboutUsImageSmall {
-    display: inline-block;
-    margin-bottom: 1rem;
-}
-.aboutUsImageSmall1 {
-    background-image: url('~@/assets/image/aboutImage1.png');
-    display: inline-block;
-    width: 100%;
-    height: 0;
-    padding-bottom: 35.8%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px gray;
-    background-size: cover;
-    background-position: center 28%;
-}
-.aboutUsImageSmall2 {
-    background-image: url('~@/assets/image/aboutImage2.png');
-    display: inline-block;
-    width: 100%;
-    height: 0;
-    padding-bottom: 75%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px gray;
-    background-size: cover;
-    background-position: center;
-}
+// .aboutUsImageSmall {
+//     display: inline-block;
+//     margin-bottom: 1rem;
+// }
+// .aboutUsImageSmall1 {
+//     background-image: url('~@/assets/image/aboutImage1.png');
+//     display: inline-block;
+//     width: 100%;
+//     height: 0;
+//     padding-bottom: 35.8%;
+//     border-radius: 10px;
+//     box-shadow: 0 0 10px gray;
+//     background-size: cover;
+//     background-position: center 28%;
+// }
+// .aboutUsImageSmall2 {
+//     background-image: url('~@/assets/image/aboutImage2.png');
+//     display: inline-block;
+//     width: 100%;
+//     height: 0;
+//     padding-bottom: 75%;
+//     border-radius: 10px;
+//     box-shadow: 0 0 10px gray;
+//     background-size: cover;
+//     background-position: center;
+// }
 
 // phone mode
 @media (max-width: 640px) {
-    .aboutUsImageSmall {
-        display: none;
-    }
+    // .aboutUsImageSmall {
+    //     display: none;
+    // }
     .aboutUsImage {
         display: inline-block;
         > .aboutUsImageBigBox {
@@ -81,9 +112,9 @@
 
 // iPad mode
 @media (min-width: 641px) and (max-width: 960px) {
-    .aboutUsImageSmall {
-        display: none;
-    }
+    // .aboutUsImageSmall {
+    //     display: none;
+    // }
     .aboutUsImage {
         display: inline-block;
         > .aboutUsImageBigBox {
