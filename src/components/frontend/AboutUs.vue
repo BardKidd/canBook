@@ -18,19 +18,118 @@
                   <div class="contactInfoData">
                     <div class="contactInfoDataRounds">
                         <i class="fas fa-map-signs"></i>
-                        <p>高雄市苓雅區五福一路67號</p>
                     </div>
+                    <p>高雄市苓雅區五福一路67號</p>
+                  </div>
+                  <div class="contactInfoData">
+                    <div class="contactInfoDataRounds">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <p>0987-878787</p>
+                  </div>
+                  <div class="contactInfoData">
+                    <div class="contactInfoDataRounds">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <p>helloCanBook@gmail.com</p>
                   </div>
               </div>
           </div>
-          <!-- <div class="col-12">
-              <div class="col-8 aboutUsImageSmall">
-                  <div class="aboutUsImageSmall1"></div>
+          <div class="FAndQ">
+              <h2>FAQ</h2>
+              <div class="accordion" id="accordionExample">
+                <!-- QA1 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingOne">
+                    <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <p>商品出貨方式說明(國內)</p>
+                      <p class="QuestionOpen">+</p>
+                    </div>
+                  </div>
+
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      依商品材積重等因素交由不同的配送廠商安排寄送至訂單資料上填寫的收件地址，故請填寫您方便收貨的寄送地址(因包裹需簽收，故請勿填寫郵政信箱)，目前博客來配合的配送廠商有「黑貓宅急便」、「便利帶」、「新竹貨運」。
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QA2 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingTwo">
+                      <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <p>超商取貨服務</p>
+                        <p class="QuestionOpen">+</p>
+                      </div>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      因超商門市空間有限，請注意以下訂單情形。訂購商品數量較多(書本約15-18本)、訂單金額滿20000元以上、單項商品無法選擇「超商取貨」。請您留意，若您超商未取件次數過多，亦無法提供您此服務。
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QA3 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingThree">
+                      <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <p>取消訂單</p>
+                        <p class="QuestionOpen">+</p>
+                      </div>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      目前 CanBook 僅提供整筆訂單或單一商品的全部取消，無法針對數量進行異動。例：會員訂購5本，欲取消2本，由於線上取消的功能無法提供數量異動，因此需請會員與客服人員聯繫處理。
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QA4 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingFour">
+                      <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <p>國內處理費用</p>
+                        <p class="QuestionOpen">+</p>
+                      </div>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      選擇超商取貨，訂單未超過 NT$ 350 需加收處理費 NT$ 20
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QA5 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingFive">
+                      <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <p>商品出貨說明(海外)</p>
+                        <p class="QuestionOpen">+</p>
+                      </div>
+                  </div>
+                  <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      一般寄送至中國、港澳地區的包裹，CanBook 配合的配送廠商有韻達快遞、DHL、DPEX、Fedex、藍天、中國速遞(EMS)、UCE....等。而寄送至其他地區的包裹，可能使用DHL或郵局快捷(EMS)。
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QA6 -->
+                <div class="ShoppingQuestionBox">
+                  <div class="ShoppingQuestion" id="headingSix">
+                      <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        <p>商品已經寄出了，是否還能變更寄送地址？</p>
+                        <p class="QuestionOpen">+</p>
+                      </div>
+                  </div>
+                  <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="ShoppingQuestionAnswer">
+                      商品出貨後，即無法修改寄送地址、收件人等資料。若您原本的地址無法成功投遞，包裹將會被退回博客來，並以e-mail方式通知會員。
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-4 aboutUsImageSmall">
-                  <div class="aboutUsImageSmall2"></div>
-              </div>
-          </div> -->
+          </div>
       </div>
   </div>
 </template>

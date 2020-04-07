@@ -9,22 +9,12 @@
     margin-bottom: 3rem;
 }
 .activityNews {
-    margin-bottom: 1rem;
-    // > .marquee {
-    //     height: 1.5rem;
-    //     margin: 0 auto;
-    //     overflow: hidden;
-    //     position: relative;
-    //     > p {
-    //         padding-left: 0;
-    //         position: absolute;
-    //         animation: marquee 15s linear infinite;
-    //         color: #34495e;
-    //         font-weight: bold;
-    //         font-size: fontSize(16px);
-    //         font-family: 'Noto Sans TC', sans-serif;
-    //     }
-    // }
+    > .popularity {
+        text-align: right;
+        margin: 0;
+        font-family: $font-family-chinese2;
+        color: $gray-300;
+    }
 }
 .activityFontStyle1 {
     @include activityFontStyle($white, #3498db, $white);
@@ -56,13 +46,3 @@
     background-image: url('~@/assets/image/activity4.png');
     @extend %activityImage;
 }
-// @keyframes marquee {
-//     0% {
-//         left: 100%;
-//         transform: translateX(0%);
-//     }
-//     100% {
-//         left: 0%;
-//         transform: translateX(-100%);
-//     }
-// }

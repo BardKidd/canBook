@@ -16,8 +16,15 @@
     }
 }
 .cardBox:after {
-    content: '';
+    content: '查看詳細內容';
     transition: .5s;
+    display: none;
+    color: $white;
+    text-align: center;
+    font-size: fontSize(20px);
+    font-family: $font-family-chinese;
+    padding-top: 45%;
+    border: 1px double $white;
 }
 .cardBox:hover::after {
     display: inline-block;

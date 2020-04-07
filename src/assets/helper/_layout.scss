@@ -53,7 +53,8 @@ footer {
     @extend %boxSizing;
     padding: 3% 0;
     position: relative;
-    bottom: 0;
+    min-height: 100%;
+    margin: 0;
     > .l-footer-widthCalc {
         > div {
             width: calc(100%/4);

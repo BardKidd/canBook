@@ -67,7 +67,7 @@ export default {
       })
     },
     clickRoundBtn () {
-      const moveTop = $('#featuredBooks').offset().top
+      const moveTop = $('.homeTitleFontStyleBox').offset().top
       $('body, html').animate({
         scrollTop: moveTop
       }, 500)
