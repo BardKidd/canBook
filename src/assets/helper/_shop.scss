@@ -205,7 +205,7 @@
 }
 .shoppingSideBar {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: -21%;
     border-left: 1px solid $primary;
@@ -214,6 +214,8 @@
     z-index: 101;
     max-width: 20%;
     background-color: $white;
+    height: 100%;
+    overflow-y: auto;
     &:before {
         content: '';
         width: 450%;
@@ -221,8 +223,9 @@
         background-color: rgba(255, 255, 255, 0.5);
         z-index: 100;
         display: block;
-        position: absolute;
-        right: 100%;
+        position: fixed;
+        right: 20%;
+        top: 0;
     }
     > .shoppingSideBarTitle {
         color: $white;
@@ -231,7 +234,7 @@
         font-size: fontSize(18px);
         font-family: $font-family-chinese2;
         > span {
-            margin-right: 6.5rem;
+            margin-right: 6rem;
         }
         > i {
             cursor: pointer;

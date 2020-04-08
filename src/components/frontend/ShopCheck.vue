@@ -194,9 +194,11 @@ export default {
     },
     sideBarOpen () {
       $('.shoppingSideBar').css({ display: 'inline-block' }).animate({ right: '0%' }, 100)
+      $('body').css('overflow-y', 'hidden')
     },
     sideBarClose () {
       $('.shoppingSideBar').css({ display: 'none' })
+      $('body').css('overflow-y', '')
     },
     getAllProduct () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`

@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
   data () {
     return {
@@ -193,6 +194,7 @@ export default {
     }
   },
   created () {
+    $('body').css('overflow-y', '')
     this.getShoppingCartList()
   }
 }
