@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="FAndQ">
-              <h2>FAQ</h2>
+              <h2>常見問題</h2>
               <div class="accordion" id="accordionExample">
                 <!-- QA1 -->
                 <div class="ShoppingQuestionBox">
@@ -133,3 +133,9 @@
       </div>
   </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>

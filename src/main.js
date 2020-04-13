@@ -41,15 +41,16 @@ const myValidate = {
 Validator.extend('phone', myValidate)
 
 Vue.component('loading', Loading)
+
+axios.defaults.withCredentials = true
+
+Vue.filter('currency', currency)
+
 new Vue({
   i18n,
   router,
   render: h => h(App)
 }).$mount('#app')
-
-axios.defaults.withCredentials = true
-
-Vue.filter('currency', currency)
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {

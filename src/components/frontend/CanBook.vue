@@ -1,7 +1,7 @@
 <template>
   <div>
     <Alert></Alert>
-    <nav>
+    <nav class="container">
       <div class="l-nav-table">
         <router-link to="/canbook/featuredBooks" class="l-logo">
           <img src="../../assets/image/logo2.png" alt="">

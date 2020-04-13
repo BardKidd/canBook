@@ -29,23 +29,13 @@
             </router-link>
           </li>
         </ul>
-
-        <!-- <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-        >
-          <span>客戶購物</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <router-link to="/admin/customerorder" class="nav-link" active-class="active">
-              模擬訂單
-            </router-link>
-          </li>
-        </ul> -->
       </div>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>

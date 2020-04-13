@@ -57,7 +57,7 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.orders = response.data.orders
-        vm.orders.forEach(function (item) {
+        vm.orders.forEach((item) => {
           const timestamp = new Date(item.create_at * 1000)
           const timestampValue = [
             timestamp.getFullYear(),

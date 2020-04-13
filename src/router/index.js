@@ -30,7 +30,7 @@ export default new VueRouter({
       component: CanBook,
       children: [
         {
-          path: 'featuredBooks',
+          path: '',
           name: 'FeaturedBooks',
           component: FeaturedBooks
         },

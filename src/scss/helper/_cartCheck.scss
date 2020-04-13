@@ -1,0 +1,134 @@
+@import './mixins';
+
+.scheduleShowCheck {
+    @include scheduleShowStyle(#aaa, 0);
+    li:nth-child(2) {
+        color: #34495e;
+        > p {
+            border-bottom: 3px solid #34495e;
+        }
+    }
+    > ul {
+        > .scheduleShowAnother {
+            color: #aaa;
+            > p {
+                border-bottom: 0;
+            }
+        }
+    }
+    
+}
+
+#successOrder {
+    color: #34495e;
+    > p {
+        border-bottom: 3px solid #34495e;
+    }
+}
+.CheckStyle {
+    padding-left: 25%;
+    font-family: $font-family-chinese2;
+    margin-bottom: 2rem;
+    > .CheckTableTitle {
+        font-size: fontSize(22px);
+        font-weight: bolder;
+        color: #555;
+    }
+    .CheckHeadStyle {
+        background-color: #a04c28;
+        color: $white;
+        font-size: fontSize(18px);
+        td {
+            padding: 0.4rem 0.8rem;
+        }
+    }
+    .CheckBodyStyle {
+        font-size: fontSize(16px);
+        tr:nth-child(odd) {
+            background-color: #eee;
+        }
+        tr:nth-child(even) {
+            background-color: $white;
+        }
+        td {
+            padding: 0.4rem 0.8rem;
+            color: #888;
+        }
+    }
+    > .CheckTotal {
+        text-align: right;
+        color: #888;
+        font-size: fontSize(16px);
+        > strong {
+            font-size: fontSize(30px);
+            font-family: Arial, sans-serif;
+            color: #a04c28;
+            padding-left: 0.5rem;
+            font-weight: lighter;
+        }
+    }
+    > .CheckBtn {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+// phone mode
+@media (max-width: 640px) {
+    .scheduleShowCheck {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .CheckStyle {
+        padding-left: 0;
+        > table {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        > .CheckTotal {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+    .CheckBtn {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .scheduleShowCheck {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .CheckStyle {
+        padding-left: 0;
+        > table {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        > .CheckTotal {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+    .CheckBtn {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}

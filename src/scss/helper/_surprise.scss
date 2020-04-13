@@ -1,0 +1,81 @@
+@import './mixins';
+
+.bg-primaryDark {
+    background-color: $primary-darken;
+}
+.surpriseTitle {
+    font-size: $fontSize-title;
+    color: $white;
+    text-align: center;
+    font-family: $font-family-chinese2;
+    font-weight: bold;
+    margin: 3rem 0;
+}
+.surpriseCode {
+    margin-bottom: 3rem;
+    > .surpriseBox {
+        background-color: $other;
+        text-align: center;
+        max-width: 40%;
+        margin: 2rem auto;
+        padding: 1rem 0;
+        font-family: $font-family-chinese;
+        box-shadow: 0 0 15px darken($other, 10%);
+        > strong {
+            display: block;
+            color: $white;
+            font-size: fontSize(40px);
+            font-weight: bold;
+        }
+        > span {
+            color: $white;
+            font-size: fontSize(20px);
+            font-weight: bold;
+        }
+        > p {
+            margin: 0;
+            font-size: fontSize(32px);
+            color: $other2;
+            font-weight: bolder;
+        }
+    }
+}
+.surpriseBtn {
+    margin-bottom: 3rem;
+    text-align: center;
+    > a {
+        background-color: #8610A8;
+        color: $white;
+        font-size: fontSize(40px);
+        border-radius: 60px;
+        text-decoration: none;
+        font-weight: 600;
+        font-family: $font-family-chinese;
+        letter-spacing: 3px;
+        padding: 0.85rem 1.5rem;
+        &:hover {
+            background-color: #3c3c98;
+        }
+    }
+}
+
+// phone mode
+@media (max-width: 640px) {
+    .surpriseCode {
+        max-width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        > .surpriseBox {
+            max-width: 100%;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .surpriseCode {
+        > .surpriseBox {
+            max-width: 80%;
+        }
+    }
+}

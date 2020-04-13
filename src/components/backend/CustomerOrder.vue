@@ -264,7 +264,7 @@ export default {
       const vm = this
       const order = vm.form
       vm.isLoading = true
-      this.$validator.validate().then((result) => {
+      vm.$validator.validate().then((result) => {
         if (result) {
           vm.$http.post(api, { data: order }).then((response) => {
             if (response.data.success) {

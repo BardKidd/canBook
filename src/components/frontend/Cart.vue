@@ -120,7 +120,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const vm = this
       const order = vm.form
-      this.$validator.validate().then((result) => {
+      vm.$validator.validate().then((result) => {
         if (result) {
           if (vm.totalShoppingList.carts.length >= 1) {
             vm.$http.post(api, { data: order }).then((response) => {
