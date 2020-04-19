@@ -5,11 +5,12 @@
             <!-- booksClassification -->
             <div class="classificationAndCart">
                 <div class="booksClassification">
-                    <strong>書籍類別<i class="fas fa-caret-down"></i></strong>
+                    <strong>書籍類別</strong>
                     <select class="classificationStyle" v-model="classification" @click.prevent="bookFilter">
-                        <option value="全部好書" class="classificationStyle"><i class="fas fa-bookmark"></i>全部好書</option>
-                        <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key"><i class="fas fa-bookmark"></i>{{ item }}</option>
+                        <option value="全部好書" class="classificationStyle">全部好書</option>
+                        <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key">{{ item }}</option>
                     </select>
+                    <i class="fas fa-caret-down classificationIcon"></i>
                 </div>
             </div>
 
@@ -31,7 +32,7 @@
         </div>
         <div class="shoppingCartIcon" @click="sideBarOpen">
             <i class="fas fa-shopping-cart"></i>
-            <div class="shoppingCartQty">{{ totalShoppingList.carts.length }}</div>
+            <div class="shoppingCartQty" v-if="totalShoppingList.carts.length > 0">{{ totalShoppingList.carts.length }}</div>
         </div>
         <div class="shoppingSideBar" v-if="totalShoppingList.carts.length > 0">
           <div class="shoppingSideBarTitle">
@@ -101,6 +102,13 @@ export default {
       const vm = this
       vm.$http.get(api).then((response) => {
         vm.totalBooksAll = response.data
+        const allProduct = response.data.products
+        vm.allCategory = allProduct.map(function (item) {
+          return item.category
+        })
+        vm.allCategoryFilter = vm.allCategory.filter(function (item, number, arr) {
+          return arr.indexOf(item) === number
+        })
       })
     },
     seeMore (id) {
@@ -159,19 +167,6 @@ export default {
       }
       vm.$http.post(api, { data: coupon }).then()
     },
-    categoryShow () {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      vm.$http.get(api).then((response) => {
-        const allProduct = response.data.products
-        vm.allCategory = allProduct.map(function (item) {
-          return item.category
-        })
-        vm.allCategoryFilter = vm.allCategory.filter(function (item, number, arr) {
-          return arr.indexOf(item) === number
-        })
-      })
-    },
     bookFilter () {
       const vm = this
       if (vm.classification === '全部好書') {
@@ -216,7 +211,6 @@ export default {
   created () {
     this.getShop()
     this.ShoppingCartList()
-    this.categoryShow()
     this.getAllShop()
   }
 }

@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <div class="row shopPaddingTop shopPaddingBottom">
       <a class="backShop" @click.prevent="backPage">
-        <i class="fas fa-backward"></i> 回到商品區
+        <i class="fas fa-backward"></i> 返回商品區
       </a>
     </div>
 
@@ -78,18 +78,18 @@
       <!-- 購物車 Icon -->
       <div class="shoppingCartIcon" @click="sideBarOpen">
           <i class="fas fa-shopping-cart"></i>
-          <div class="shoppingCartQty">{{ shopCartList.carts.length }}</div>
+          <div class="shoppingCartQty" v-if="shopCartList.carts.length > 0">{{ shopCartList.carts.length }}</div>
       </div>
     </div>
 
     <!-- 相關產品 -->
     <div class="row">
-      <div class="col">
+      <div class="col relatedBox">
         <h2 class="relatedProductsTitle">相關產品</h2>
-        <div class="relatedProductsContent col-4">
-          <img src="#" alt="">
-          <p>{{ totalRelatedProducts }}</p>
-          <span>價錢</span>
+        <div class="relatedProductsContent col-4" v-for="(item, key) in relatedProducts.slice(0, 3)" :key="key" @click.prevent="seeRelatedProducts(item.id)">
+          <img :src="item.imageUrl" alt="">
+          <p>{{ item.title }}</p>
+          <span>NT$ {{ item.price }}</span>
         </div>
       </div>
     </div>
@@ -108,7 +108,8 @@ export default {
       coupon_code: '',
       totalShoppingList: {},
       totalProducts: {},
-      totalRelatedProducts: []
+      relatedProducts: {},
+      relatedProductId: ''
     }
   },
   methods: {
@@ -168,7 +169,7 @@ export default {
       })
     },
     backPage () {
-      this.$router.back()
+      this.$router.push('/shop')
     },
     delAllShoppingCartList () {
       const vm = this
@@ -200,18 +201,29 @@ export default {
       $('.shoppingSideBar').css({ display: 'none' })
       $('body').css('overflow-y', '')
     },
-    getAllProduct () {
+    getRealtedProduct () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
       vm.$http.get(api).then((response) => {
-        vm.totalProducts = response.data
+        vm.totalProducts = response.data.products
+        vm.relatedProducts = vm.totalProducts.filter(item => {
+          return item.category === vm.productData.category && item.title !== vm.productData.title
+        })
       })
     },
-    getRelatedProduct () {
+    seeRelatedProducts (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       const vm = this
-      const relatedProduct = vm.totalProducts.totalProducts
-      vm.totalRelatedProducts = relatedProduct.filter(function (item) {
-        return item.category === vm.productData.category
+      vm.isLoading = true
+      vm.shopId = id
+      vm.$http.get(api).then((response) => {
+        if (response.data.success) {
+          vm.$router.push(`${vm.shopId}`)
+          vm.getShopData()
+          vm.relatedProducts = {}
+          vm.getRealtedProduct()
+        }
+        vm.isLoading = false
       })
     }
   },
@@ -219,8 +231,7 @@ export default {
     this.shopId = this.$route.params.shopId
     this.getShopData()
     this.getShopCartContent()
-    this.getAllProduct()
-    this.getRelatedProduct()
+    this.getRealtedProduct()
   }
 }
 </script>

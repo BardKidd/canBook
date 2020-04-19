@@ -93,6 +93,33 @@
         }
     }
 }
+.relatedBox {
+    margin-bottom: 3rem;
+    > .relatedProductsTitle {
+        text-align: center;
+        font-family: $font-family-chinese2;
+        font-size: fontSize(36px);
+        color: #424949;
+        margin-bottom: 3rem;
+        font-weight: lighter;
+    }
+    > .relatedProductsContent {
+        display: inline-block;
+        cursor: pointer;
+        > p {
+            padding-top: 1rem;
+            font-family: $font-family-chinese2;
+            font-weight: 500;
+            font-size: fontSize(16px);
+            margin: 0;
+        }
+        > span {
+            color: $gray-500;
+            font-family: $font-family-english;
+            font-size: fontSize(16px);
+        }
+    }
+}
 
 // phone mode
 @media (max-width: 640px) {

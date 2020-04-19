@@ -6,6 +6,7 @@
 .booksClassification {
     padding-bottom: 1rem;
     border-bottom: 0.5px dotted #95a5a6;
+    position: relative;
     > strong {
         font-size: fontSize(22px);
         font-family: $font-family-chinese;
@@ -13,7 +14,7 @@
         color: $primary;
         margin-right: 6rem;
     }
-    .classificationStyle {
+    > .classificationStyle {
         appearance: none;
         margin-top: 1rem;
         font-family: $font-family-chinese;
@@ -31,9 +32,13 @@
         &:hover {
             background-color: #eee;
         }
-        i {
-            padding-right: 0.5rem;
-        }
+    }
+    > .classificationIcon {
+        color: $primary;
+        font-size: fontSize(20px);
+        position: absolute;
+        top: 48%;
+        right: 5%;
     }
 }
 .countRound {

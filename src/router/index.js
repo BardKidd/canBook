@@ -21,12 +21,12 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
+    // {
+    //   path: '*',
+    //   redirect: 'featuredbooks'
+    // },
     {
-      path: '*',
-      redirect: 'canbook/featuredBooks'
-    },
-    {
-      path: '/canbook',
+      path: '/',
       component: CanBook,
       children: [
         {

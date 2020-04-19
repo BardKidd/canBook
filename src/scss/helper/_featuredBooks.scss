@@ -1,7 +1,9 @@
 @import './mixins';
-
+.bg-primary {
+    background-color: $primary;
+}
 .cardBox {
-    border: 1px solid #95a5a6;
+    // border: 1px solid #95a5a6;
     overflow: hidden;
     position: relative;
     transition: .5s;
@@ -43,8 +45,8 @@
     margin-top: 1rem;
     font-family: $font-family-chinese2;
     position: relative;
-    p {
-        color: $primary-lighten;
+    .moreFontStyle {
+        color: $other2;
         font-size: fontSize(18px);
         font-weight: 600;
         text-align: right;
@@ -56,10 +58,12 @@
         font-size: fontSize(20px);
         width: 80%;
         display: inline-block;
+        color: $white;
     }
     span {
         position: absolute;
         right: 0;
+        color: $white;
     }
 }
 .homeTitleFontStyleBox {
@@ -69,6 +73,8 @@
         font-size: $fontSize-large;
         font-family: $font-family-chinese;
         font-weight: bold;
+        padding: 3rem 0;
+        color: $white;
     }
 }
 
