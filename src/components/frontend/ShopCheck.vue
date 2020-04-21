@@ -120,6 +120,7 @@ export default {
       vm.$http.get(api).then(response => {
         response.data.product.num = 1
         vm.productData = response.data.product
+        vm.getRealtedProduct()
         vm.isLoading = false
       })
     },
@@ -231,7 +232,6 @@ export default {
     this.shopId = this.$route.params.shopId
     this.getShopData()
     this.getShopCartContent()
-    this.getRealtedProduct()
   }
 }
 </script>

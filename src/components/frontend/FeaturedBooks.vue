@@ -35,7 +35,7 @@
             <div class="col-12 surpriseCode">
                 <div class="surpriseBox">
                   <strong>[好書優惠]</strong>
-                  <span>神秘優惠驚喜</span>
+                  <span>歡慶周年-神秘優惠驚喜</span>
                   <p>- ilovebook2020 -</p>
                   <span>享5折優惠</span>
                 </div>
@@ -43,6 +43,26 @@
             <div class="col-12 surpriseBtn">
               <router-link to="./shop">購物去</router-link>
             </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 輕小說週 -->
+    <div class="bg-primary">
+      <div class="container">
+        <div class="row">
+          <h2 class="col-12 ranobeTitle">- 嶄新的青春群像小說，故事邁向最終章 -</h2>
+          <div class="col-3 ranobeContent" @click.prevent="oneProductData(item.id)" v-for="(item, key) in allRanobe.slice(-5, -1)" :key="key">
+            <div class="ranobeImgBox">
+              <img :src="item.imageUrl" alt="">
+            </div>
+            <div class="ranobeImgBoxBack">
+              <p>內容</p>
+            </div>
+            <div class="ranobeFontStyle">
+              <strong>{{ item.title }}</strong>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +77,8 @@ export default {
     return {
       featuredBooksProducts: {},
       isLoading: false,
-      shopId: ''
+      shopId: '',
+      allRanobe: {}
     }
   },
   methods: {
@@ -87,10 +108,21 @@ export default {
         }
         vm.isLoading = true
       })
+    },
+    getAllRanobe () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
+      vm.$http.get(api).then((response) => {
+        const totalBooks = response.data.products
+        vm.allRanobe = totalBooks.filter(item => {
+          return item.category === '輕小說'
+        })
+      })
     }
   },
   created () {
     this.getFeaturedBooks()
+    this.getAllRanobe()
   }
 }
 </script>
