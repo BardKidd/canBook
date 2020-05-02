@@ -57,7 +57,7 @@
               <img :src="item.imageUrl" alt="">
             </div>
             <div class="ranobeImgBoxBack">
-              <p>內容</p>
+              <p>{{ item.description }}</p>
             </div>
             <div class="ranobeFontStyle">
               <strong>{{ item.title }}</strong>
