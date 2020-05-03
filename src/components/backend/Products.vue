@@ -164,7 +164,7 @@
 
 <script>
 import $ from 'jquery'
-import Pagination from '@/components/frontend/Alert'
+import Pagination from '@/components/frontend/Pagination'
 export default {
   components: {
     Pagination
