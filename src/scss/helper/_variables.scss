@@ -2,11 +2,13 @@
 $fontSize-base: 1rem;
 $fontSize-large: $fontSize-base * 2;
 $fontSize-title: $fontSize-base * 2.5;
+$fontSize-bigtitle: $fontSize-base * 3;
+$fontSize-superbigtitle: $fontSize-base * 3.5;
 
 // color
 $primary: #111032;
 $primary-lighten: lighten($primary, 20%);
-$primary-darken: darken($primary, 20%);
+$primary-darken: darken($primary, 15%);
 $white: white;
 $black: black;
 $red: #d13f2f;

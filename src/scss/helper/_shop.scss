@@ -291,7 +291,13 @@
             padding: 5% 5%;
             > p {
                 border-top: 2px solid $gray-100;
-                padding: 6% 0;
+                padding: 6% 0 0;
+            }
+            > .delAllBtn {
+                border: none;
+                color: $gray-100;
+                background-color: $red;
+                border-radius: 5px;
             }
         }
     }

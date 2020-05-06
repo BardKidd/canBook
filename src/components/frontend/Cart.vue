@@ -69,16 +69,15 @@
               <button type="button" class="btn btn-outline-danger" @click.prevent="delShopingCartList(item.id)"><i class="fas fa-trash-alt"></i></button>
               <div>
                   <p>{{ item.product.title }}</p>
-                  <p>數量:<input type="number" class="qtyNum" v-model="item.qty" @change.prevent="getShoppingCartList"></p>
+                  <p>數量: {{ item.qty }}</p>
               </div>
               <span>NT$: {{ item.product.price * item.qty }}</span>
           </div>
           <div class="enterCoupon">
-              <input type="text" class="form-control" placeholder="請輸入優惠碼" :class="{'is-invalid': errors.has('coupon')}" v-validate="'required'" name="coupon" v-model="coupon_code">
+              <input type="text" class="form-control" placeholder="請輸入優惠碼" name="coupon" v-model="coupon_code">
               <div class="input-group-append" @click.prevent="useCoupon">
                   <button class="btn" type="button" id="button-addon2">送出</button>
               </div>
-              <span class="text-danger" v-if="errors.has('coupon')">無效的優惠碼</span>
           </div>
         </div>
       </div>
@@ -114,6 +113,9 @@ export default {
       const vm = this
       vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data
+        vm.totalShoppingList.carts = response.data.data.carts
+        const set = new Set()
+        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item => !set.has(item.product_id) ? set.add(item.product_id) : false)
       })
     },
     sendOrder () {

@@ -3,6 +3,8 @@
     <loading :active.sync="isLoading"></loading>
     <!-- 封面大圖 -->
     <div class="indexCover">
+        <h1 class="indexTitle">向下尋找</h1>
+        <p class="indexTitle2">這裡總有一本屬於你的書</p>
         <div class="round" @click="clickRoundBtn"><i class="fas fa-caret-down"></i></div>
     </div>
 
@@ -57,7 +59,7 @@
               <img :src="item.imageUrl" alt="">
             </div>
             <div class="ranobeImgBoxBack">
-              <p>{{ item.description }}</p>
+              <p></p>
             </div>
             <div class="ranobeFontStyle">
               <strong>{{ item.title }}</strong>

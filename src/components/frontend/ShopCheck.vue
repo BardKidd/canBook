@@ -63,6 +63,7 @@
           </div>
           <div class="shoppingSideBarTotal">
             <p>小計: NT${{ shopCartList.total }}</p>
+            <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
           </div>
         </div>
         <router-link to="../cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
@@ -142,6 +143,9 @@ export default {
       const vm = this
       vm.$http.get(api).then((response) => {
         vm.shopCartList = response.data.data
+        vm.shopCartList.carts = response.data.data.carts
+        const set = new Set()
+        vm.shopCartList.carts = vm.shopCartList.carts.filter(item => !set.has(item.product_id) ? set.add(item.product_id) : false)
       })
     },
     delShopingCartList (id) {
