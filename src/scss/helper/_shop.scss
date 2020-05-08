@@ -356,6 +356,19 @@
     .pagination {
         font-size: fontSize(20px);
     }
+    .shoppingSideBar {
+        width: 80%;
+        max-width: 80%;
+        &:before {
+            width: 80%;
+            right: 80%;
+        }
+        > .shoppingSideBarTitle {
+            > span {
+                margin-right: 8rem;;
+            }
+        }
+    }
 }
 
 // iPad mode
@@ -372,6 +385,10 @@
             > .classificationStyle {
                 padding: 0.5rem 0.1rem 0.5rem 0.8rem;
                 font-size: fontSize(32px);
+            }
+            > .classificationIcon {
+                font-size: fontSize(52px);
+                top: 50%;
             }
         }
         > .shoppingCartList {
@@ -404,5 +421,18 @@
     }
     .pagination {
         font-size: fontSize(32px);
+    }
+    .shoppingSideBar {
+        width: 40%;
+        max-width: 40%;
+        &:before {
+            width: 60%;
+            right: 40%;
+        }
+        > .shoppingSideBarTitle {
+            > span {
+                margin-right: 9rem;;
+            }
+        }
     }
 }
