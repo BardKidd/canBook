@@ -1,4 +1,7 @@
 @import './mixins';
+.aboutUsBox {
+    width: 100%;
+}
 .aboutUsImage {
     display: inline-block;
     background-color: $black;
