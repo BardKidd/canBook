@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="aboutUsImage row">
+    <div class="aboutUsBox">
+        <div class="aboutUsImage">
             <div class="aboutUsImageBigBox col-12">
                 <h2>關於我們</h2>
                 <div class="aboutUsImageBig col-12"></div>
@@ -10,7 +10,7 @@
                 <div class="aboutUsContent">客戶要求什麼，我們做什麼! 這是我們的理念。為了維持理念，企業花費大筆資金在員工的創意設計上，將概念提供給他們，同時也教育客戶一個概念。現在全球已有300家分店的啃書書店，將在全球各地為世界上需要我們的顧客獻上我們的服務。現在我們只是300家而已，未來我們的目標是拓展到變成你的鄰居，敬請期待，我的好顧客們~</div>
             </div>
         </div>
-        <div class="weAreHere row">
+        <div class="weAreHere">
             <h2>我們在這裡</h2>
             <div class="OurMap col-12"></div>
             <div class="contactInfo col-12">
@@ -34,14 +34,14 @@
                 </div>
             </div>
         </div>
-        <div class="FAndQ row">
+        <div class="FAndQ">
             <h2>常見問題</h2>
             <div class="accordion col-12" id="accordionExample">
               <!-- QA1 -->
               <div class="ShoppingQuestionBox">
                 <div class="ShoppingQuestion" id="headingOne">
                   <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <p>商品出貨方式說明(國內)</p>
+                    <p class="QuestionTitle">商品出貨方式說明(國內)</p>
                     <p class="QuestionOpen">+</p>
                   </div>
                 </div>
@@ -102,7 +102,7 @@
               <div class="ShoppingQuestionBox">
                 <div class="ShoppingQuestion" id="headingFive">
                     <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      <p>商品出貨說明(海外)</p>
+                      <p class="QuestionTitle">商品出貨說明(海外)</p>
                       <p class="QuestionOpen">+</p>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
               <div class="ShoppingQuestionBox">
                 <div class="ShoppingQuestion" id="headingSix">
                     <div class="ShoppingQuestionTitle" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      <p>商品已經寄出了，是否還能變更寄送地址？</p>
+                      <p class="QuestionTitle">商品已經寄出了，是否還能變更寄送地址？</p>
                       <p class="QuestionOpen">+</p>
                     </div>
                 </div>

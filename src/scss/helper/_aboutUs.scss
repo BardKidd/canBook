@@ -1,6 +1,6 @@
 @import './mixins';
 .aboutUsBox {
-    width: 100%;
+    overflow-x: hidden;
 }
 .aboutUsImage {
     display: inline-block;
@@ -152,12 +152,33 @@
             > .aboutUsImageBig {
                 margin-bottom: 2rem;
                 padding-bottom: 100%;
+                width: 100%;
             }
         }
         > .aboutUsContentBox {
             max-width: 100%;
             flex: 0 0 100%;
-            background-color: #eee;
+            > .aboutUsContent {
+                width: 100%;
+            }
+        }
+    }
+    .weAreHere {
+        > .OurMap {
+            padding-bottom: 100%;
+            width: 100%;
+        }
+        > .contactInfo {
+            > .contactInfoData {
+                padding: 0;
+                vertical-align: top;
+                > .contactInfoDataRounds {
+                    width: 100%;
+                }
+                > p {
+                    word-wrap:break-word;
+                }
+            }
         }
     }
     .FAndQ {
@@ -167,6 +188,9 @@
         padding: 0;
         width: 100%;
         vertical-align: top;
+        .QuestionTitle {
+            width: 85%;
+        }
     }
 }
 
@@ -174,6 +198,7 @@
 @media (min-width: 641px) and (max-width: 960px) {
     .aboutUsImage {
         display: inline-block;
+        padding: 11rem 0 3rem;
         > .aboutUsImageBigBox {
             max-width: 100%;
             flex: 0 0 100%;
@@ -181,15 +206,32 @@
                 margin-bottom: 2rem;
                 margin-top: 2rem;
                 padding-bottom: 70%;
+                width: 80%;
             }
         }
         > .aboutUsContentBox {
             max-width: 100%;
             flex: 0 0 100%;
-            background-color: #eee;
             > .aboutUsContent {
                 font-size: fontSize(26px);
+                width: 100%;
             }
         }
     }
+    .weAreHere {
+        > .OurMap {
+            width: 80%;
+            padding-bottom: 80%;
+        }
+        > .contactInfo {
+            > .contactInfoData {
+                > .contactInfoDataRounds {
+                    width: 80%;
+                }
+            }
+        }
+    }
+    .QuestionTitle {
+        width: 90%;
+    } 
 }
