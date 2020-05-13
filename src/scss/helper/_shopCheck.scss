@@ -142,6 +142,15 @@
             }
         }
     }
+    .relatedBox {
+        > .relatedProductsContent {
+            vertical-align: top;
+            > img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
 }
 
 // iPad mode
@@ -167,6 +176,15 @@
                 > p {
                     font-size: fontSize(18px);
                 }
+            }
+        }
+    }
+    .relatedBox {
+        > .relatedProductsContent {
+            vertical-align: top;
+            > img {
+                height: 100%;
+                width: 100%;
             }
         }
     }
