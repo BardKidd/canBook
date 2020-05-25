@@ -19,7 +19,11 @@
           <td>{{ item.user.email }}</td>
           <td>
             <ul>
-              <li style="list-style: none;" v-for="(item, key) in item.products" :key="key">{{ item.product.title }}{{ item.qty }}{{ item.product.unit }}</li>
+              <li
+                style="list-style: none;"
+                v-for="(item, key) in item.products"
+                :key="key"
+              >{{ item.product.title }}{{ item.qty }}{{ item.product.unit }}</li>
             </ul>
           </td>
           <td>{{ item.total | currency }}</td>
@@ -32,8 +36,7 @@
     </table>
 
     <!-- 分頁 -->
-    <Pagination :pagination = pagination @emitPage = getOrderlist></Pagination>
-
+    <Pagination :pagination="pagination" @emitPage="getOrderlist"></Pagination>
   </div>
 </template>
 
@@ -55,9 +58,9 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.orders = response.data.orders
-        vm.orders.forEach((item) => {
+        vm.orders.forEach(item => {
           const timestamp = new Date(item.create_at * 1000)
           const timestampValue = [
             timestamp.getFullYear(),

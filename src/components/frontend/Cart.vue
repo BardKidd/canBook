@@ -3,9 +3,15 @@
     <div class="row shopPaddingTop">
       <div class="scheduleShow col-8">
         <ul>
-          <li><p>1.填寫訂購資料</p></li>
-          <li><p>2.付款確認</p></li>
-          <li><p>3.完成訂單</p></li>
+          <li>
+            <p>1.填寫訂購資料</p>
+          </li>
+          <li>
+            <p>2.付款確認</p>
+          </li>
+          <li>
+            <p>3.完成訂單</p>
+          </li>
         </ul>
       </div>
 
@@ -15,32 +21,87 @@
           <p class="orderTitle">訂單資訊</p>
           <form @submit.prevent="sendOrder">
             <div class="form-group">
-              <label for="useremail">Email <span>*必填</span></label>
-              <input type="email" v-model="form.user.email" class="form-control" name="email" id="useremail" placeholder="請輸入 Email" v-validate="'required|email'" :class="{'is-invalid': errors.has('email')}">
+              <label for="useremail">
+                Email
+                <span>*必填</span>
+              </label>
+              <input
+                type="email"
+                v-model="form.user.email"
+                class="form-control"
+                name="email"
+                id="useremail"
+                placeholder="請輸入 Email"
+                v-validate="'required|email'"
+                :class="{'is-invalid': errors.has('email')}"
+              />
               <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
             </div>
 
             <div class="form-group">
-              <label for="username">收件人姓名 <span>*必填</span></label>
-              <input type="text" v-model="form.user.name" :class="{'is-invalid ': errors.has('name')}" class="form-control" name="name" v-validate="'required'" id="username" placeholder="請輸入姓名">
+              <label for="username">
+                收件人姓名
+                <span>*必填</span>
+              </label>
+              <input
+                type="text"
+                v-model="form.user.name"
+                :class="{'is-invalid ': errors.has('name')}"
+                class="form-control"
+                name="name"
+                v-validate="'required'"
+                id="username"
+                placeholder="請輸入姓名"
+              />
               <span class="text-danger" v-if="errors.has('name')">請輸入姓名</span>
             </div>
 
             <div class="form-group">
-              <label for="username">收件人手機 <span>*必填</span></label>
-              <input type="text" v-model="form.user.tel" :class="{'is-invalid': errors.has('tel')}" class="form-control" name="tel" v-validate="'phone'" id="usertel" placeholder="請輸入手機">
+              <label for="username">
+                收件人手機
+                <span>*必填</span>
+              </label>
+              <input
+                type="text"
+                v-model="form.user.tel"
+                :class="{'is-invalid': errors.has('tel')}"
+                class="form-control"
+                name="tel"
+                v-validate="'phone'"
+                id="usertel"
+                placeholder="請輸入手機"
+              />
               <span class="text-danger" v-if="errors.has('tel')">{{ '手機' + errors.first('tel') }}</span>
             </div>
 
             <div class="form-group">
-              <label for="username">收件人地址 <span>*必填</span></label>
-              <input type="text" v-model="form.user.address" :class="{'is-invalid': errors.has('address')}" class="form-control" name="address" v-validate="'required'" id="useraddress" placeholder="請輸入地址">
+              <label for="username">
+                收件人地址
+                <span>*必填</span>
+              </label>
+              <input
+                type="text"
+                v-model="form.user.address"
+                :class="{'is-invalid': errors.has('address')}"
+                class="form-control"
+                name="address"
+                v-validate="'required'"
+                id="useraddress"
+                placeholder="請輸入地址"
+              />
               <span class="text-danger" v-if="errors.has('address')">請輸入收件人地址</span>
             </div>
 
             <div class="form-group">
               <label for="comment">留言</label>
-              <textarea name="" v-model="form.message" id="comment" class="form-control" cols="30" rows="10"></textarea>
+              <textarea
+                name
+                v-model="form.message"
+                id="comment"
+                class="form-control"
+                cols="30"
+                rows="10"
+              ></textarea>
             </div>
 
             <div class="text-right">
@@ -52,32 +113,55 @@
         <!-- 購物車內容 -->
         <div class="shoppingCartList col-4">
           <div class="shoppingCartListTitle">
-              <strong>購物車清單</strong>
-              <button type="button" class="btn btn-outline-danger" @click.prevent="delAllShoppingCartList">清空購物車</button>
-              <div class="countRound" v-if="totalShoppingList.carts.length !== 0">{{ totalShoppingList.carts.length }}</div>
-              <div class="countRound" v-if="totalShoppingList.carts.length === 0">0</div>
+            <strong>購物車清單</strong>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              @click.prevent="delAllShoppingCartList"
+            >清空購物車</button>
+            <div
+              class="countRound"
+              v-if="totalShoppingList.carts.length !== 0"
+            >{{ totalShoppingList.carts.length }}</div>
+            <div class="countRound" v-if="totalShoppingList.carts.length === 0">0</div>
           </div>
           <div class="lumpSum" v-if="totalShoppingList.total === totalShoppingList.final_total">
-              <strong>小計</strong>
-              <span>NT: {{ totalShoppingList.total }}</span>
+            <strong>小計</strong>
+            <span>NT: {{ totalShoppingList.total }}</span>
           </div>
           <div class="lumpSum" v-if="totalShoppingList.total !== totalShoppingList.final_total">
-              <strong>折扣後小計</strong>
-              <span>NT: {{ Math.round(totalShoppingList.final_total) }}</span>
+            <strong>折扣後小計</strong>
+            <span>NT: {{ Math.round(totalShoppingList.final_total) }}</span>
           </div>
-          <div class="shoppingCartContent" v-for="(item, key) in totalShoppingList.carts" :key="key">
-              <button type="button" class="btn btn-outline-danger" @click.prevent="delShopingCartList(item.id)"><i class="fas fa-trash-alt"></i></button>
-              <div>
-                  <p>{{ item.product.title }}</p>
-                  <p>數量: {{ item.qty }}</p>
-              </div>
-              <span>NT$: {{ item.product.price * item.qty }}</span>
+          <div
+            class="shoppingCartContent"
+            v-for="(item, key) in totalShoppingList.carts"
+            :key="key"
+          >
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              @click.prevent="delShopingCartList(item.id)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <div>
+              <p>{{ item.product.title }}</p>
+              <p>數量: {{ item.qty }}</p>
+            </div>
+            <span>NT$: {{ item.product.price * item.qty }}</span>
           </div>
           <div class="enterCoupon">
-              <input type="text" class="form-control" placeholder="請輸入優惠碼" name="coupon" v-model="coupon_code">
-              <div class="input-group-append" @click.prevent="useCoupon">
-                  <button class="btn" type="button" id="button-addon2">送出</button>
-              </div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="請輸入優惠碼"
+              name="coupon"
+              v-model="coupon_code"
+            />
+            <div class="input-group-append" @click.prevent="useCoupon">
+              <button class="btn" type="button" id="button-addon2">送出</button>
+            </div>
           </div>
         </div>
       </div>
@@ -111,28 +195,34 @@ export default {
     getShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
         const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item => !set.has(item.product_id) ? set.add(item.product_id) : false)
+        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item =>
+          !set.has(item.product_id) ? set.add(item.product_id) : false
+        )
       })
     },
     sendOrder () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const vm = this
       const order = vm.form
-      vm.$validator.validate().then((result) => {
+      vm.$validator.validate().then(result => {
         if (result) {
           if (vm.totalShoppingList.carts.length >= 1) {
-            vm.$http.post(api, { data: order }).then((response) => {
+            vm.$http.post(api, { data: order }).then(response => {
               if (response.data.success) {
                 vm.cartId = response.data.orderId
                 vm.$router.push(`cart/${vm.cartId}`)
               }
             })
           } else {
-            vm.$bus.$emit('message:push', '購物車沒有商品喔 快去商店看看吧~', 'primary')
+            vm.$bus.$emit(
+              'message:push',
+              '購物車沒有商品喔 快去商店看看吧~',
+              'primary'
+            )
           }
         }
       })
@@ -141,7 +231,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then((response) => {
+      vm.$http.delete(api).then(response => {
         vm.getShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -154,15 +244,15 @@ export default {
       const getAllID = vm.totalShoppingList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(function (item) {
+      getAllID.forEach(item => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(function (id) {
+      itisID.forEach(id => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-        apiary.push(vm.$http.delete(api).then(function () {}))
+        apiary.push(vm.$http.delete(api).then())
       })
-      Promise.all(apiary).then(function () {
+      Promise.all(apiary).then(() => {
         vm.isLoading = false
         vm.getShoppingCartList()
         if (vm.isLoading === false) {
@@ -186,7 +276,7 @@ export default {
         qty: num
       }
       vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then((response) => {
+      vm.$http.post(api, { data: shopData }).then(response => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -203,15 +293,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @media (max-width: 640px) {
-    .backShop {
-      display: none;
-    }
+@media (max-width: 640px) {
+  .backShop {
+    display: none;
   }
+}
 
-  @media (min-width: 641px) and (max-width: 960px) {
-    .backShop {
-      display: none;
-    }
+@media (min-width: 641px) and (max-width: 960px) {
+  .backShop {
+    display: none;
   }
+}
 </style>

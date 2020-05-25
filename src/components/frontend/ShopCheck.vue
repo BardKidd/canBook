@@ -26,8 +26,12 @@
         </div>
         <div class="productShopPrice">
           <strong v-if="productData.price !== productData.origin_price">NT$: {{ productData.price }}</strong>
-          <strong v-if="productData.price === productData.origin_price">NT$: {{ productData.origin_price }}</strong>
-          <p v-if="productData.price !== productData.origin_price">NT$: {{ productData.origin_price }}</p>
+          <strong
+            v-if="productData.price === productData.origin_price"
+          >NT$: {{ productData.origin_price }}</strong>
+          <p
+            v-if="productData.price !== productData.origin_price"
+          >NT$: {{ productData.origin_price }}</p>
         </div>
         <div class="productShopQuantity">
           <select v-model="productData.num">
@@ -54,7 +58,7 @@
         <div class="shoppingSideBarContent">
           <div v-for="(item, key) in shopCartList.carts" :key="key" class="shoppingSideBarList">
             <span class="shoppingSideBarDataDel" @click.prevent="delShopingCartList(item.id)">X</span>
-            <img :src="item.product.imageUrl" alt="">
+            <img :src="item.product.imageUrl" alt />
             <div class="shoppingSideBarData">
               <p>{{ item.product.title }}</p>
               <span>{{ item.qty }}/{{item.product.unit}}</span>
@@ -66,7 +70,10 @@
             <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
           </div>
         </div>
-        <router-link to="../cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
+        <router-link to="../cart" class="shoppingSideBarGetOrderBtn">
+          下單去
+          <i class="fas fa-arrow-right"></i>
+        </router-link>
       </div>
       <div class="shoppingSideBar" v-else>
         <div class="shoppingSideBarTitle">
@@ -78,8 +85,11 @@
 
       <!-- 購物車 Icon -->
       <div class="shoppingCartIcon" @click="sideBarOpen">
-          <i class="fas fa-shopping-cart"></i>
-          <div class="shoppingCartQty" v-if="shopCartList.carts.length > 0">{{ shopCartList.carts.length }}</div>
+        <i class="fas fa-shopping-cart"></i>
+        <div
+          class="shoppingCartQty"
+          v-if="shopCartList.carts.length > 0"
+        >{{ shopCartList.carts.length }}</div>
       </div>
     </div>
 
@@ -87,8 +97,13 @@
     <div class="row">
       <div class="col relatedBox">
         <h2 class="relatedProductsTitle">相關產品</h2>
-        <div class="relatedProductsContent col-4" v-for="(item, key) in relatedProducts.slice(0, 3)" :key="key" @click.prevent="seeRelatedProducts(item.id)">
-          <img :src="item.imageUrl" alt="">
+        <div
+          class="relatedProductsContent col-4"
+          v-for="(item, key) in relatedProducts.slice(0, 3)"
+          :key="key"
+          @click.prevent="seeRelatedProducts(item.id)"
+        >
+          <img :src="item.imageUrl" alt />
           <p>{{ item.title }}</p>
           <span>NT$ {{ item.price }}</span>
         </div>
@@ -133,7 +148,7 @@ export default {
         product_id: shopId,
         qty: num
       }
-      vm.$http.post(api, { data: shopData }).then(function () {
+      vm.$http.post(api, { data: shopData }).then(() => {
         vm.getShopCartContent()
         vm.isLoading = false
       })
@@ -141,18 +156,20 @@ export default {
     getShopCartContent () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.shopCartList = response.data.data
         vm.shopCartList.carts = response.data.data.carts
         const set = new Set()
-        vm.shopCartList.carts = vm.shopCartList.carts.filter(item => !set.has(item.product_id) ? set.add(item.product_id) : false)
+        vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
+          !set.has(item.product_id) ? set.add(item.product_id) : false
+        )
       })
     },
     delShopingCartList (id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then((response) => {
+      vm.$http.delete(api).then(response => {
         if (response.data.success) {
           vm.getShopCartContent()
           vm.isLoading = false
@@ -169,7 +186,7 @@ export default {
         code: vm.coupon_code
       }
       vm.isLoading = true
-      vm.$http.post(api, { data: coupon }).then(function () {
+      vm.$http.post(api, { data: coupon }).then(() => {
         vm.isLoading = false
       })
     },
@@ -181,16 +198,15 @@ export default {
       const getAllID = vm.shopCartList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(function (item) {
+      getAllID.forEach(item => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(function (id) {
+      itisID.forEach(id => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-        apiary.push(vm.$http.delete(api).then(function () {
-        }))
+        apiary.push(vm.$http.delete(api).then())
       })
-      Promise.all(apiary).then(function () {
+      Promise.all(apiary).then(() => {
         vm.isLoading = false
         vm.getShopCartContent()
         if (vm.isLoading === false) {
@@ -199,7 +215,9 @@ export default {
       })
     },
     sideBarOpen () {
-      $('.shoppingSideBar').css({ display: 'inline-block' }).animate({ right: '0%' }, 100)
+      $('.shoppingSideBar')
+        .css({ display: 'inline-block' })
+        .animate({ right: '0%' }, 100)
       $('body').css('overflow-y', 'hidden')
     },
     sideBarClose () {
@@ -209,10 +227,13 @@ export default {
     getRealtedProduct () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.totalProducts = response.data.products
         vm.relatedProducts = vm.totalProducts.filter(item => {
-          return item.category === vm.productData.category && item.title !== vm.productData.title
+          return (
+            item.category === vm.productData.category &&
+            item.title !== vm.productData.title
+          )
         })
       })
     },
@@ -221,7 +242,7 @@ export default {
       const vm = this
       vm.isLoading = true
       vm.shopId = id
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         if (response.data.success) {
           vm.$router.push(`${vm.shopId}`)
           vm.getShopData()

@@ -1,69 +1,80 @@
 <template>
-    <div class="container">
-        <loading :active.sync="isLoading"></loading>
-        <div class="row shopPaddingTop">
-            <!-- booksClassification -->
-            <div class="classificationAndCart">
-                <div class="booksClassification">
-                    <strong>書籍類別</strong>
-                    <select class="classificationStyle" v-model="classification" @click.prevent="bookFilter">
-                        <option value="全部好書" class="classificationStyle">全部好書</option>
-                        <option :value="item" class="classificationStyle" v-for="(item, key) in allCategoryFilter" :key="key">{{ item }}</option>
-                    </select>
-                    <i class="fas fa-caret-down classificationIcon"></i>
-                </div>
-            </div>
+  <div class="container">
+    <loading :active.sync="isLoading"></loading>
+    <div class="row shopPaddingTop">
+      <!-- booksClassification -->
+      <div class="classificationAndCart">
+        <div class="booksClassification">
+          <strong>書籍類別</strong>
+          <select class="classificationStyle" v-model="classification" @click.prevent="bookFilter">
+            <option value="全部好書" class="classificationStyle">全部好書</option>
+            <option
+              :value="item"
+              class="classificationStyle"
+              v-for="(item, key) in allCategoryFilter"
+              :key="key"
+            >{{ item }}</option>
+          </select>
+          <i class="fas fa-caret-down classificationIcon"></i>
+        </div>
+      </div>
 
-            <!-- content -->
-            <div class="totalBooks">
-                <div class="totalBooksTitle">{{ classification }}</div>
-                <div class="col-4 totalBooksCard" v-for="(item, key) in totalBooks" :key="key" id="aBook">
-                    <div class="cardImg" @click.prevent="seeMore(item.id)">
-                        <img :src="item.imageUrl" alt="">
-                    </div>
-                    <div class="totalBooksCardFontStyle">
-                        <strong>{{ item.title }}</strong>
-                        <span>NT$: {{ item.price }}</span>
-                        <i class="fas fa-shopping-cart" @click.prevent="addToShopingCart(item.id)"></i>
-                    </div>
-                </div>
-                <Pagination :pagination = pagination @emitPage = getShop v-if="classification === '全部好書'"></Pagination>
-            </div>
-        </div>
-        <div class="shoppingCartIcon" @click="sideBarOpen">
-            <i class="fas fa-shopping-cart"></i>
-            <div class="shoppingCartQty" v-if="totalShoppingList.carts.length > 0">{{ totalShoppingList.carts.length }}</div>
-        </div>
-        <div class="shoppingSideBar" v-if="totalShoppingList.carts.length > 0">
-          <div class="shoppingSideBarTitle">
-            <span>購物車內容</span>
-            <i class="fas fa-times" @click="sideBarClose"></i>
+      <!-- content -->
+      <div class="totalBooks">
+        <div class="totalBooksTitle">{{ classification }}</div>
+        <div class="col-4 totalBooksCard" v-for="(item, key) in totalBooks" :key="key" id="aBook">
+          <div class="cardImg" @click.prevent="seeMore(item.id)">
+            <img :src="item.imageUrl" alt />
           </div>
-          <div class="shoppingSideBarContent">
-            <div v-for="(item, key) in totalShoppingList.carts" :key="key" class="shoppingSideBarList">
-              <span class="shoppingSideBarDataDel" @click.prevent="delShoppingCartList(item.id)">X</span>
-              <img :src="item.product.imageUrl" alt="">
-              <div class="shoppingSideBarData">
-                <p>{{ item.product.title }}</p>
-                <span>{{ item.qty }}/{{item.product.unit}}</span>
-                <span>NT${{ item.product.price * item.qty }}</span>
-              </div>
-            </div>
-            <div class="shoppingSideBarTotal">
-              <p>小計: NT${{ totalShoppingList.total }}</p>
-              <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
-            </div>
+          <div class="totalBooksCardFontStyle">
+            <strong>{{ item.title }}</strong>
+            <span>NT$: {{ item.price }}</span>
+            <i class="fas fa-shopping-cart" @click.prevent="addToShopingCart(item.id)"></i>
           </div>
-          <router-link to="./cart" class="shoppingSideBarGetOrderBtn">下單去<i class="fas fa-arrow-right"></i></router-link>
         </div>
-        <div class="shoppingSideBar" v-else>
-          <div class="shoppingSideBarTitle">
-            <span>購物車內容</span>
-            <i class="fas fa-times" @click="sideBarClose"></i>
-          </div>
-          <div class="shoppingSideBarZero">購物車目前是空的! 快去商場逛逛吧~</div>
-        </div>
+        <Pagination :pagination="pagination" @emitPage="getShop" v-if="classification === '全部好書'"></Pagination>
+      </div>
     </div>
+    <div class="shoppingCartIcon" @click="sideBarOpen">
+      <i class="fas fa-shopping-cart"></i>
+      <div
+        class="shoppingCartQty"
+        v-if="totalShoppingList.carts.length > 0"
+      >{{ totalShoppingList.carts.length }}</div>
+    </div>
+    <div class="shoppingSideBar" v-if="totalShoppingList.carts.length > 0">
+      <div class="shoppingSideBarTitle">
+        <span>購物車內容</span>
+        <i class="fas fa-times" @click="sideBarClose"></i>
+      </div>
+      <div class="shoppingSideBarContent">
+        <div v-for="(item, key) in totalShoppingList.carts" :key="key" class="shoppingSideBarList">
+          <span class="shoppingSideBarDataDel" @click.prevent="delShoppingCartList(item.id)">X</span>
+          <img :src="item.product.imageUrl" alt />
+          <div class="shoppingSideBarData">
+            <p>{{ item.product.title }}</p>
+            <span>{{ item.qty }}/{{item.product.unit}}</span>
+            <span>NT${{ item.product.price * item.qty }}</span>
+          </div>
+        </div>
+        <div class="shoppingSideBarTotal">
+          <p>小計: NT${{ totalShoppingList.total }}</p>
+          <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
+        </div>
+      </div>
+      <router-link to="./cart" class="shoppingSideBarGetOrderBtn">
+        下單去
+        <i class="fas fa-arrow-right"></i>
+      </router-link>
+    </div>
+    <div class="shoppingSideBar" v-else>
+      <div class="shoppingSideBarTitle">
+        <span>購物車內容</span>
+        <i class="fas fa-times" @click="sideBarClose"></i>
+      </div>
+      <div class="shoppingSideBarZero">購物車目前是空的! 快去商場逛逛吧~</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -93,7 +104,7 @@ export default {
     getShop (page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.totalBooks = response.data.products
         vm.pagination = response.data.pagination
       })
@@ -101,13 +112,13 @@ export default {
     getAllShop () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.totalBooksAll = response.data
         const allProduct = response.data.products
-        vm.allCategory = allProduct.map(function (item) {
+        vm.allCategory = allProduct.map(item => {
           return item.category
         })
-        vm.allCategoryFilter = vm.allCategory.filter(function (item, number, arr) {
+        vm.allCategoryFilter = vm.allCategory.filter((item, number, arr) => {
           return arr.indexOf(item) === number
         })
       })
@@ -117,7 +128,7 @@ export default {
       const vm = this
       vm.shopId = id
       vm.isLoading = true
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         if (response.data.success) {
           vm.$router.push(`shop/${vm.shopId}`)
         }
@@ -132,7 +143,7 @@ export default {
         qty: num
       }
       vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then((response) => {
+      vm.$http.post(api, { data: shopData }).then(response => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -143,18 +154,20 @@ export default {
     ShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then((response) => {
+      vm.$http.get(api).then(response => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
         const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item => !set.has(item.product_id) ? set.add(item.product_id) : false)
+        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item =>
+          !set.has(item.product_id) ? set.add(item.product_id) : false
+        )
       })
     },
     delShoppingCartList (id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then((response) => {
+      vm.$http.delete(api).then(response => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -176,7 +189,7 @@ export default {
         vm.getShop()
       } else {
         const allProduct = vm.totalBooksAll.products
-        vm.totalBooks = allProduct.filter(function (item) {
+        vm.totalBooks = allProduct.filter(item => {
           return vm.classification === item.category
         })
       }
@@ -186,15 +199,15 @@ export default {
       const getAllID = vm.totalShoppingList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(function (item) {
+      getAllID.forEach(item => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(function (id) {
+      itisID.forEach(id => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
         apiary.push(vm.$http.delete(api).then())
       })
-      Promise.all(apiary).then(function () {
+      Promise.all(apiary).then(() => {
         vm.isLoading = false
         vm.ShoppingCartList()
         if (vm.isLoading === false) {
@@ -203,7 +216,9 @@ export default {
       })
     },
     sideBarOpen () {
-      $('.shoppingSideBar').css({ display: 'inline-block' }).animate({ right: '0%' }, 100)
+      $('.shoppingSideBar')
+        .css({ display: 'inline-block' })
+        .animate({ right: '0%' }, 100)
       $('body').css('overflow-y', 'hidden')
     },
     sideBarClose () {
