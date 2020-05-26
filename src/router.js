@@ -1,109 +1,89 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '@/components/backend/Dashboard'
-import Login from '@/components/frontend/Login'
-import Products from '@/components/backend/Products'
-import Orderlist from '@/components/backend/Orderlist'
-import Coupon from '@/components/frontend/Coupon'
-import CustomerOrder from '@/components/backend/CustomerOrder'
-import CustomerOrderCheck from '@/components/backend/CustomerOrderCheck'
-
-import CanBook from '@/components/frontend/CanBook'
-import FeaturedBooks from '@/components/frontend/FeaturedBooks'
-import Shop from '@/components/frontend/Shop'
-import ShopCheck from '@/components/frontend/ShopCheck'
-import News from '@/components/frontend/News'
-import AboutUs from '@/components/frontend/AboutUs'
-import Cart from '@/components/frontend/Cart'
-import CartCheck from '@/components/frontend/CartCheck'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
-    // {
-    //   path: '*',
-    //   redirect: 'featuredbooks'
-    // },
     {
       path: '/',
-      component: CanBook,
+      component: () => import('./components/frontend/CanBook.vue'),
       children: [
         {
           path: '',
           name: 'FeaturedBooks',
-          component: FeaturedBooks
+          component: () => import('./components/frontend/FeaturedBooks.vue')
         },
         {
           path: 'shop',
           name: 'Shop',
-          component: Shop
+          component: () => import('./components/frontend/Shop.vue')
         },
         {
           path: 'shop/:shopId',
           name: 'ShopCheck',
-          component: ShopCheck
+          component: () => import('./components/frontend/ShopCheck.vue')
         },
         {
           path: 'news',
           name: 'News',
-          component: News
+          component: () => import('./components/frontend/News.vue')
         },
         {
           path: 'aboutUs',
           name: 'AboutUs',
-          component: AboutUs
+          component: () => import('./components/frontend/AboutUs.vue')
         },
         {
           path: 'cart',
           name: 'Cart',
-          component: Cart
+          component: () => import('./components/frontend/Cart.vue')
         },
         {
           path: 'cart/:cartId',
           name: 'CartCheck',
-          component: CartCheck
+          component: () => import('./components/frontend/CartCheck.vue')
         }
       ]
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: () => import('./components/frontend/Login.vue')
     },
     {
       path: '/admin',
-      component: Dashboard,
+      component: () => import('./components/backend/Dashboard.vue'),
       meta: { requiresAuth: true },
       children: [
         {
           path: 'products',
           name: 'Products',
-          component: Products,
+          component: () => import('./components/backend/Products.vue'),
           meta: { requiresAuth: true }
         },
         {
           path: 'orderlist',
           name: 'Orderlist',
-          component: Orderlist,
+          component: () => import('./components/backend/Orderlist.vue'),
           meta: { requiresAuth: true }
         },
         {
           path: 'coupon',
           name: 'Coupon',
-          component: Coupon,
+          component: () => import('./components/backend/Coupon.vue'),
           meta: { requiresAuth: true }
         },
         {
           path: 'customerorder',
           name: 'CustomerOrder',
-          component: CustomerOrder,
+          component: () => import('./components/backend/CustomerOrder.vue'),
           meta: { requiresAuth: true }
         },
         {
           path: 'customerorder_check/:orderId',
           name: 'CustomerOrderCheck',
-          component: CustomerOrderCheck
+          component: () => import('./components/backend/CustomerOrderCheck.vue')
         }
       ]
     }
