@@ -114,6 +114,7 @@
 
 <script>
 import $ from 'jquery'
+
 export default {
   data () {
     return {
@@ -133,7 +134,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.shopId}`
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         response.data.product.num = 1
         vm.productData = response.data.product
         vm.getRealtedProduct()
@@ -156,20 +157,18 @@ export default {
     getShopCartContent () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.shopCartList = response.data.data
         vm.shopCartList.carts = response.data.data.carts
         const set = new Set()
-        vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
-          !set.has(item.product_id) ? set.add(item.product_id) : false
-        )
+        vm.shopCartList.carts = vm.shopCartList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
       })
     },
     delShopingCartList (id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.getShopCartContent()
           vm.isLoading = false
@@ -198,11 +197,11 @@ export default {
       const getAllID = vm.shopCartList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(item => {
+      getAllID.forEach((item) => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(id => {
+      itisID.forEach((id) => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
         apiary.push(vm.$http.delete(api).then())
       })
@@ -227,14 +226,12 @@ export default {
     getRealtedProduct () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.totalProducts = response.data.products
-        vm.relatedProducts = vm.totalProducts.filter(item => {
-          return (
-            item.category === vm.productData.category &&
+        vm.relatedProducts = vm.totalProducts.filter((item) => (
+          item.category === vm.productData.category &&
             item.title !== vm.productData.title
-          )
-        })
+        ))
       })
     },
     seeRelatedProducts (id) {
@@ -242,7 +239,7 @@ export default {
       const vm = this
       vm.isLoading = true
       vm.shopId = id
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.$router.push(`${vm.shopId}`)
           vm.getShopData()

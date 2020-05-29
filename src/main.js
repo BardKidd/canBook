@@ -30,7 +30,7 @@ Vue.use(VeeValidate, {
 
 // 自訂手機格式
 const getMessage = '格式不正確，請輸入10位手機號碼(09xxxxxxxx)'
-const validate = value => {
+const validate = (value) => {
   const regex = /^[09]{2}[0-9]{8}$/
   return regex.test(value)
 }
@@ -49,7 +49,7 @@ Vue.filter('currency', currency)
 new Vue({
   i18n,
   router,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
 
 router.beforeEach((to, from, next) => {

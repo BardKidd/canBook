@@ -87,6 +87,7 @@
 <script>
 import $ from 'jquery'
 import Alert from './Alert'
+
 export default {
   components: {
     Alert

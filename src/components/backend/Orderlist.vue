@@ -42,6 +42,7 @@
 
 <script>
 import Pagination from '@/components/frontend/Alert'
+
 export default {
   components: {
     Pagination
@@ -58,9 +59,9 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.orders = response.data.orders
-        vm.orders.forEach(item => {
+        vm.orders.forEach((item) => {
           const timestamp = new Date(item.create_at * 1000)
           const timestampValue = [
             timestamp.getFullYear(),

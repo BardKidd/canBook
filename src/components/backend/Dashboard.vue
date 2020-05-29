@@ -10,9 +10,10 @@
 </template>
 
 <script>
+import Alert from '@/components/frontend/Alert'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import Alert from '@/components/frontend/Alert'
+
 export default {
   components: {
     Sidebar,

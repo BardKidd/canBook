@@ -169,6 +169,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '@/components/frontend/Alert'
+
 export default {
   components: {
     Pagination
@@ -187,7 +188,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
@@ -199,7 +200,7 @@ export default {
         this.isNew = true
         $('#couponModal').modal('show')
       } else {
-        this.tempCoupon = Object.assign({}, item)
+        this.tempCoupon = { ...item }
         this.isNew = false
         $('#couponModal').modal('show')
       }
@@ -212,7 +213,7 @@ export default {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
         httpMethod = 'put'
       }
-      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
         if (response.data.success) {
           $('#couponModal').modal('hide')
           vm.getCoupons()
@@ -226,7 +227,7 @@ export default {
     delCoupon () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           $('#delCouponModal').modal('hide')
           vm.getCoupons()

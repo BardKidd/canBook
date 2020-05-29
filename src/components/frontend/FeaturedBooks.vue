@@ -82,6 +82,7 @@
 
 <script>
 import $ from 'jquery'
+
 export default {
   data () {
     return {
@@ -96,7 +97,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.featuredBooksProducts = response.data.products
         vm.isLoading = false
       })
@@ -115,7 +116,7 @@ export default {
       const vm = this
       vm.shopId = id
       vm.isLoading = false
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.$router.push(`shop/${vm.shopId}`)
         }
@@ -125,11 +126,9 @@ export default {
     getAllRanobe () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         const totalBooks = response.data.products
-        vm.allRanobe = totalBooks.filter(item => {
-          return item.category === '輕小說'
-        })
+        vm.allRanobe = totalBooks.filter((item) => item.category === '輕小說')
       })
     }
   },

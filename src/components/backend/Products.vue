@@ -238,6 +238,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '@/components/frontend/Pagination'
+
 export default {
   components: {
     Pagination
@@ -257,7 +258,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.products = response.data.products
         vm.isLoading = false
         vm.pagination = response.data.pagination
@@ -268,7 +269,7 @@ export default {
         this.tempProduct = {}
         this.isNew = true
       } else {
-        this.tempProduct = Object.assign({}, item)
+        this.tempProduct = { ...item }
         this.isNew = false
       }
       $('#productModal').modal('show')
@@ -281,7 +282,7 @@ export default {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
         httpMethod = 'put'
       }
-      vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
           $('#productModal').modal('hide')
           vm.getProducts()
@@ -314,7 +315,7 @@ export default {
         .post(api, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
-        .then(response => {
+        .then((response) => {
           vm.status = false
           if (response.data.success) {
             vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)

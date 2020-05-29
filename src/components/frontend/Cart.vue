@@ -171,6 +171,7 @@
 
 <script>
 import $ from 'jquery'
+
 export default {
   data () {
     return {
@@ -195,23 +196,21 @@ export default {
     getShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
         const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item =>
-          !set.has(item.product_id) ? set.add(item.product_id) : false
-        )
+        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
       })
     },
     sendOrder () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const vm = this
       const order = vm.form
-      vm.$validator.validate().then(result => {
+      vm.$validator.validate().then((result) => {
         if (result) {
           if (vm.totalShoppingList.carts.length >= 1) {
-            vm.$http.post(api, { data: order }).then(response => {
+            vm.$http.post(api, { data: order }).then((response) => {
               if (response.data.success) {
                 vm.cartId = response.data.orderId
                 vm.$router.push(`cart/${vm.cartId}`)
@@ -231,7 +230,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         vm.getShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -244,11 +243,11 @@ export default {
       const getAllID = vm.totalShoppingList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(item => {
+      getAllID.forEach((item) => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(id => {
+      itisID.forEach((id) => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
         apiary.push(vm.$http.delete(api).then())
       })
@@ -276,7 +275,7 @@ export default {
         qty: num
       }
       vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then(response => {
+      vm.$http.post(api, { data: shopData }).then((response) => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {

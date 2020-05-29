@@ -237,6 +237,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../frontend/Pagination'
+
 export default {
   components: {
     Pagination
@@ -268,7 +269,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false
         vm.cardProducts = response.data.products
         vm.pagination = response.data.pagination
@@ -278,7 +279,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       const vm = this
       vm.productId = id
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           response.data.product.num = 1
           vm.product = response.data.product
@@ -303,7 +304,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false
         vm.shippingCart = response.data.data
       })
@@ -311,7 +312,7 @@ export default {
     delShippingCartProduct (id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.getShippingCart()
         }
@@ -334,9 +335,9 @@ export default {
       const vm = this
       const order = vm.form
       vm.isLoading = true
-      vm.$validator.validate().then(result => {
+      vm.$validator.validate().then((result) => {
         if (result) {
-          vm.$http.post(api, { data: order }).then(response => {
+          vm.$http.post(api, { data: order }).then((response) => {
             if (response.data.success) {
               vm.$router.push(`customerorder_check/${response.data.orderId}`)
             }

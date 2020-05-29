@@ -78,8 +78,9 @@
 </template>
 
 <script>
-import Pagination from './Pagination'
 import $ from 'jquery'
+import Pagination from './Pagination'
+
 export default {
   components: {
     Pagination
@@ -104,7 +105,7 @@ export default {
     getShop (page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.totalBooks = response.data.products
         vm.pagination = response.data.pagination
       })
@@ -112,15 +113,11 @@ export default {
     getAllShop () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.totalBooksAll = response.data
         const allProduct = response.data.products
-        vm.allCategory = allProduct.map(item => {
-          return item.category
-        })
-        vm.allCategoryFilter = vm.allCategory.filter((item, number, arr) => {
-          return arr.indexOf(item) === number
-        })
+        vm.allCategory = allProduct.map((item) => item.category)
+        vm.allCategoryFilter = vm.allCategory.filter((item, number, arr) => arr.indexOf(item) === number)
       })
     },
     seeMore (id) {
@@ -128,7 +125,7 @@ export default {
       const vm = this
       vm.shopId = id
       vm.isLoading = true
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.$router.push(`shop/${vm.shopId}`)
         }
@@ -143,7 +140,7 @@ export default {
         qty: num
       }
       vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then(response => {
+      vm.$http.post(api, { data: shopData }).then((response) => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -154,20 +151,18 @@ export default {
     ShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
         const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter(item =>
-          !set.has(item.product_id) ? set.add(item.product_id) : false
-        )
+        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
       })
     },
     delShoppingCartList (id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         vm.ShoppingCartList()
         vm.isLoading = false
         if (response.data.success) {
@@ -189,9 +184,7 @@ export default {
         vm.getShop()
       } else {
         const allProduct = vm.totalBooksAll.products
-        vm.totalBooks = allProduct.filter(item => {
-          return vm.classification === item.category
-        })
+        vm.totalBooks = allProduct.filter((item) => vm.classification === item.category)
       }
     },
     delAllShoppingCartList () {
@@ -199,11 +192,11 @@ export default {
       const getAllID = vm.totalShoppingList.carts
       const itisID = []
       vm.isLoading = true
-      getAllID.forEach(item => {
+      getAllID.forEach((item) => {
         itisID.push(item.id)
       })
       const apiary = []
-      itisID.forEach(id => {
+      itisID.forEach((id) => {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
         apiary.push(vm.$http.delete(api).then())
       })

@@ -110,7 +110,7 @@ export default {
     getOneCartData () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.cartId}`
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.orderData = response.data.order
       })
     },
