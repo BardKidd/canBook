@@ -12,6 +12,7 @@ $primary-darken: darken($primary, 15%);
 $white: white;
 $black: black;
 $red: #E7006F;
+$red-prompt: darken($red, 15%);
 $gray-100: #eee;
 $gray-200: darken($gray-100, 10%);
 $gray-300: darken($gray-100, 20%);

@@ -89,7 +89,7 @@
               <button class="btn btn-primary">確認付款去</button>
             </div>
             <div class="text-right col-8 CheckBtn" v-if="orderData.is_paid == 1">
-              <router-link to="/" class="btn btn-primary">返回首頁 繼續購物去</router-link>
+              <router-link to="/" class="btn btn-primary">繼續購物</router-link>
             </div>
           </div>
         </div>
