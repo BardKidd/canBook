@@ -35,17 +35,17 @@
         </div>
         <div class="productShopQuantity">
           <select v-model="productData.num">
-            <option :value="num" v-for="num in 10" :key="num">購買 {{ num }} {{ productData.unit }}</option>
+            <option :value="num" v-for="num in 10" :key="num">{{ num }} {{ productData.unit }}</option>
           </select>
+          <div class="productShopAdd">
+            <div class="input-group-append" @click.prevent="addToShopCart(shopId, productData.num)">
+              <button class="btn" type="button">加入購物車</button>
+            </div>
+          </div>
           <p>
             總共:
             <strong>NT$ {{ productData.num * productData.price }} 元</strong>
           </p>
-        </div>
-        <div class="productShopAdd">
-          <div class="input-group-append" @click.prevent="addToShopCart(shopId, productData.num)">
-            <button class="btn" type="button">加入購物車</button>
-          </div>
         </div>
       </div>
 
@@ -113,147 +113,150 @@
 </template>
 
 <script>
-import $ from 'jquery'
+import $ from "jquery";
 
 export default {
-  data () {
+  data() {
     return {
-      shopId: '',
+      shopId: "",
       productData: {},
       shopCartList: {},
       isLoading: false,
-      coupon_code: '',
+      coupon_code: "",
       totalShoppingList: {},
       totalProducts: {},
       relatedProducts: {},
-      relatedProductId: ''
-    }
+      relatedProductId: ""
+    };
   },
   methods: {
-    getShopData () {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.shopId}`
-      vm.isLoading = true
-      vm.$http.get(api).then((response) => {
-        response.data.product.num = 1
-        vm.productData = response.data.product
-        vm.getRealtedProduct()
-        vm.isLoading = false
-      })
+    getShopData() {
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.shopId}`;
+      vm.isLoading = true;
+      vm.$http.get(api).then(response => {
+        response.data.product.num = 1;
+        vm.productData = response.data.product;
+        vm.getRealtedProduct();
+        vm.isLoading = false;
+      });
     },
-    addToShopCart (shopId, num = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
-      vm.isLoading = true
+    addToShopCart(shopId, num = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const vm = this;
+      vm.isLoading = true;
       const shopData = {
         product_id: shopId,
         qty: num
-      }
+      };
       vm.$http.post(api, { data: shopData }).then(() => {
-        vm.getShopCartContent()
-        vm.isLoading = false
-      })
+        vm.getShopCartContent();
+        vm.isLoading = false;
+      });
     },
-    getShopCartContent () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.shopCartList = response.data.data
-        vm.shopCartList.carts = response.data.data.carts
-        const set = new Set()
-        vm.shopCartList.carts = vm.shopCartList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
-      })
+    getShopCartContent() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        vm.shopCartList = response.data.data;
+        vm.shopCartList.carts = response.data.data.carts;
+        const set = new Set();
+        vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
+          !set.has(item.product_id) ? set.add(item.product_id) : false
+        );
+      });
     },
-    delShopingCartList (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-      const vm = this
-      vm.isLoading = true
-      vm.$http.delete(api).then((response) => {
+    delShopingCartList(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      vm.$http.delete(api).then(response => {
         if (response.data.success) {
-          vm.getShopCartContent()
-          vm.isLoading = false
+          vm.getShopCartContent();
+          vm.isLoading = false;
           if (response.data.success) {
-            vm.$bus.$emit('message:push', response.data.message, 'danger')
+            vm.$bus.$emit("message:push", response.data.message, "danger");
           }
         }
-      })
+      });
     },
-    useCoupon () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
-      const vm = this
+    useCoupon() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+      const vm = this;
       const coupon = {
         code: vm.coupon_code
-      }
-      vm.isLoading = true
+      };
+      vm.isLoading = true;
       vm.$http.post(api, { data: coupon }).then(() => {
-        vm.isLoading = false
-      })
+        vm.isLoading = false;
+      });
     },
-    backPage () {
-      this.$router.push('/shop')
+    backPage() {
+      this.$router.push("/shop");
     },
-    delAllShoppingCartList () {
-      const vm = this
-      const getAllID = vm.shopCartList.carts
-      const itisID = []
-      vm.isLoading = true
-      getAllID.forEach((item) => {
-        itisID.push(item.id)
-      })
-      const apiary = []
-      itisID.forEach((id) => {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-        apiary.push(vm.$http.delete(api).then())
-      })
+    delAllShoppingCartList() {
+      const vm = this;
+      const getAllID = vm.shopCartList.carts;
+      const itisID = [];
+      vm.isLoading = true;
+      getAllID.forEach(item => {
+        itisID.push(item.id);
+      });
+      const apiary = [];
+      itisID.forEach(id => {
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+        apiary.push(vm.$http.delete(api).then());
+      });
       Promise.all(apiary).then(() => {
-        vm.isLoading = false
-        vm.getShopCartContent()
+        vm.isLoading = false;
+        vm.getShopCartContent();
         if (vm.isLoading === false) {
-          vm.$bus.$emit('message:push', '已全部刪除', 'danger')
+          vm.$bus.$emit("message:push", "已全部刪除", "danger");
         }
-      })
+      });
     },
-    sideBarOpen () {
-      $('.shoppingSideBar')
-        .css({ display: 'inline-block' })
-        .animate({ right: '0%' }, 100)
-      $('body').css('overflow-y', 'hidden')
+    sideBarOpen() {
+      $(".shoppingSideBar")
+        .css({ display: "inline-block" })
+        .animate({ right: "0%" }, 100);
+      $("body").css("overflow-y", "hidden");
     },
-    sideBarClose () {
-      $('.shoppingSideBar').css({ display: 'none' })
-      $('body').css('overflow-y', '')
+    sideBarClose() {
+      $(".shoppingSideBar").css({ display: "none" });
+      $("body").css("overflow-y", "");
     },
-    getRealtedProduct () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.totalProducts = response.data.products
-        vm.relatedProducts = vm.totalProducts.filter((item) => (
-          item.category === vm.productData.category &&
+    getRealtedProduct() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        vm.totalProducts = response.data.products;
+        vm.relatedProducts = vm.totalProducts.filter(
+          item =>
+            item.category === vm.productData.category &&
             item.title !== vm.productData.title
-        ))
-      })
+        );
+      });
     },
-    seeRelatedProducts (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
-      const vm = this
-      vm.isLoading = true
-      vm.shopId = id
-      vm.$http.get(api).then((response) => {
+    seeRelatedProducts(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      vm.shopId = id;
+      vm.$http.get(api).then(response => {
         if (response.data.success) {
-          vm.$router.push(`${vm.shopId}`)
-          vm.getShopData()
-          vm.relatedProducts = {}
-          vm.getRealtedProduct()
+          vm.$router.push(`${vm.shopId}`);
+          vm.getShopData();
+          vm.relatedProducts = {};
+          vm.getRealtedProduct();
         }
-        vm.isLoading = false
-      })
+        vm.isLoading = false;
+      });
     }
   },
-  created () {
-    this.shopId = this.$route.params.shopId
-    this.getShopData()
-    this.getShopCartContent()
+  created() {
+    this.shopId = this.$route.params.shopId;
+    this.getShopData();
+    this.getShopCartContent();
   }
-}
+};
 </script>

@@ -58,15 +58,32 @@
         > p {
             display: inline-block;
             text-decoration: line-through;
+            color: $gray-500;
         }
     }
     > .productShopQuantity {
         > select {
-            width: 100%;
+            width: 50%;
             padding: 0.5rem;
             font-size: fontSize(17px);
             color: black;
             border-radius: 5px;
+            display: inline-block;
+        }
+        > .productShopAdd {
+            width: 50%;
+            display: inline-block;
+            padding-top: 1rem;
+            > div {
+                > button {
+                    background-color: $red;
+                    color: $white;
+                    margin-left: 3rem;
+                    &:hover {
+                        background-color: darken($red, 10%);
+                    }
+                }
+            }
         }
         > p {
             text-align: right;
@@ -75,20 +92,6 @@
             margin-top: 1rem;
             > strong {
                 color: $primary;
-            }
-        }
-    }
-    > .productShopAdd {
-        border-top: 0.5px dotted #424949;
-        padding-top: 1rem;
-        > div {
-            > button {
-                background-color: $red;
-                color: $white;
-                width: 100%;
-                &:hover {
-                    background-color: darken($red, 10%);
-                }
             }
         }
     }

@@ -1,9 +1,5 @@
 @import './mixins';
-// .bg-primary {
-//     background-color: $primary;
-// }
 .cardBox {
-    // border: 1px solid #95a5a6;
     overflow: hidden;
     position: relative;
     transition: .5s;
@@ -62,9 +58,13 @@
         color: $primary;
     }
     span {
+        background-color: $primary;
         position: absolute;
         right: 0;
-        color: $primary;
+        color: $white;
+        border-radius: 5px;
+        padding: 0.1rem;
+        font-size: fontSize(12px);
     }
 }
 .homeTitleFontStyleBox {

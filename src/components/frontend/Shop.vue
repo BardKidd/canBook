@@ -62,7 +62,7 @@
           <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
         </div>
       </div>
-      <router-link to="./cart" class="shoppingSideBarGetOrderBtn">
+      <router-link to="./cart" class="shoppingSideBarGetOrderBtn btn">
         下單去
         <i class="fas fa-arrow-right"></i>
       </router-link>

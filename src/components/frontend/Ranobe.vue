@@ -1,0 +1,71 @@
+<template>
+  <div class="container">
+    <div class="row">
+      <h2 class="col-12 ranobeTitle">- 嶄新的青春群像小說，故事邁向最終章 -</h2>
+      <div
+        class="col-3 ranobeContent"
+        @click.prevent="oneProductData(item.id)"
+        v-for="(item, key) in allRanobe.slice(-5, -1)"
+        :key="key"
+      >
+        <div class="ranobeImgBox">
+          <img :src="item.imageUrl" alt />
+        </div>
+        <div class="ranobeImgBoxBack">
+          <p></p>
+        </div>
+        <div class="ranobeFontStyle">
+          <strong>{{ item.title }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+    //   featuredBooksProducts: {},
+      isLoading: false,
+      shopId: "",
+      allRanobe: {}
+    };
+  },
+  methods: {
+    // getFeaturedBooks() {
+    //   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
+    //   const vm = this;
+    //   vm.isLoading = true;
+    //   vm.$http.get(api).then(response => {
+    //     vm.featuredBooksProducts = response.data.products;
+    //     vm.isLoading = false;
+    //   });
+    // },
+    oneProductData(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      const vm = this;
+      vm.shopId = id;
+      vm.isLoading = false;
+      vm.$http.get(api).then(response => {
+        if (response.data.success) {
+          vm.$router.push(`shop/${vm.shopId}`);
+        }
+        vm.isLoading = true;
+      });
+    },
+    getAllRanobe() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        const totalBooks = response.data.products;
+        vm.allRanobe = totalBooks.filter(item => item.category === "輕小說");
+      });
+    }
+  },
+  created() {
+    // this.getFeaturedBooks();
+    this.getAllRanobe();
+  }
+};
+</script>

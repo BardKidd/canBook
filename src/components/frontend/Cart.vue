@@ -114,16 +114,16 @@
         <div class="shoppingCartList col-4">
           <div class="shoppingCartListTitle">
             <strong>購物車清單</strong>
-            <button
-              type="button"
-              class="btn btn-outline-danger"
-              @click.prevent="delAllShoppingCartList"
-            >清空購物車</button>
             <div
               class="countRound"
               v-if="totalShoppingList.carts.length !== 0"
             >{{ totalShoppingList.carts.length }}</div>
             <div class="countRound" v-if="totalShoppingList.carts.length === 0">0</div>
+            <button
+              type="button"
+              class="btn btn-prompt"
+              @click.prevent="delAllShoppingCartList"
+            >清空購物車</button>
           </div>
           <div class="lumpSum" v-if="totalShoppingList.total === totalShoppingList.final_total">
             <strong>小計</strong>
@@ -140,12 +140,12 @@
           >
             <button
               type="button"
-              class="btn btn-outline-danger"
+              class="btn btn-prompt"
               @click.prevent="delShopingCartList(item.id)"
             >
               <i class="fas fa-trash-alt"></i>
             </button>
-            <div>
+            <div class="w-60">
               <p>{{ item.product.title }}</p>
               <p>數量: {{ item.qty }}</p>
             </div>
