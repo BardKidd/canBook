@@ -1,0 +1,241 @@
+@import './mixins';
+.aboutUsBox {
+    overflow-x: hidden;
+}
+.aboutUsImage {
+    padding: 5.3rem 0 0;
+    > .aboutUsImageBigBox {
+        display: inline-block;
+        padding: 0;
+        > .aboutUsImageBig {
+            background-image: url('~@/assets/image/open.png');
+            background-size: cover;
+            background-position: center bottom;
+            padding-bottom: 72%;
+        }
+    }
+    > .aboutUsContentBox {
+        vertical-align: top;
+        display: inline-block;
+        padding: 2% 0;
+        background-color: $gray-100;
+        > .aboutUsTitle {
+            width: 80%;
+            display: block;
+            color: $primary;
+            font-family: $font-family-chinese;
+            font-size: $fontSize-title;
+            text-align: left;
+            margin: 0 auto 1rem;
+        }
+        > .aboutUsContent {
+            width: 80%;
+            display: block;
+            color: $primary;
+            font-family: $font-family-chinese2;
+            text-indent: 2rem;
+            margin: 0 auto 1rem;
+            font-size: fontSize(17px);
+        }
+        > .aboutUsContent::selection {
+            background-color: $primary;
+            color: $white;
+        }
+    }
+}
+.weAreHere {
+    display: inline-block;
+    background-color: $primary-darken;
+    width: 100%;
+    margin: -0.5% 0 0;
+    > .OurMap {
+        display: inline-block;
+        background-image: url('~@/assets/image/weAreHere.png');
+        background-size: cover;
+        padding-bottom: 40%;
+        margin: 0 auto;
+        vertical-align: top;
+    }
+    > .contactInfo {
+        display: inline-block;
+        width: 100%;
+        padding: 4% 2% 0;
+        > .weAreHereTitle {
+            color: $white;
+            font-family: $font-family-chinese;
+            font-size: $fontSize-title;
+            margin: 0 auto 1rem;
+            width: 80%;
+        }
+        > .contactInfoData {
+            width: 80%;
+            padding: 1rem 2rem;
+            display: inline-block;
+            > .contactInfoDataRounds {
+                width: 25%;
+                color: $other2;
+                border-radius: 60%;
+                font-size: fontSize(32px);
+                background-color: $primary-lighten;
+                padding: 1rem;
+                position: relative;
+                left: 20%;
+                transform: translateX(-50%);
+                text-align: center;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+            > span {
+                color: $white;
+                font-family: $font-family-chinese;
+                font-size: fontSize(16px);
+                margin-left: 15%;
+            }
+        }
+    }
+}
+.FAndQ {
+    color: $primary;
+    padding: 3rem 6rem;
+    > h2 {
+        text-align: center;
+        padding-bottom: 2rem;
+        font-family: $font-family-chinese;
+        font-size: $fontSize-title;
+    }
+}
+.ShoppingQuestionBox {
+    padding-top: 2rem;
+    padding: 0 1rem;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    > .ShoppingQuestion {
+        border-bottom: 2px solid $white;
+        overflow: hidden;
+        > .ShoppingQuestionTitle {
+            width: 100%;
+            font-size: fontSize(26px);
+            font-family: $font-family-chinese2;
+            position: relative;
+            cursor: pointer;
+            padding-top: 1rem;
+            display: inline-block;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            > p {
+                display: inline-block;
+            }
+            > .QuestionOpen {
+                font-size: fontSize(55px);
+                font-family: $font-family-english;
+                position: absolute;
+                right: 3%;
+                top: -7%;
+            }
+        }
+    }
+    .ShoppingQuestionAnswer {
+        font-family: $font-family-chinese2;
+        padding-top: 1rem;
+        border-bottom: 2px solid $primary;
+    }
+}
+
+// phone mode
+@media (max-width: 640px) {
+    .aboutUsImage {
+        display: inline-block;
+        > .aboutUsImageBigBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsImageBig {
+                margin-bottom: 2rem;
+                padding-bottom: 100%;
+                width: 100%;
+            }
+        }
+        > .aboutUsContentBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsContent {
+                width: 100%;
+            }
+        }
+    }
+    .weAreHere {
+        > .OurMap {
+            padding-bottom: 100%;
+            width: 100%;
+        }
+        > .contactInfo {
+            > .contactInfoData {
+                padding: 0;
+                vertical-align: top;
+                > .contactInfoDataRounds {
+                    width: 100%;
+                }
+                > p {
+                    word-wrap:break-word;
+                }
+            }
+        }
+    }
+    .FAndQ {
+        padding: 3rem 1rem;
+    }
+    .ShoppingQuestionBox {
+        padding: 0;
+        width: 100%;
+        vertical-align: top;
+        .QuestionTitle {
+            width: 85%;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .aboutUsImage {
+        display: inline-block;
+        padding: 11rem 0 3rem;
+        > .aboutUsImageBigBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsImageBig {
+                margin-bottom: 2rem;
+                margin-top: 2rem;
+                padding-bottom: 70%;
+                width: 80%;
+            }
+        }
+        > .aboutUsContentBox {
+            max-width: 100%;
+            flex: 0 0 100%;
+            > .aboutUsContent {
+                font-size: fontSize(26px);
+                width: 100%;
+            }
+        }
+    }
+    .weAreHere {
+        > .OurMap {
+            width: 80%;
+            padding-bottom: 80%;
+        }
+        > .contactInfo {
+            > .contactInfoData {
+                > .contactInfoDataRounds {
+                    width: 80%;
+                }
+            }
+        }
+    }
+    .QuestionTitle {
+        width: 90%;
+    } 
+}

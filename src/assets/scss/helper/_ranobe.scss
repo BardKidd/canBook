@@ -1,0 +1,92 @@
+.ranobeTitle {
+    color: $primary;
+    font-size: $fontSize-title;
+    text-align: center;
+    font-family: $font-family-chinese;
+    font-weight: bold;
+    padding: 3rem 0;
+}
+.ranobeContent {
+    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    > .ranobeImgBox {
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+        transform: perspective(600px) rotateY(0deg);
+        transition: transform 0.6s linear;
+        backface-visibility: hidden;
+        > img {
+            position: relative;
+            right: 18%;
+        }
+    }
+    > .ranobeImgBoxBack {
+        transform: perspective(600px) rotateY(180deg);
+        position: absolute;
+        transition: transform 0.6s linear;
+        left: 14px;
+        overflow: hidden;
+        width: 90%;
+        top: 0;
+        height: 83.2%;
+        text-align: center;
+        backface-visibility: hidden;
+        background-color: $white;
+        > p {
+            background-color: $primary;
+            height: 100%;
+            font-family: $font-family-chinese;
+            font-weight: bold;
+            color: #2c3e50;
+            background-image: url('~@/assets/image/yukinoSide.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    &:hover > .ranobeImgBox {
+        transform: perspective(600px) rotateY(-180deg);
+    }
+    &:hover > .ranobeImgBoxBack {
+        transform: perspective(600px) rotateY(0deg);
+    }
+    > .ranobeFontStyle {
+        padding-top: 1rem;
+        color: $primary;
+        font-family: $font-family-chinese;
+        text-align: center;
+        > strong {
+            width: 100%;
+            font-size: fontSize(18px);
+        }
+    }
+}
+
+// phone mode
+@media (max-width: 640px) {
+    .ranobeContent {
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+        > .ranobeImgBox {
+            > img {
+                right: 0;
+            }
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .ranobeContent {
+        max-width: 50%;
+        flex: 0 0 50%;
+        margin-bottom: 2rem;
+        > .ranobeImgBox {
+            > img {
+                right: 0;
+            }
+        }
+    }
+}

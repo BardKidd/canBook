@@ -1,0 +1,195 @@
+@import './mixins';
+.w-60 {
+    width: 60%;
+}
+.scheduleShow {
+    @include scheduleShowStyle(#aaa, 0);
+    li:nth-child(1) {
+        color: #34495e;
+        > p {
+            border-bottom: 3px solid #34495e;
+        }
+    }
+}
+.cartData {
+    > .shoppingCartList {
+        display: inline-block;
+        vertical-align: top;
+        strong {
+            color: $primary;
+            font-size: fontSize(22px);
+            font-family: $font-family-chinese2;
+        }
+        > .shoppingCartListTitle {
+            position: relative;
+            > .countRound {
+                margin-left: 0.2rem; 
+                color: $white;
+                display: inline-block;
+                border-radius: 30px;
+                background: #555;
+                padding: 0.05rem 0.5rem;
+                font-weight: bolder;
+                position: relative;
+                top: -3px;
+            }
+            > button {
+                position: absolute;
+                right: 0;
+            }
+        }
+        > .shoppingCartContent {
+            .qtyNum {
+                width: 20%;
+            }
+        }
+    }
+    > .orderData {
+        display: inline-block;
+        margin-bottom: 1rem;
+        > .orderTitle {
+            font-size: fontSize(22px);
+            color: $primary;
+            font-family: $font-family-chinese2;
+            font-weight: bolder;
+        }
+        label {
+            color: #777;
+            font-size: fontSize(15px);
+            font-family: $font-family-chinese2;
+            font-weight: bold;
+            > span {
+                color: $red-prompt;
+            }
+        }
+        input, textarea {
+            color: #555;
+            font-size: fontSize(16px);
+            font-family: $font-family-chinese2;
+            font-weight: bold;
+        }
+    }
+}
+.btn-prompt {
+    color: $red-prompt;
+    border-color: $red-prompt;
+    &:hover {
+        color: $white;
+        background-color: $red-prompt;
+    }
+}
+.shoppingCartContent {
+    @extend %boxStyle;
+    position: relative;
+    > button {
+        vertical-align: top;
+    }
+    > div {
+        display: inline-block;
+        font-size: fontSize(15px);
+        font-family: $font-family-chinese;
+        color: #555;
+        font-weight: bolder;
+        margin-left: 1rem;
+        > p {
+            margin: 0;
+        }
+    }
+    > span {
+        color: $primary;
+        font-size: fontSize(16px);
+        font-family: $font-family-chinese;
+        font-weight: bolder;
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+.enterCoupon {
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+    position: relative;
+    > input {
+        width: 84%;
+        display: inline-block;
+        font-weight: bolder;
+    }
+    > div {
+        display: inline-block;
+        right: 0;
+        top: 0.5rem;
+        position: absolute;
+        > button {
+            color: $white;
+            background-color: $primary;
+            &:hover {
+                background-color: $primary-darken;
+                color: $white;
+            }
+        }
+    }
+    > span {
+        display: block;
+    }
+}
+// phone mode
+@media (max-width: 640px) {
+    .scheduleShow {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .cartData {
+        > .shoppingCartList {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+            > .shoppingCartContent {
+                > span {
+                    bottom: 0.5rem;
+                }
+            }
+        }
+        > .orderData {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .scheduleShow {
+        > ul {
+            padding: 0;
+            > li {
+                padding: 0;
+                > p {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+    }
+    .cartData {
+        > .shoppingCartList {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+            > .shoppingCartContent {
+                > span {
+                    bottom: 0.5rem;
+                }
+            }
+        }
+        > .orderData {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+}
