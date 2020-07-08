@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- 換新電腦測試中 -->
     <Alert></Alert>
     <nav class="container">
       <div class="l-nav-table">
@@ -10,9 +9,6 @@
         <ul class="l-nav-mainOption">
           <li>
             <router-link to="/shop">優秀好書</router-link>
-          </li>
-          <li>
-            <router-link to="/news">最新消息</router-link>
           </li>
           <li>
             <router-link to="/aboutUs">關於我們</router-link>

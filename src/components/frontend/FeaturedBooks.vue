@@ -36,6 +36,9 @@
 
     <!-- 輕小說週 -->
     <Ranobe></Ranobe>
+
+    <!-- 最新消息 -->
+    <News></News>
     
   </div>
 </template>
@@ -44,11 +47,13 @@
 import $ from "jquery";
 import Surprise from './Surprise';
 import Ranobe from './Ranobe';
+import News from './News';
 
 export default {
   components: {
     Surprise,
     Ranobe,
+    News,
   },
   data() {
     return {

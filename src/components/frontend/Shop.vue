@@ -154,8 +154,9 @@ export default {
       vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
-        const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
+        // const set = new Set()
+        // vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
+        // console.log(vm.totalShoppingList)
       })
     },
     delShoppingCartList (id) {

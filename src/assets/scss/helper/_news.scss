@@ -2,29 +2,28 @@
 
 .newsTitle {
     font-size: $fontSize-title;
-    color: $primary;
+    color: $white;
     text-align: center;
     font-family: $font-family-chinese2;
     font-weight: bold;
-    margin-bottom: 3rem;
+    padding: 3rem 0;
 }
 .activityNews {
     > .popularity {
         text-align: right;
-        margin: 0;
+        margin-bottom: 1rem;
         font-family: $font-family-chinese2;
         color: $gray-300;
     }
 }
 .activityFontStyle1 {
-    @include activityFontStyle($white, #3498db, $white);
+    @include activityFontStyle(#017e83, #2f3640, #2f3640);
 }
 .activityImage1 {
-    background-image: url('~@/assets/image/activity1.png');
+    background-image: url('~@/assets/image/activity4.png');
     @extend %activityImage;
 }
 .activityFontStyle2 {
-    text-align: right;
     @include activityFontStyle($white, $white, $white);
 }
 .activityImage2 {
@@ -36,13 +35,5 @@
 }
 .activityImage3 {
     background-image: url('~@/assets/image/activity6.png');
-    @extend %activityImage;
-}
-.activityFontStyle4 {
-    text-align: right;
-    @include activityFontStyle(#017e83, #2f3640, #2f3640);
-}
-.activityImage4 {
-    background-image: url('~@/assets/image/activity4.png');
     @extend %activityImage;
 }

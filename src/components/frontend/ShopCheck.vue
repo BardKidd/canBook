@@ -148,15 +148,19 @@ export default {
     addToShopCart(shopId, num = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
-      vm.isLoading = true;
+      // if 有相同 product_id 的產品，就把 shopData 的 qty 修改或加總?
       const shopData = {
-        product_id: shopId,
+        product_id: id,
         qty: num
-      };
-      vm.$http.post(api, { data: shopData }).then(() => {
-        vm.getShopCartContent();
-        vm.isLoading = false;
-      });
+      }
+      vm.isLoading = true;
+      vm.$http.post(api, { data: shopData }).then((response) => {
+        vm.ShoppingCartList()
+        vm.isLoading = false
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        }
+      })
     },
     getShopCartContent() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
@@ -164,10 +168,16 @@ export default {
       vm.$http.get(api).then(response => {
         vm.shopCartList = response.data.data;
         vm.shopCartList.carts = response.data.data.carts;
-        const set = new Set();
-        vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
-          !set.has(item.product_id) ? set.add(item.product_id) : false
-        );
+        // const set = new Set();
+        // vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
+        //   !set.has(item.product_id) ? set.add(item.product_id) : false
+        // );
+
+        // const setTs = new Set();
+        // vm.shopCartList.carts.qty = vm.shopCartList.carts.qty.filter(item => 
+        //   setTs.has(item.qty) ? setTs.add(item.qty) : false
+        // );
+        // console.log(vm.shopCartList.carts)
       });
     },
     delShopingCartList(id) {
