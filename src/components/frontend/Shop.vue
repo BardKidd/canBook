@@ -29,7 +29,6 @@
           <div class="totalBooksCardFontStyle">
             <strong>{{ item.title }}</strong>
             <span>NT$: {{ item.price }}</span>
-            <i class="fas fa-shopping-cart" @click.prevent="addToShopingCart(item.id)"></i>
           </div>
         </div>
         <Pagination :pagination="pagination" @emitPage="getShop" v-if="classification === '全部好書'"></Pagination>
@@ -132,31 +131,12 @@ export default {
         vm.isLoading = false
       })
     },
-    addToShopingCart (id, num = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
-      const shopData = {
-        product_id: id,
-        qty: num
-      }
-      vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then((response) => {
-        vm.ShoppingCartList()
-        vm.isLoading = false
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', response.data.message, 'success')
-        }
-      })
-    },
     ShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
       vm.$http.get(api).then((response) => {
         vm.totalShoppingList = response.data.data
         vm.totalShoppingList.carts = response.data.data.carts
-        // const set = new Set()
-        // vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
-        // console.log(vm.totalShoppingList)
       })
     },
     delShoppingCartList (id) {

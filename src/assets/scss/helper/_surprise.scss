@@ -81,11 +81,30 @@
 // phone mode
 @media (max-width: 640px) {
     .surpriseCode {
-        max-width: 90%;
-        margin-right: auto;
-        margin-left: auto;
         > .surpriseBox {
             max-width: 100%;
+            > strong {
+                font-size: fontSize(32px);
+            }
+            > p {
+                font-size: fontSize(25px);
+            }
+        }
+    }
+    .surpriseBtn {
+        > .surpriseBtnTopText {
+            margin: 0;
+            text-align: center;
+            > a {
+                padding: 0;
+                font-size: fontSize(11px);
+                border-radius: 30px;
+                margin: -10%;
+                padding: 6%;
+                > i {
+                    margin-left: 0.2rem;
+                }
+            }
         }
     }
 }
@@ -95,6 +114,11 @@
     .surpriseCode {
         > .surpriseBox {
             max-width: 80%;
+        }
+    }
+    .surpriseBtn {
+        > .surpriseBtnTopText {
+            text-align: center;
         }
     }
 }

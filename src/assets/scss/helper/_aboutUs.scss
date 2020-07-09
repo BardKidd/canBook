@@ -4,6 +4,7 @@
 }
 .aboutUsImage {
     padding: 5.3rem 0 0;
+    background-color: $gray-100;
     > .aboutUsImageBigBox {
         display: inline-block;
         padding: 0;
@@ -18,7 +19,6 @@
         vertical-align: top;
         display: inline-block;
         padding: 2% 0;
-        background-color: $gray-100;
         > .aboutUsTitle {
             width: 80%;
             display: block;
@@ -169,18 +169,23 @@
     }
     .weAreHere {
         > .OurMap {
-            padding-bottom: 100%;
+            padding: 50%;
             width: 100%;
         }
         > .contactInfo {
+            flex: 0 0 100%;
+            max-width: 100%;
             > .contactInfoData {
                 padding: 0;
-                vertical-align: top;
+                width: 100%;
                 > .contactInfoDataRounds {
-                    width: 100%;
+                    width: 22%;
                 }
                 > p {
                     word-wrap:break-word;
+                }
+                > span {
+                    margin-left: 11%;
                 }
             }
         }
@@ -196,46 +201,60 @@
             width: 85%;
         }
     }
+    .ShoppingQuestionAnswer {
+        font-size: fontSize(16px);
+    }
 }
 
 // iPad mode
 @media (min-width: 641px) and (max-width: 960px) {
     .aboutUsImage {
         display: inline-block;
-        padding: 11rem 0 3rem;
         > .aboutUsImageBigBox {
             max-width: 100%;
             flex: 0 0 100%;
             > .aboutUsImageBig {
                 margin-bottom: 2rem;
-                margin-top: 2rem;
-                padding-bottom: 70%;
-                width: 80%;
+                padding-bottom: 100%;
+                width: 100%;
             }
         }
         > .aboutUsContentBox {
             max-width: 100%;
             flex: 0 0 100%;
             > .aboutUsContent {
-                font-size: fontSize(26px);
                 width: 100%;
             }
         }
     }
     .weAreHere {
         > .OurMap {
-            width: 80%;
-            padding-bottom: 80%;
+            padding: 50%;
+            width: 100%;
         }
         > .contactInfo {
+            flex: 0 0 100%;
+            max-width: 100%;
             > .contactInfoData {
+                padding: 0;
+                width: 100%;
                 > .contactInfoDataRounds {
-                    width: 80%;
+                    width: 12%;
+                }
+                > p {
+                    word-wrap:break-word;
+                }
+                > span {
+                    margin-left: 16%;
+                    font-size: 2rem;
                 }
             }
         }
     }
     .QuestionTitle {
         width: 90%;
-    } 
+    }
+    .ShoppingQuestionAnswer {
+        font-size: fontSize(24px);
+    }
 }

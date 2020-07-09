@@ -86,11 +86,14 @@
             max-width: 100%;
             flex: 0 0 100%;
             > .cardFontStyle {
-                p {
+                > p {
                     margin-top: 1.5rem;
                 }
-                span {
+                > span {
                     display: block;
+                }
+                > strong {
+                    width: 100%;
                 }
             }
         }

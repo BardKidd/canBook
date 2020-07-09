@@ -34,7 +34,6 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <router-link to="/shop">優秀好書</router-link>
-            <router-link to="/news">最新消息</router-link>
             <router-link to="/aboutUs">關於我們</router-link>
           </div>
         </div>

@@ -74,7 +74,7 @@
             <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
           </div>
         </div>
-        <router-link to="../cart" class="shoppingSideBarGetOrderBtn">
+        <router-link to="../cart" class="shoppingSideBarGetOrderBtn btn">
           下單去
           <i class="fas fa-arrow-right"></i>
         </router-link>
@@ -148,19 +148,46 @@ export default {
     addToShopCart(shopId, num = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
-      // if 有相同 product_id 的產品，就把 shopData 的 qty 修改或加總?
       const shopData = {
-        product_id: id,
+        product_id: shopId,
         qty: num
-      }
+      };
       vm.isLoading = true;
-      vm.$http.post(api, { data: shopData }).then((response) => {
-        vm.ShoppingCartList()
-        vm.isLoading = false
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', response.data.message, 'success')
+      // if 東西相同的話先加總數量，否則直接送出資料
+      vm.$http.get(api).then(response => {
+        vm.shopCartList = response.data.data;
+        vm.shopCartList.carts = response.data.data.carts;
+        const target = vm.shopCartList.carts.filter(
+          item => item.product_id === shopId
+        );
+        if (target.length > 0) {
+          const sameItem = target[0];
+          const originQty = sameItem.qty;
+          const originCartId = sameItem.id;
+          const originProductId = sameItem.product_id;
+          const newQty = originQty + num;
+          const newData = {
+            product_id: shopId,
+            qty: newQty
+          };
+          vm.$http.post(api, { data: newData }).then(response => {
+            vm.delSameShopingCartList(originCartId);
+            vm.getShopCartContent();
+            vm.isLoading = false;
+            if (response.data.success) {
+              vm.$bus.$emit("message:push", response.data.message, "success");
+            }
+          });
+        } else {
+          vm.$http.post(api, { data: shopData }).then(response => {
+            vm.getShopCartContent();
+            vm.isLoading = false;
+            if (response.data.success) {
+              vm.$bus.$emit("message:push", response.data.message, "success");
+            }
+          });
         }
-      })
+      });
     },
     getShopCartContent() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
@@ -168,16 +195,17 @@ export default {
       vm.$http.get(api).then(response => {
         vm.shopCartList = response.data.data;
         vm.shopCartList.carts = response.data.data.carts;
-        // const set = new Set();
-        // vm.shopCartList.carts = vm.shopCartList.carts.filter(item =>
-        //   !set.has(item.product_id) ? set.add(item.product_id) : false
-        // );
-
-        // const setTs = new Set();
-        // vm.shopCartList.carts.qty = vm.shopCartList.carts.qty.filter(item => 
-        //   setTs.has(item.qty) ? setTs.add(item.qty) : false
-        // );
-        // console.log(vm.shopCartList.carts)
+      });
+    },
+    delSameShopingCartList(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      vm.$http.delete(api).then(response => {
+        if (response.data.success) {
+          vm.getShopCartContent();
+          vm.isLoading = false;
+        }
       });
     },
     delShopingCartList(id) {

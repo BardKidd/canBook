@@ -37,3 +37,19 @@
     background-image: url('~@/assets/image/activity6.png');
     @extend %activityImage;
 }
+
+// phone mode
+@media (max-width: 640px) {
+    .activityNews {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+// iPad mode
+@media (min-width: 641px) and (max-width: 960px) {
+    .activityNews {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

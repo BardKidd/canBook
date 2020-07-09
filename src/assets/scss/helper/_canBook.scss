@@ -62,28 +62,32 @@
 
 // phone mode
 @media (max-width: 640px) {
+    .indexTitleBox {
+        width: 100%;
+        > .indexTitle {
+            font-size: fontSize(40px);
+            bottom: 10.5rem;
+            right: 5rem;
+        }
+        > .indexTitle2 {
+            left: 10%;
+            right: 0;
+            text-align: center;
+            font-size: fontSize(26px);
+        }
+    }
     .indexCover {
         height: 80vh;
-    }
-    .indexTitle {
-        bottom: 10.5rem;
-        right: 5rem;
-    }
-    .indexTitle2 {
-        width: 80%;
-        left: 10%;
-        right: 0;
-        text-align: center;
-    }
-    .round {
-        display: none;
     }
 }
 
 // iPad mode
 @media (min-width: 641px) and (max-width: 960px) {
     .indexCover {
-        height: 100vh;
+        height: 70vh;
+        > .indexTitleBox {
+            top: 60%;
+        }
     }
     .indexTitle {
         bottom: 11.5rem;

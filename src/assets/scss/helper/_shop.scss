@@ -253,6 +253,7 @@
         display: block;
         text-align: center;
         margin: 1rem auto;
+        font-size: fontSize(16px);
         &:hover {
             background-color: darken($red, 10%);
         }
