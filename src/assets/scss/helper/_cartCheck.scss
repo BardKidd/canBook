@@ -35,7 +35,7 @@
         color: #555;
     }
     .CheckHeadStyle {
-        background-color: #a04c28;
+        background-color: $primary;
         color: $white;
         font-size: fontSize(18px);
         td {
@@ -62,7 +62,7 @@
         > strong {
             font-size: fontSize(30px);
             font-family: Arial, sans-serif;
-            color: #a04c28;
+            color: $black;
             padding-left: 0.5rem;
             font-weight: lighter;
         }

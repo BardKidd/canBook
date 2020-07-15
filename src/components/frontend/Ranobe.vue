@@ -25,22 +25,12 @@
 export default {
   data() {
     return {
-      //   featuredBooksProducts: {},
       isLoading: false,
       shopId: "",
       allRanobe: {}
     };
   },
   methods: {
-    // getFeaturedBooks() {
-    //   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
-    //   const vm = this;
-    //   vm.isLoading = true;
-    //   vm.$http.get(api).then(response => {
-    //     vm.featuredBooksProducts = response.data.products;
-    //     vm.isLoading = false;
-    //   });
-    // },
     oneProductData(id) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
       const vm = this;
@@ -63,7 +53,6 @@ export default {
     }
   },
   created() {
-    // this.getFeaturedBooks();
     this.getAllRanobe();
   }
 };

@@ -52,7 +52,7 @@
           <img :src="item.product.imageUrl" alt />
           <div class="shoppingSideBarData">
             <p>{{ item.product.title }}</p>
-            <span>{{ item.qty }}/{{item.product.unit}}</span>
+            <span>{{ item.qty }}/{{ item.product.unit }}</span>
             <span>NT${{ item.product.price * item.qty }}</span>
           </div>
         </div>

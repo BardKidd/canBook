@@ -59,17 +59,17 @@ footer {
     position: relative;
     min-height: 100%;
     @extend %boxSizing;
-    height: 50px;
+    height: 60px;
 }
 .l-footer-table {
     background-color: $primary;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
     position: absolute;
     bottom: 0;
     width: 100%;
     > .l-footer-widthCalc {
         width: 100%;
-        height: 50px;
+        height: 60px;
         position: absolute;
         bottom: 0;
         > div {

@@ -1,8 +1,24 @@
+// px 轉 rem
 $basicFontSize: 16px;
 @function fontSize($px) {
     @return ($px / $basicFontSize) * 1rem;
 }
 
+// RWD 手機板型
+@mixin phone {
+    @media (max-width: 640px) {
+        @content
+    }
+}
+
+// RWD 平板樣式
+@mixin pad {
+    @media (min-width: 641px) and (max-width: 960px) {
+        @content
+    }
+}
+
+// 樣式消除且並行
 %liStyle {
     list-style: none;
     display: inline-block;
@@ -12,11 +28,13 @@ $basicFontSize: 16px;
     box-sizing: border-box;
 }
 
+// 垂直
 %vertically {
     top: 50%;
     transform: translateY(-50%);
 }
 
+// 垂直置中
 %center-vertically {
     top: 50%;
     left: 50%;

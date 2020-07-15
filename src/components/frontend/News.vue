@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primaryDark">
+  <div class="bg-primary">
     <div class="container">
       <div class="row">
         <div class="col-12 newsTitle">最新消息</div>
