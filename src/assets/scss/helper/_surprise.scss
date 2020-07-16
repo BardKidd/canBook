@@ -36,7 +36,7 @@
         > p {
             margin: 0;
             font-size: fontSize(32px);
-            color: $other2;
+            color: $other;
             font-weight: bolder;
         }
     }
@@ -61,7 +61,7 @@
             margin-bottom: 2rem;
         }
         > a {
-            background-color: #8610A8;
+            background-color: $red;
             color: $white;
             border-radius: 60px;
             text-decoration: none;

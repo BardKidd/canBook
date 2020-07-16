@@ -59,15 +59,15 @@ $basicFontSize: 16px;
 }
 
 @mixin activityFontStyle($titleColor, $dateColor, $contentColor) {
-    padding: 5rem 2.5rem;
+    padding: 9rem 1rem 15rem;
     font-family: $font-family-chinese2;
     > strong {
         color: $titleColor;
-        font-size: fontSize(32px);
+        font-size: fontSize(23px);
     }
     > p {
         color: $dateColor;
-        font-size: fontSize(22px);
+        font-size: fontSize(16px);
     }
     > span {
        color: $contentColor;

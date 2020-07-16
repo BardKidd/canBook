@@ -88,7 +88,7 @@ export default {
   components: {
     Alert
   },
-  create () {
+  created () {
     $(window).scroll(() => {
       if ($('html, body').scrollTop() >= 230) {
         $('.l-nav-table')

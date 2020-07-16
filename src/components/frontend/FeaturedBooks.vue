@@ -6,6 +6,7 @@
       <div class="indexTitleBox">
         <h1 class="indexTitle">- 在我推薦的書裡，能提供你去思考 -</h1>
         <p class="indexTitle2">這裡總有一本屬於你的書</p>
+        <router-link to="./shop" class="btn btn-primary">開始尋找</router-link>
       </div>
     </div>
 
@@ -20,7 +21,7 @@
             <img :src="item.imageUrl" alt />
           </div>
           <div class="cardFontStyle">
-            <strong>{{ item.title }}</strong>
+            <strong class="equalHeightFeaturedBooks">{{ item.title }}</strong>
             <span>{{ item.category }}</span>
             <p class="moreFontStyle" @click.prevent="oneProductData(item.id)">
               查看
@@ -44,7 +45,7 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
 import Surprise from './Surprise';
 import Ranobe from './Ranobe';
 import News from './News';
@@ -88,6 +89,15 @@ export default {
   },
   created() {
     this.getFeaturedBooks();
-  }
+    $(function() {
+      let h = 0;
+      $('.equalHeightFeaturedBooks').each(function() {
+        if($(this).height() > h) {
+          h = $(this).height();
+        }
+      })
+      $('.equalHeightFeaturedBooks').css('height', h + 'px');
+    })
+  },
 };
 </script>
