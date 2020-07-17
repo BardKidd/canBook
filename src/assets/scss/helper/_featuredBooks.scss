@@ -51,11 +51,12 @@
         margin-top: 1rem;
         cursor: pointer;
     }
-    strong {
+    .featuredBooksCardTitle {
         font-size: fontSize(20px);
         width: 80%;
         display: inline-block;
         color: $primary;
+        height: 60px;
     }
     span {
         background-color: $primary;
@@ -92,7 +93,7 @@
                 > span {
                     display: block;
                 }
-                > strong {
+                > .featuredBooksCardTitle {
                     width: 100%;
                 }
             }

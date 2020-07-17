@@ -124,7 +124,9 @@ export default {
     return {
       shopId: "",
       productData: {},
-      shopCartList: {},
+      shopCartList: {
+        carts: {}
+      },
       isLoading: false,
       coupon_code: "",
       totalShoppingList: {},
@@ -152,49 +154,72 @@ export default {
         product_id: shopId,
         qty: num
       };
+      const target = vm.shopCartList.carts.filter(item => item.product_id === shopId);      
+      if(sameItem.length === -1) {
+        const sameItem = target[0];
+        const originQty = sameItem.qty;
+        const originCartId = sameItem.id;
+        const originProductId = sameItem.product_id;
+        const newQty = originQty + num;
+        const newData = {
+          product_id: shopId,
+          qty: newQty
+        };
+      }
+      sameItem === -1 ? vm.shopCartList.carts.push(shopData) : (vm.shopCartList.carts[sameItem].qty += num);
       vm.isLoading = true;
-      // if 東西相同的話先加總數量，否則直接送出資料
-      vm.$http.get(api).then(response => {
-        vm.shopCartList = response.data.data;
-        vm.shopCartList.carts = response.data.data.carts;
-        const target = vm.shopCartList.carts.filter(
-          item => item.product_id === shopId
-        );
-        if (target.length > 0) {
-          const sameItem = target[0];
-          const originQty = sameItem.qty;
-          const originCartId = sameItem.id;
-          const originProductId = sameItem.product_id;
-          const newQty = originQty + num;
-          const newData = {
-            product_id: shopId,
-            qty: newQty
-          };
-          vm.$http.post(api, { data: newData }).then(response => {
-            vm.delSameShopingCartList(originCartId);
-            vm.getShopCartContent();
-            vm.isLoading = false;
-            if (response.data.success) {
-              vm.$bus.$emit("message:push", response.data.message, "success");
-            }
-          });
-        } else {
-          vm.$http.post(api, { data: shopData }).then(response => {
-            vm.getShopCartContent();
-            vm.isLoading = false;
-            if (response.data.success) {
-              vm.$bus.$emit("message:push", response.data.message, "success");
-            }
-          });
+      vm.$http.post(api, { data: shopData }).then(response => {
+        vm.getShopCartContent();
+        vm.isLoading = false;
+        if (response.data.success) {
+          vm.$bus.$emit("message:push", response.data.message, "success");
         }
       });
+
+      // if 東西相同的話先加總數量，否則直接送出資料
+      // vm.$http.get(api).then(response => {
+      //   vm.shopCartList = response.data.data;
+      //   vm.shopCartList.carts = response.data.data.carts;
+      //   const target = vm.shopCartList.carts.filter(
+      //     item => item.product_id === shopId
+      //   );
+      //   if (target.length > 0) {
+      //     const sameItem = target[0];
+      //     const originQty = sameItem.qty;
+      //     const originCartId = sameItem.id;
+      //     const originProductId = sameItem.product_id;
+      //     const newQty = originQty + num;
+      //     const newData = {
+      //       product_id: shopId,
+      //       qty: newQty
+      //     };
+      //     vm.$http.post(api, { data: newData }).then(response => {
+      //       vm.delSameShopingCartList(originCartId);
+      //       vm.getShopCartContent();
+      //       vm.isLoading = false;
+      //       if (response.data.success) {
+      //         vm.$bus.$emit("message:push", response.data.message, "success");
+      //       }
+      //     });
+      //   } else {
+      //     vm.$http.post(api, { data: shopData }).then(response => {
+      //       vm.getShopCartContent();
+      //       vm.isLoading = false;
+      //       if (response.data.success) {
+      //         vm.$bus.$emit("message:push", response.data.message, "success");
+      //       }
+      //     });
+      //   }
+      // });
     },
     getShopCartContent() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
+      vm.shopCartList.carts = JSON.parse(sessionStorage.getItem('cart')) || [];
       vm.$http.get(api).then(response => {
         vm.shopCartList = response.data.data;
         vm.shopCartList.carts = response.data.data.carts;
+        sessionStorage.setItem("cart", JSON.stringify(vm.shopCartList.carts));
       });
     },
     delSameShopingCartList(id) {

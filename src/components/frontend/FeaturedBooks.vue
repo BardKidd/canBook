@@ -21,7 +21,7 @@
             <img :src="item.imageUrl" alt />
           </div>
           <div class="cardFontStyle">
-            <strong class="equalHeightFeaturedBooks">{{ item.title }}</strong>
+            <p class="featuredBooksCardTitle">{{ item.title }}</p>
             <span>{{ item.category }}</span>
             <p class="moreFontStyle" @click.prevent="oneProductData(item.id)">
               查看
@@ -89,15 +89,6 @@ export default {
   },
   created() {
     this.getFeaturedBooks();
-    $(function() {
-      let h = 0;
-      $('.equalHeightFeaturedBooks').each(function() {
-        if($(this).height() > h) {
-          h = $(this).height();
-        }
-      })
-      $('.equalHeightFeaturedBooks').css('height', h + 'px');
-    })
   },
 };
 </script>
