@@ -195,12 +195,11 @@ export default {
   methods: {
     getShoppingCartList () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
+      const vm = this;
+      vm.isLoading = true;
       vm.$http.get(api).then((response) => {
-        vm.totalShoppingList = response.data.data
-        vm.totalShoppingList.carts = response.data.data.carts
-        const set = new Set()
-        vm.totalShoppingList.carts = vm.totalShoppingList.carts.filter((item) => (!set.has(item.product_id) ? set.add(item.product_id) : false))
+        vm.totalShoppingList = response.data.data;
+        vm.isLoading = false;
       })
     },
     sendOrder () {
@@ -267,22 +266,23 @@ export default {
       }
       vm.$http.post(api, { data: coupon }).then()
     },
-    addToShopingCart (id, num = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
-      const shopData = {
-        product_id: id,
-        qty: num
-      }
-      vm.isLoading = true
-      vm.$http.post(api, { data: shopData }).then((response) => {
-        vm.ShoppingCartList()
-        vm.isLoading = false
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', response.data.message, 'success')
-        }
+    delReCart(goNext) {
+      const vm = this;
+      vm.isLoading = true;
+      // 刪除重複的 item 後才前進到下一頁
+      vm.$http.all(
+        vm.totalShoppingList.carts.map((item) => {
+          const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+          return vm.$http.delete(api);
+        })
+      ).then(() => {
+        vm.isLoading = false;
+        goNext();
       })
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    this.delReCart(next);
   },
   created () {
     $('body').css('overflow-y', '')
