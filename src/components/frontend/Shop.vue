@@ -48,23 +48,23 @@
       </div>
       <div class="shoppingSideBarContent">
         <div v-for="(item, key) in totalShoppingList.carts" :key="key" class="shoppingSideBarList">
-          <span class="shoppingSideBarDataDel" @click.prevent="delShoppingCartList(item.id)">X</span>
+          <span class="shoppingSideBarDataDel" @click.prevent="delShoppingCartList(key)">X</span>
           <img :src="item.product.imageUrl" alt />
           <div class="shoppingSideBarData">
             <p>{{ item.product.title }}</p>
             <span>{{ item.qty }}/{{ item.product.unit }}</span>
-            <span>NT${{ item.product.price * item.qty }}</span>
+            <span>NT{{ (item.product.price * item.qty) | currency }}</span>
           </div>
         </div>
         <div class="shoppingSideBarTotal">
-          <p>小計: NT${{ totalShoppingList.total }}</p>
+          <p>小計: NT{{ total | currency }}</p>
           <button class="delAllBtn" @click.prevent="delAllShoppingCartList">清除購物車</button>
         </div>
       </div>
-      <router-link to="./cart" class="shoppingSideBarGetOrderBtn btn">
+      <button class="shoppingSideBarGetOrderBtn btn" @click.prevent="postCart">
         下單去
         <i class="fas fa-arrow-right"></i>
-      </router-link>
+      </button>
     </div>
     <div class="shoppingSideBar" v-else>
       <div class="shoppingSideBarTitle">
@@ -77,133 +77,151 @@
 </template>
 
 <script>
-import $ from 'jquery'
-import Pagination from './Pagination'
+import $ from "jquery";
+import Pagination from "./Pagination";
 
 export default {
   components: {
     Pagination
   },
-  data () {
+  data() {
     return {
       totalBooks: [],
       totalBooksAll: [],
       pagination: {},
       isLoading: false,
-      shopId: '',
+      shopId: "",
       totalShoppingList: {
         carts: {}
       },
-      coupon_code: '',
-      classification: '全部好書',
+      coupon_code: "",
+      classification: "全部好書",
       allCategory: [],
       allCategoryFilter: []
+    };
+  },
+  computed: {
+    total() {
+      sessionStorage.setItem(
+        "cart",
+        JSON.stringify(this.totalShoppingList.carts)
+      );
+      return this.totalShoppingList.carts.reduce(
+        (total, item) => total + item.product.price * item.qty,
+        0
+      );
     }
   },
   methods: {
-    getShop (page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.totalBooks = response.data.products
-        vm.pagination = response.data.pagination
-      })
+    getShop(page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        vm.totalBooks = response.data.products;
+        vm.pagination = response.data.pagination;
+      });
     },
-    getAllShop () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.totalBooksAll = response.data
-        const allProduct = response.data.products
-        vm.allCategory = allProduct.map((item) => item.category)
-        vm.allCategoryFilter = vm.allCategory.filter((item, number, arr) => arr.indexOf(item) === number)
-      })
+    getAllShop() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        vm.totalBooksAll = response.data;
+        const allProduct = response.data.products;
+        vm.allCategory = allProduct.map(item => item.category);
+        vm.allCategoryFilter = vm.allCategory.filter(
+          (item, number, arr) => arr.indexOf(item) === number
+        );
+      });
     },
-    seeMore (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
-      const vm = this
-      vm.shopId = id
-      vm.isLoading = true
-      vm.$http.get(api).then((response) => {
+    seeMore(id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      const vm = this;
+      vm.shopId = id;
+      vm.isLoading = true;
+      vm.$http.get(api).then(response => {
         if (response.data.success) {
-          vm.$router.push(`shop/${vm.shopId}`)
+          vm.$router.push(`shop/${vm.shopId}`);
         }
-        vm.isLoading = false
-      })
+        vm.isLoading = false;
+      });
     },
-    ShoppingCartList () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.totalShoppingList = response.data.data
-        vm.totalShoppingList.carts = response.data.data.carts
-      })
+    ShoppingCartList() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const vm = this;
+      vm.totalShoppingList.carts =
+        JSON.parse(sessionStorage.getItem("cart")) || [];
     },
-    delShoppingCartList (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-      const vm = this
-      vm.isLoading = true
-      vm.$http.delete(api).then((response) => {
-        vm.ShoppingCartList()
-        vm.isLoading = false
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', response.data.message, 'danger')
-        }
-      })
+    delShoppingCartList(key) {
+      const vm = this;
+      vm.isLoading = true;
+      vm.totalShoppingList.carts.splice(key, 1);
+      sessionStorage.setItem(
+        "cart",
+        JSON.stringify(vm.totalShoppingList.carts)
+      );
+      vm.isLoading = false;
+      vm.$bus.$emit("message:push", "刪除成功", "danger");
     },
-    useCoupon () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
-      const vm = this
+    useCoupon() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+      const vm = this;
       const coupon = {
         code: vm.coupon_code
-      }
-      vm.$http.post(api, { data: coupon }).then()
+      };
+      vm.$http.post(api, { data: coupon }).then();
     },
-    bookFilter () {
-      const vm = this
-      if (vm.classification === '全部好書') {
-        vm.getShop()
+    bookFilter() {
+      const vm = this;
+      if (vm.classification === "全部好書") {
+        vm.getShop();
       } else {
-        const allProduct = vm.totalBooksAll.products
-        vm.totalBooks = allProduct.filter((item) => vm.classification === item.category)
+        const allProduct = vm.totalBooksAll.products;
+        vm.totalBooks = allProduct.filter(
+          item => vm.classification === item.category
+        );
       }
     },
-    delAllShoppingCartList () {
-      const vm = this
-      const getAllID = vm.totalShoppingList.carts
-      const itisID = []
-      vm.isLoading = true
-      getAllID.forEach((item) => {
-        itisID.push(item.id)
-      })
-      const apiary = []
-      itisID.forEach((id) => {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-        apiary.push(vm.$http.delete(api).then())
-      })
-      Promise.all(apiary).then(() => {
-        vm.isLoading = false
-        vm.ShoppingCartList()
-        if (vm.isLoading === false) {
-          vm.$bus.$emit('message:push', '已全部刪除', 'danger')
-        }
-      })
+    delAllShoppingCartList() {
+      this.totalShoppingList.carts = [];
+      sessionStorage.setItem(
+        "cart",
+        JSON.stringify(this.totalShoppingList.carts)
+      );
     },
-    sideBarOpen () {
-      $('.shoppingSideBar')
-        .css({ display: 'inline-block' })
-        .animate({ right: '0%' }, 100)
-      $('body').css('overflow-y', 'hidden')
+    postCart() {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const vm = this;
+      vm.isLoading = true;
+      vm.$http
+        .all(
+          vm.totalShoppingList.carts.map(item => {
+            const cartItem = {
+              product_id: item.product.id,
+              qty: item.qty
+            };
+            return vm.$http.post(api, { data: cartItem });
+          })
+        )
+        .then(() => {
+          vm.isLoading = false;
+          vm.$router.push("/cart");
+        });
     },
-    sideBarClose () {
-      $('.shoppingSideBar').css({ display: 'none' })
-      $('body').css('overflow-y', '')
+    sideBarOpen() {
+      $(".shoppingSideBar")
+        .css({ display: "inline-block" })
+        .animate({ right: "0%" }, 100);
+      $("body").css("overflow-y", "hidden");
+    },
+    sideBarClose() {
+      $(".shoppingSideBar").css({ display: "none" });
+      $("body").css("overflow-y", "");
     }
   },
-  created () {
-    this.getShop()
-    this.ShoppingCartList()
-    this.getAllShop()
+  created() {
+    this.getShop();
+    this.ShoppingCartList();
+    this.getAllShop();
   }
-}
+};
 </script>

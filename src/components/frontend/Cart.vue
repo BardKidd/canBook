@@ -141,7 +141,7 @@
             <button
               type="button"
               class="btn btn-prompt"
-              @click.prevent="delShopingCartList(item.id)"
+              @click.prevent="delShopingCartList(item.id, key)"
             >
               <i class="fas fa-trash-alt"></i>
             </button>
@@ -225,12 +225,17 @@ export default {
         }
       })
     },
-    delShopingCartList (id) {
+    delShopingCartList (id, key) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
       vm.isLoading = true
       vm.$http.delete(api).then((response) => {
         vm.getShoppingCartList()
+        vm.totalShoppingList.carts.splice(key, 1);
+        sessionStorage.setItem(
+          "cart",
+          JSON.stringify(vm.totalShoppingList.carts)
+        );
         vm.isLoading = false
         if (response.data.success) {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
@@ -240,6 +245,10 @@ export default {
     delAllShoppingCartList () {
       const vm = this
       const getAllID = vm.totalShoppingList.carts
+      // 刪除 sessionStorage
+      vm.totalShoppingList.carts = [];
+      sessionStorage.setItem('cart', JSON.stringify(vm.totalShoppingList.carts));
+      // 刪除 Ajax 資料
       const itisID = []
       vm.isLoading = true
       getAllID.forEach((item) => {

@@ -42,7 +42,10 @@
             <option :value="num" v-for="num in 10" :key="num">{{ num }} {{ productData.unit }}</option>
           </select>
           <div class="productShopAdd">
-            <div class="input-group-append" @click.prevent="addToShopCart(productData, productData.num)">
+            <div
+              class="input-group-append"
+              @click.prevent="addToShopCart(productData, productData.num)"
+            >
               <button class="btn" type="button">加入購物車</button>
             </div>
           </div>
@@ -137,9 +140,12 @@ export default {
   },
   computed: {
     total() {
-      sessionStorage.setItem('cart', JSON.stringify(this.shopCartList.carts));
-      return this.shopCartList.carts.reduce((total, item) => total + item.product.price * item.qty, 0);
-    },
+      sessionStorage.setItem("cart", JSON.stringify(this.shopCartList.carts));
+      return this.shopCartList.carts.reduce(
+        (total, item) => total + item.product.price * item.qty,
+        0
+      );
+    }
   },
   methods: {
     getShopData() {
@@ -155,111 +161,54 @@ export default {
     },
     addToShopCart(addItem, num = 1) {
       // 不能使用 API，否則 stroage 內資料會被刪除。
-      // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
       vm.isLoading = true;
       const shopData = {
         product: addItem,
         qty: num
       };
-      const sameItem = vm.shopCartList.carts.findIndex((item) => item.product.id === addItem.id);
-      sameItem === -1 ? vm.shopCartList.carts.push(shopData) : (vm.shopCartList.carts[sameItem].qty += num)
+      const sameItem = vm.shopCartList.carts.findIndex(
+        item => item.product.id === addItem.id
+      );
+      sameItem === -1
+        ? vm.shopCartList.carts.push(shopData)
+        : (vm.shopCartList.carts[sameItem].qty += num);
 
       sessionStorage.setItem("cart", JSON.stringify(vm.shopCartList.carts));
       vm.isLoading = false;
-      vm.$bus.$emit("message:push", '加入成功', "success");
-      // vm.getShopCartContent();
-      // if 東西相同的話先加總數量，否則直接送出資料
-      // vm.$http.get(api).then(response => {
-      //   vm.shopCartList = response.data.data;
-      //   vm.shopCartList.carts = response.data.data.carts;
-      //   const target = vm.shopCartList.carts.filter(
-      //     item => item.product_id === shopId
-      //   );
-      //   if (target.length > 0) {
-      //     const sameItem = target[0];
-      //     const originQty = sameItem.qty;
-      //     const originCartId = sameItem.id;
-      //     const originProductId = sameItem.product_id;
-      //     const newQty = originQty + num;
-      //     const newData = {
-      //       product_id: shopId,
-      //       qty: newQty
-      //     };
-      //     vm.$http.post(api, { data: newData }).then(response => {
-      //       vm.delSameShopingCartList(originCartId);
-      //       vm.getShopCartContent();
-      //       vm.isLoading = false;
-      //       if (response.data.success) {
-      //         vm.$bus.$emit("message:push", response.data.message, "success");
-      //       }
-      //     });
-      //   } else {
-      //     vm.$http.post(api, { data: shopData }).then(response => {
-      //       vm.getShopCartContent();
-      //       vm.isLoading = false;
-      //       if (response.data.success) {
-      //         vm.$bus.$emit("message:push", response.data.message, "success");
-      //       }
-      //     });
-      //   }
-      // });
+      vm.$bus.$emit("message:push", "加入成功", "success");
     },
     getShopCartContent() {
-      // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
-      vm.shopCartList.carts = JSON.parse(sessionStorage.getItem('cart')) || [];
-      // vm.$http.get(api).then(response => {
-      //   vm.shopCartList = response.data.data;
-      //   vm.shopCartList.carts = response.data.data.carts;
-      // });
+      vm.shopCartList.carts = JSON.parse(sessionStorage.getItem("cart")) || [];
     },
-    // delSameShopingCartList(id) {
-    //   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-    //   const vm = this;
-    //   vm.isLoading = true;
-    //   vm.$http.delete(api).then(response => {
-    //     if (response.data.success) {
-    //       vm.getShopCartContent();
-    //       vm.isLoading = false;
-    //     }
-    //   });
-    // },
     delShopingCartList(key) {
-      // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       const vm = this;
       vm.isLoading = true;
       vm.shopCartList.carts.splice(key, 1);
-      sessionStorage.setItem('cart', JSON.stringify(vm.shopCartList.carts));
+      sessionStorage.setItem("cart", JSON.stringify(vm.shopCartList.carts));
       vm.isLoading = false;
-      vm.$bus.$emit("message:push", '刪除成功', "danger");
-      // vm.$http.delete(api).then(response => {
-      //   if (response.data.success) {
-      //     vm.getShopCartContent();
-      //     vm.isLoading = false;
-      //     if (response.data.success) {
-      //       vm.$bus.$emit("message:push", response.data.message, "danger");
-      //     }
-      //   }
-      // });
+      vm.$bus.$emit("message:push", "刪除成功", "danger");
     },
     postCart() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
       vm.isLoading = true;
       // 同時發送多個請求
-      vm.$http.all(
-        vm.shopCartList.carts.map((item) => {
-          const cartItem = {
-            product_id: item.product.id,
-            qty: item.qty,
-          };
-          return vm.$http.post(api, { data: cartItem });
-        })
-      ).then(() => {
-        vm.isLoading = false;
-        vm.$router.push('/cart');
-      })
+      vm.$http
+        .all(
+          vm.shopCartList.carts.map(item => {
+            const cartItem = {
+              product_id: item.product.id,
+              qty: item.qty
+            };
+            return vm.$http.post(api, { data: cartItem });
+          })
+        )
+        .then(() => {
+          vm.isLoading = false;
+          vm.$router.push("/cart");
+        });
     },
     useCoupon() {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
@@ -277,26 +226,7 @@ export default {
     },
     delAllShoppingCartList() {
       this.shopCartList.carts = [];
-      sessionStorage.setItem('cart', JSON.stringify(this.shopCartList.carts));
-      // const vm = this;
-      // const getAllID = vm.shopCartList.carts;
-      // const itisID = [];
-      // vm.isLoading = true;
-      // getAllID.forEach(item => {
-      //   itisID.push(item.id);
-      // });
-      // const apiary = [];
-      // itisID.forEach(id => {
-      //   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      //   apiary.push(vm.$http.delete(api).then());
-      // });
-      // Promise.all(apiary).then(() => {
-      //   vm.isLoading = false;
-      //   vm.getShopCartContent();
-      //   if (vm.isLoading === false) {
-      //     vm.$bus.$emit("message:push", "已全部刪除", "danger");
-      //   }
-      // });
+      sessionStorage.setItem("cart", JSON.stringify(this.shopCartList.carts));
     },
     sideBarOpen() {
       $(".shoppingSideBar")
