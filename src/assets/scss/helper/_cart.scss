@@ -4,10 +4,34 @@
 }
 .scheduleShow {
     @include scheduleShowStyle(#aaa, 0);
-    li:nth-child(1) {
-        color: #34495e;
-        > p {
-            border-bottom: 3px solid #34495e;
+    > ul {
+        @include phone {
+            padding: 0;
+        }
+        @include pad {
+            padding: 0;
+        }
+        > li {
+            @include phone {
+                padding: 0;
+            }
+            @include pad {
+                padding: 0;
+            }
+            > p {
+                @include phone {
+                    font-size: fontSize(16px);
+                }
+                @include pad {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
+        > li:nth-child(1) {
+            color: #34495e;
+            > p {
+                border-bottom: 3px solid #34495e;
+            }
         }
     }
 }
@@ -15,6 +39,16 @@
     > .shoppingCartList {
         display: inline-block;
         vertical-align: top;
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 2rem;
+        }
         strong {
             color: $primary;
             font-size: fontSize(22px);
@@ -47,6 +81,14 @@
     > .orderData {
         display: inline-block;
         margin-bottom: 1rem;
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
         > .orderTitle {
             font-size: fontSize(22px);
             color: $primary;
@@ -103,6 +145,12 @@
         position: absolute;
         right: 1rem;
         bottom: 1rem;
+        @include phone {
+            bottom: 0.5rem;
+        }
+        @include pad {
+            bottom: 0.5rem;
+        }
     }
 }
 .enterCoupon {
@@ -130,66 +178,5 @@
     }
     > span {
         display: block;
-    }
-}
-// phone mode
-@media (max-width: 640px) {
-    .scheduleShow {
-        > ul {
-            padding: 0;
-            > li {
-                padding: 0;
-                > p {
-                    font-size: fontSize(16px);
-                }
-            }
-        }
-    }
-    .cartData {
-        > .shoppingCartList {
-            max-width: 100%;
-            flex: 0 0 100%;
-            margin-bottom: 2rem;
-            > .shoppingCartContent {
-                > span {
-                    bottom: 0.5rem;
-                }
-            }
-        }
-        > .orderData {
-            max-width: 100%;
-            flex: 0 0 100%;
-        }
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .scheduleShow {
-        > ul {
-            padding: 0;
-            > li {
-                padding: 0;
-                > p {
-                    font-size: fontSize(16px);
-                }
-            }
-        }
-    }
-    .cartData {
-        > .shoppingCartList {
-            max-width: 100%;
-            flex: 0 0 100%;
-            margin-bottom: 2rem;
-            > .shoppingCartContent {
-                > span {
-                    bottom: 0.5rem;
-                }
-            }
-        }
-        > .orderData {
-            max-width: 100%;
-            flex: 0 0 100%;
-        }
     }
 }

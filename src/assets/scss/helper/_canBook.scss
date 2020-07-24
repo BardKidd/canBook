@@ -8,6 +8,12 @@
     background-position: center;
     background-image: url('~@/assets/image/indexImage2.png');
     position: relative;
+    @include phone {
+        height: 80vh;
+    }
+    @include pad {
+        height: 70vh;
+    }
 }
 .indexTitleBox {
     width: 50%;
@@ -18,81 +24,33 @@
     color: $black;
     font-family: $font-family-chinese2;
     padding: 1rem;
-    > .indexTitle {
-        font-size: $fontSize-large;    
-    }
-    > .indexTitle2 {
-        font-size: $fontSize-base; 
-    }
-}
-.round {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    background-color: rgba(189, 195, 199, 0.7);
-    position: relative;
-    top: 95%;
-    left: 50%;
-    transition: 0.3s;
-    transform: translate(-50%, -50%);
-    animation: roundRun 1s infinite;
-    &:hover {
-        opacity: 0.75;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    > i {
-        font-size: fontSize(32px);
-        color: rgba(83, 92, 104, 0.9);
-        position: absolute;
-        @extend %center-vertically;
-    }
-}
-@keyframes roundRun {
-    0% {
-        top: 95%; 
-    }
-    50% {
-        top: 93%;
-    }
-    100% {
-        top: 95%;
-    }
-}
-
-// phone mode
-@media (max-width: 640px) {
-    .indexTitleBox {
+    @include phone {
         width: 100%;
-        > .indexTitle {
+    }
+    @include pad {
+        top: 60%;
+    }
+    > .indexTitle {
+        font-size: $fontSize-large;
+        @include phone {
             font-size: fontSize(40px);
             bottom: 10.5rem;
             right: 5rem;
         }
-        > .indexTitle2 {
+        @include pad {
+            bottom: 11.5rem;
+        }
+    }
+    > .indexTitle2 {
+        font-size: $fontSize-base;
+        @include phone {
             left: 10%;
             right: 0;
             text-align: center;
             font-size: fontSize(26px);
         }
-    }
-    .indexCover {
-        height: 80vh;
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .indexCover {
-        height: 70vh;
-        > .indexTitleBox {
-            top: 60%;
+        @include pad {
+            bottom: 6rem;
         }
-    }
-    .indexTitle {
-        bottom: 11.5rem;
-    }
-    .indexTitle2 {
-        bottom: 6rem;
     }
 }

@@ -6,7 +6,6 @@
         <router-link to="/" class="l-logo">
           <img src="../../assets/image/logo2.png" alt />
         </router-link>
-        <!-- TS -->
         <ul class="l-nav-mainOption">
           <li>
             <router-link to="/shop">優秀好書</router-link>

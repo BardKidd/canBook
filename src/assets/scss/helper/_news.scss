@@ -18,6 +18,7 @@
 }
 .activityFontStyle1 {
     @include activityFontStyle(#017e83, #2f3640, #2f3640);
+    text-shadow: 1px 1px 1px $gray-200;
 }
 .activityImage1 {
     background-image: url('~@/assets/image/activity4.png');
@@ -25,13 +26,15 @@
 }
 .activityFontStyle2 {
     @include activityFontStyle($white, $white, $white);
+    text-shadow: 1px 1px 1px $black;
 }
 .activityImage2 {
     background-image: url('~@/assets/image/activity2.png');
     @extend %activityImage;
 }
 .activityFontStyle3 {
-    @include activityFontStyle(#487eb0, #2f3640, #2f3640);
+    @include activityFontStyle(#487eb0, $white, $white);
+    text-shadow: 1px 1px 1px $black;
 }
 .activityImage3 {
     background-image: url('~@/assets/image/activity6.png');

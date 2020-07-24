@@ -32,8 +32,8 @@ export default {
   },
   methods: {
     oneProductData(id) {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-      const vm = this;
       vm.shopId = id;
       vm.isLoading = false;
       vm.$http.get(api).then(response => {
@@ -44,8 +44,8 @@ export default {
       });
     },
     getAllRanobe() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      const vm = this;
       vm.$http.get(api).then(response => {
         const totalBooks = response.data.products;
         vm.allRanobe = totalBooks.filter(item => item.category === "輕小說");

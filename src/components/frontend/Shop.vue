@@ -114,16 +114,16 @@ export default {
   },
   methods: {
     getShop(page = 1) {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      const vm = this;
       vm.$http.get(api).then(response => {
         vm.totalBooks = response.data.products;
         vm.pagination = response.data.pagination;
       });
     },
     getAllShop() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      const vm = this;
       vm.$http.get(api).then(response => {
         vm.totalBooksAll = response.data;
         const allProduct = response.data.products;
@@ -134,8 +134,8 @@ export default {
       });
     },
     seeMore(id) {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-      const vm = this;
       vm.shopId = id;
       vm.isLoading = true;
       vm.$http.get(api).then(response => {
@@ -146,8 +146,8 @@ export default {
       });
     },
     ShoppingCartList() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
       vm.totalShoppingList.carts =
         JSON.parse(sessionStorage.getItem("cart")) || [];
     },
@@ -163,8 +163,8 @@ export default {
       vm.$bus.$emit("message:push", "刪除成功", "danger");
     },
     useCoupon() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      const vm = this;
       const coupon = {
         code: vm.coupon_code
       };
@@ -189,8 +189,8 @@ export default {
       );
     },
     postCart() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
       vm.isLoading = true;
       vm.$http
         .all(

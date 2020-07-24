@@ -12,7 +12,7 @@
           <li v-if="orderData.is_paid == 0">
             <p>3.完成訂單</p>
           </li>
-          <li v-if="orderData.is_paid == 1" id="successOrder">
+          <li v-else id="successOrder">
             <p>3.完成訂單</p>
           </li>
         </ul>

@@ -5,42 +5,85 @@
 .aboutUsImage {
     padding: 5.3rem 0 0;
     background-color: $gray-100;
+    @include phone {
+        display: inline-block;
+    }
+    @include pad {
+        display: inline-block;
+    }
     > .aboutUsImageBigBox {
         display: inline-block;
         padding: 0;
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
         > .aboutUsImageBig {
             background-image: url('~@/assets/image/open.png');
             background-size: cover;
             background-position: center bottom;
             padding-bottom: 72%;
+            @include phone {
+                margin-bottom: 2rem;
+                padding-bottom: 100%;
+                width: 100%;
+            }
+            @include pad {
+                margin-bottom: 2rem;
+                padding-bottom: 100%;
+                width: 100%;
+            }
         }
     }
     > .aboutUsContentBox {
         vertical-align: top;
-        display: inline-block;
-        padding: 2% 0;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(25%);
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
         > .aboutUsTitle {
             width: 80%;
             display: block;
             color: $primary;
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
-            text-align: left;
-            margin: 0 auto 7rem;
+            margin: 0 auto;
         }
         > .aboutUsContent {
             width: 80%;
-            display: block;
-            color: $primary;
-            font-family: $font-family-chinese2;
-            text-indent: 2rem;
-            font-size: fontSize(17px);
-            position: relative;
-            @extend %center-vertically;
-        }
-        > .aboutUsContent::selection {
-            background-color: $primary;
-            color: $white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            @include phone {
+                width: 100%;
+            }
+            @include pad {
+                width: 100%;
+            }
+            > .aboutUsContentFontStyle {
+                color: $primary;
+                font-family: $font-family-chinese2;
+                text-indent: 2rem;
+                font-size: fontSize(17px);
+            }
+            > .aboutUsContentFontStyle::selection {
+                background-color: $primary;
+                color: $white;
+            }
         }
     }
 }
@@ -56,22 +99,47 @@
         padding-bottom: 40%;
         margin: 0 auto;
         vertical-align: top;
+        @include phone {
+            padding: 50%;
+            width: 100%;
+        }
+        @include pad {
+            padding: 50%;
+            width: 100%;
+        }
     }
     > .contactInfo {
-        display: inline-block;
-        width: 100%;
-        padding: 4% 2% 0;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(26%);
+        @include phone {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        @include pad {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
         > .weAreHereTitle {
             color: $white;
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
-            margin: 0 auto 2.5rem;
             width: 80%;
         }
         > .contactInfoData {
             width: 80%;
-            padding: 1rem 2rem;
             display: inline-block;
+            margin-bottom: 1rem;
+            @include phone {
+                padding: 0;
+                width: 100%;
+            }
+            @include pad {
+                padding: 0;
+                width: 100%;
+            }
             > .contactInfoDataRounds {
                 width: 100px;
                 height: 100px;
@@ -85,12 +153,25 @@
                 text-align: center;
                 display: inline-block;
                 padding: 1rem;
+                @include phone {
+                    width: 22%;
+                }
+                @include pad {
+                    width: 12%;
+                }
             }
             > span {
                 color: $white;
                 font-family: $font-family-chinese;
                 font-size: fontSize(16px);
                 margin-left: 15%;
+                @include phone {
+                    margin-left: 11%;
+                }
+                @include pad {
+                    margin-left: 16%;
+                    font-size: 2rem;
+                }
             }
         }
     }
@@ -98,6 +179,9 @@
 .FAndQ {
     color: $primary;
     padding: 3rem 6rem;
+    @include phone {
+        padding: 3rem 1rem;
+    }
     > h2 {
         text-align: center;
         padding-bottom: 2rem;
@@ -111,6 +195,11 @@
     display: inline-block;
     width: 100%;
     vertical-align: top;
+    @include phone {
+        padding: 0;
+        width: 100%;
+        vertical-align: top;
+    }
     > .ShoppingQuestion {
         border-bottom: 2px solid $white;
         overflow: hidden;
@@ -144,118 +233,12 @@
         font-family: $font-family-chinese2;
         padding-top: 1rem;
         border-bottom: 2px solid $primary;
-    }
-}
-
-// phone mode
-@media (max-width: 640px) {
-    .aboutUsImage {
-        display: inline-block;
-        > .aboutUsImageBigBox {
-            max-width: 100%;
-            flex: 0 0 100%;
-            > .aboutUsImageBig {
-                margin-bottom: 2rem;
-                padding-bottom: 100%;
-                width: 100%;
-            }
+        text-indent: 2rem;
+        @include phone {
+            font-size: fontSize(16px);
         }
-        > .aboutUsContentBox {
-            max-width: 100%;
-            flex: 0 0 100%;
-            > .aboutUsContent {
-                width: 100%;
-            }
+        @include pad {
+            font-size: fontSize(24px);
         }
-    }
-    .weAreHere {
-        > .OurMap {
-            padding: 50%;
-            width: 100%;
-        }
-        > .contactInfo {
-            flex: 0 0 100%;
-            max-width: 100%;
-            > .contactInfoData {
-                padding: 0;
-                width: 100%;
-                > .contactInfoDataRounds {
-                    width: 22%;
-                }
-                > p {
-                    word-wrap:break-word;
-                }
-                > span {
-                    margin-left: 11%;
-                }
-            }
-        }
-    }
-    .FAndQ {
-        padding: 3rem 1rem;
-    }
-    .ShoppingQuestionBox {
-        padding: 0;
-        width: 100%;
-        vertical-align: top;
-        .QuestionTitle {
-            width: 85%;
-        }
-    }
-    .ShoppingQuestionAnswer {
-        font-size: fontSize(16px);
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .aboutUsImage {
-        display: inline-block;
-        > .aboutUsImageBigBox {
-            max-width: 100%;
-            flex: 0 0 100%;
-            > .aboutUsImageBig {
-                margin-bottom: 2rem;
-                padding-bottom: 100%;
-                width: 100%;
-            }
-        }
-        > .aboutUsContentBox {
-            max-width: 100%;
-            flex: 0 0 100%;
-            > .aboutUsContent {
-                width: 100%;
-            }
-        }
-    }
-    .weAreHere {
-        > .OurMap {
-            padding: 50%;
-            width: 100%;
-        }
-        > .contactInfo {
-            flex: 0 0 100%;
-            max-width: 100%;
-            > .contactInfoData {
-                padding: 0;
-                width: 100%;
-                > .contactInfoDataRounds {
-                    width: 12%;
-                }
-                > p {
-                    word-wrap:break-word;
-                }
-                > span {
-                    margin-left: 16%;
-                    font-size: 2rem;
-                }
-            }
-        }
-    }
-    .QuestionTitle {
-        width: 90%;
-    }
-    .ShoppingQuestionAnswer {
-        font-size: fontSize(24px);
     }
 }

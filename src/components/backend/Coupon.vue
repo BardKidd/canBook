@@ -185,8 +185,8 @@ export default {
   },
   methods: {
     getCoupons () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
@@ -206,9 +206,9 @@ export default {
       }
     },
     updataCoupon () {
+      const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
       let httpMethod = 'post'
-      const vm = this
       if (vm.isNew === false) {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
         httpMethod = 'put'

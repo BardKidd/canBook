@@ -266,8 +266,8 @@ export default {
   },
   methods: {
     getCustomerOrder (page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
@@ -276,8 +276,8 @@ export default {
       })
     },
     seeMore (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       vm.productId = id
       vm.$http.get(api).then((response) => {
         if (response.data.success) {
@@ -289,8 +289,8 @@ export default {
       })
     },
     addToShippingCart (id, num = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const shippingCart = {
         product_id: id,
         qty: num
@@ -301,8 +301,8 @@ export default {
       })
     },
     getShippingCart () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
@@ -310,8 +310,8 @@ export default {
       })
     },
     delShippingCartProduct (id) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.getShippingCart()
@@ -319,8 +319,8 @@ export default {
       })
     },
     useCoupon () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       vm.isLoading = true
       const coupon = {
         code: vm.coupon_code
@@ -331,8 +331,8 @@ export default {
       })
     },
     sendOrder () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const order = vm.form
       vm.isLoading = true
       vm.$validator.validate().then((result) => {

@@ -9,6 +9,28 @@
         }
     }
     > ul {
+        @include phone {
+            padding: 0;
+        }
+        @include pad {
+            padding: 0;
+        }
+        > li {
+            @include phone {
+                padding: 0;
+            }
+            @include pad {
+                padding: 0;
+            }
+            > p {
+                @include phone {
+                    font-size: fontSize(16px);
+                }
+                @include pad {
+                    font-size: fontSize(16px);
+                }
+            }
+        }
         > .scheduleShowAnother {
             color: #aaa;
             > p {
@@ -29,6 +51,22 @@
     padding-left: 25%;
     font-family: $font-family-chinese2;
     margin-bottom: 2rem;
+    @include phone {
+        padding-left: 0;
+    }
+    @include pad {
+        padding-left: 0;
+    }
+    > table {
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
     > .CheckTableTitle {
         font-size: fontSize(22px);
         font-weight: bolder;
@@ -59,6 +97,14 @@
         text-align: right;
         color: #888;
         font-size: fontSize(16px);
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
         > strong {
             font-size: fontSize(30px);
             font-family: Arial, sans-serif;
@@ -70,65 +116,13 @@
     > .CheckBtn {
         margin-top: 1rem;
         margin-bottom: 1rem;
-    }
-}
-
-// phone mode
-@media (max-width: 640px) {
-    .scheduleShowCheck {
-        > ul {
-            padding: 0;
-            > li {
-                padding: 0;
-                > p {
-                    font-size: fontSize(16px);
-                }
-            }
-        }
-    }
-    .CheckStyle {
-        padding-left: 0;
-        > table {
+        @include phone {
             max-width: 100%;
             flex: 0 0 100%;
         }
-        > .CheckTotal {
+        @include pad {
             max-width: 100%;
             flex: 0 0 100%;
         }
-    }
-    .CheckBtn {
-        max-width: 100%;
-        flex: 0 0 100%;
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .scheduleShowCheck {
-        > ul {
-            padding: 0;
-            > li {
-                padding: 0;
-                > p {
-                    font-size: fontSize(16px);
-                }
-            }
-        }
-    }
-    .CheckStyle {
-        padding-left: 0;
-        > table {
-            max-width: 100%;
-            flex: 0 0 100%;
-        }
-        > .CheckTotal {
-            max-width: 100%;
-            flex: 0 0 100%;
-        }
-    }
-    .CheckBtn {
-        max-width: 100%;
-        flex: 0 0 100%;
     }
 }

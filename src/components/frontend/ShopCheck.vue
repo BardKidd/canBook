@@ -191,8 +191,8 @@ export default {
       vm.$bus.$emit("message:push", "刪除成功", "danger");
     },
     postCart() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
       vm.isLoading = true;
       // 同時發送多個請求
       vm.$http
@@ -211,8 +211,8 @@ export default {
         });
     },
     useCoupon() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      const vm = this;
       const coupon = {
         code: vm.coupon_code
       };
@@ -239,8 +239,8 @@ export default {
       $("body").css("overflow-y", "");
     },
     getRealtedProduct() {
+      const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      const vm = this;
       vm.$http.get(api).then(response => {
         vm.totalProducts = response.data.products;
         vm.relatedProducts = vm.totalProducts.filter(

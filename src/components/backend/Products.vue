@@ -255,8 +255,8 @@ export default {
   },
   methods: {
     getProducts (page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.products = response.data.products
@@ -275,9 +275,9 @@ export default {
       $('#productModal').modal('show')
     },
     updataProduct () {
+      const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`
       let httpMethod = 'post'
-      const vm = this
       if (!vm.isNew) {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
         httpMethod = 'put'
@@ -305,8 +305,8 @@ export default {
       })
     },
     uploadFile () {
-      const uploadFile = this.$refs.files.files[0]
       const vm = this
+      const uploadFile = this.$refs.files.files[0]
       vm.status = true
       const formData = new FormData()
       formData.append('file-to-upload', uploadFile)

@@ -91,8 +91,8 @@ export default {
   },
   methods: {
     login () {
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       vm.$http.post(api, vm.user).then((response) => {
         if (response.data.success) {
           vm.$router.push('/admin/products')
