@@ -16,11 +16,46 @@
         background-color: $primary;
         transition: .3s;
     }
+    @include pad {
+        font-size: fontSize(26px);
+        cursor: pointer;
+        font-weight: bold;
+    }
 }
 .shopCheckBox {
     padding-bottom: 2rem;
     border-bottom: 0.5px dotted #bfcece;
     margin-bottom: 3rem;
+    > div {
+        @include phone {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+        @include pad {
+            max-width: 50%;
+            flex: 0 0 50%;
+        }
+    }
+    > .productShop {
+        > .productShopContent {
+            > span {
+                @include phone {
+                    font-size: fontSize(20px);
+                }
+                @include pad {
+                    font-size: fontSize(20px);
+                }
+            }
+            > p {
+                @include phone {
+                    font-size: fontSize(18px);
+                }
+                @include pad {
+                    font-size: fontSize(18px);
+                }
+            }
+        }
+    }
 }
 .productShop {
     font-family: $font-family-chinese;
@@ -29,6 +64,9 @@
     > .productShopTitle {
         border-bottom: 0.5px dotted #424949;
         margin-bottom: 1rem;
+        @include phone {
+            margin-top: 1rem;
+        }
         > span {
             background-color: $primary;
             color: $white;
@@ -109,6 +147,22 @@
     > .relatedProductsContent {
         display: inline-block;
         cursor: pointer;
+        @include phone {
+            vertical-align: top;
+        }
+        @include pad {
+            vertical-align: top;
+        }
+        > img {
+            @include phone {
+                height: 100%;
+                width: 100%;
+            }
+            @include pad {
+                height: 100%;
+                width: 100%;
+            }
+        }
         > p {
             padding-top: 1rem;
             font-family: $font-family-chinese2;
@@ -120,75 +174,6 @@
             color: $gray-500;
             font-family: $font-family-english;
             font-size: fontSize(16px);
-        }
-    }
-}
-
-// phone mode
-@media (max-width: 640px) {
-    .shoppingCartList {
-        display: none;
-    }
-    .shopCheckBox {
-        > div {
-            max-width: 100%;
-            flex: 0 0 100%;
-        }
-        > .productShop {
-            > .productShopContent {
-                > span {
-                    font-size: fontSize(20px);
-                }
-                > p {
-                    font-size: fontSize(18px);
-                }
-            }
-        }
-    }
-    .relatedBox {
-        > .relatedProductsContent {
-            vertical-align: top;
-            > img {
-                height: 100%;
-                width: 100%;
-            }
-        }
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .shoppingCartList {
-        display: none;
-    }
-    .backShop {
-        font-size: fontSize(26px);
-        cursor: pointer;
-        font-weight: bold;
-    }
-    .shopCheckBox {
-        > div {
-            max-width: 50%;
-            flex: 0 0 50%;
-        }
-        > .productShop {
-            > .productShopContent {
-                > span {
-                    font-size: fontSize(20px);
-                }
-                > p {
-                    font-size: fontSize(18px);
-                }
-            }
-        }
-    }
-    .relatedBox {
-        > .relatedProductsContent {
-            vertical-align: top;
-            > img {
-                height: 100%;
-                width: 100%;
-            }
         }
     }
 }

@@ -6,27 +6,30 @@
     font-weight: bold;
     padding: 3rem 0;
 }
-
-// phone mode
-@media (max-width: 640px) {
-    .ranobeBox {
+.ranobeBox {
+    @include phone {
         flex: 0 0 100%;
         max-width: 100%;
-    }
-    .cardFontStyle {
-        > p {
+    } 
+}
+.cardFontStyle {
+    > p {
+        @include phone {
             margin-top: 1.5rem;
         }
-        > span {
+    }
+    > span {
+        @include phone {
             display: block;
-        }
-        > strong {
-            width: 100%;
+            top: 45%;
         }
     }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    
+    > strong {
+        @include phone {
+            width: 100%;
+            font-size: 1.25rem;
+            display: inline-block;
+            color: $primary;
+        }
+    }
 }

@@ -22,11 +22,20 @@
         font-family: $font-family-chinese;
         box-shadow: 0 0 15px darken($primary-lighten, 10%);
         padding: 3rem 0;
+        @include phone {
+            max-width: 100%;
+        }
+        @include pad {
+            max-width: 80%;
+        }
         > strong {
             display: block;
             color: $white;
             font-size: fontSize(40px);
             font-weight: bold;
+            @include phone {
+                font-size: fontSize(32px);
+            }
         }
         > span {
             color: $white;
@@ -38,6 +47,9 @@
             font-size: fontSize(32px);
             color: $other;
             font-weight: bolder;
+            @include phone {
+                font-size: fontSize(25px);
+            }
         }
     }
 }
@@ -48,6 +60,13 @@
         color: $white;
         text-align: left;
         margin-top: 2rem;
+        @include phone {
+            margin: 0;
+            text-align: center;
+        }
+        @include pad {
+            text-align: center;
+        }
         > span {
             display: block;
             font-family: $font-family-chinese2;
@@ -71,54 +90,19 @@
             &:hover {
                 background-color: #3c3c98;
             }
-            > i {
-                margin-left: 1rem;
-            }
-        }
-    }
-}
-
-// phone mode
-@media (max-width: 640px) {
-    .surpriseCode {
-        > .surpriseBox {
-            max-width: 100%;
-            > strong {
-                font-size: fontSize(32px);
-            }
-            > p {
-                font-size: fontSize(25px);
-            }
-        }
-    }
-    .surpriseBtn {
-        > .surpriseBtnTopText {
-            margin: 0;
-            text-align: center;
-            > a {
+            @include phone {
                 padding: 0;
                 font-size: fontSize(11px);
                 border-radius: 30px;
                 margin: -10%;
                 padding: 6%;
-                > i {
+            }
+            > i {
+                margin-left: 1rem;
+                @include phone {
                     margin-left: 0.2rem;
                 }
             }
-        }
-    }
-}
-
-// iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .surpriseCode {
-        > .surpriseBox {
-            max-width: 80%;
-        }
-    }
-    .surpriseBtn {
-        > .surpriseBtnTopText {
-            text-align: center;
         }
     }
 }

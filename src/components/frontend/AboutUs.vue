@@ -7,7 +7,7 @@
       </div>
       <div class="aboutUsContentBox col-7">
         <h2 class="aboutUsTitle">關於我們</h2>
-        <div class="aboutUsContent">
+        <div class="aboutUsContent container">
           <p
             class="aboutUsContentFontStyle"
           >啃書書店創立於2020年，老闆 林ちゃん 發現年輕文青書籍市場，打算針對此等喜好做市場投資。此書店設計的書衣皆由專門的設計師獨家設計，讓買來想要擺著的文青能夠直覺地想要將他放在房間裡。老闆為了深根此市場，採訪了眾多文青，並將訪談內容寫成著名論文《年輕人的心理-以文青族群為例》，藉以深入此族群的心理，認真地去了解消費者的需要，達到貨出的去，錢進得來的消費循環。</p>

@@ -12,6 +12,9 @@ html, body {
     display: inline-block;
     z-index: 99;
     left: 0;
+    @include pad {
+        height: 15vh;
+    }
     @extend %boxSizing;
     > .l-logo {
         width: 20%;
@@ -21,6 +24,16 @@ html, body {
         height: 85px;
         overflow: hidden;
         left: 10%;
+        @include phone {
+            position: absolute;
+            left: 15%;
+            width: 65%;
+        }
+        @include pad {
+            position: absolute;
+            top: 10%;
+            width: 30%;
+        }
     }
     a {
         text-decoration: none;
@@ -32,6 +45,12 @@ html, body {
         right: 10%;
         top: 37%;
         padding-left: 0;
+        @include phone {
+            display: none;
+        }
+        @include pad {
+            top: 42%;
+        }
         > li {
             @extend %liStyle;
             font-size: fontSize(18px);
@@ -50,6 +69,42 @@ html, body {
     }
     > .dropdown {
         display: none;
+        @include phone {
+            display: block;
+            text-align: right;
+            top: 25%;
+            left: 80%;
+            width: 20%;
+        }
+        @include pad {
+            display: none;
+        }
+        > #dropdownMenuButton {
+            @include phone {
+                background-color: transparent;
+                border: none;
+            }
+            > i {
+                @include phone {
+                    color: $white;
+                    font-size: fontSize(28px);
+                }
+            }
+        }
+        > .dropdown-menu {
+            > a {
+                @include phone {
+                    display: block;
+                    color: #555;
+                    font-size: fontSize(18px);
+                    font-family: $font-family-chinese2;
+                    text-align: center;
+                    &:hover {
+                        background-color: #eee;
+                    } 
+                }
+            }
+        }
     }
 }
 
@@ -82,12 +137,23 @@ footer {
             position: absolute;
             bottom: 15%;
             left: 5%;
+            @include phone {
+                display: none;
+            }
+            @include pad {
+                padding-left: 0;
+                bottom: 25%;
+            }
             > a {
                 color: $white;
                 text-decoration: none;
                 width: 100%;
                 display: inline-block;
                 overflow: hidden;
+                @include pad {
+                    position: relative;
+                    left: 50%;
+                }
                 > img {
                     width: 85%;
                     display: inline-block;
@@ -100,6 +166,20 @@ footer {
             position: absolute;
             right: 15%;
             bottom: 0;
+            @include phone {
+                margin: 0;
+                display: flex;
+                top: 20%;
+                left: -2%;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            @include pad {
+                left: 50%;
+                position: relative;
+            }
             > li {
                 @extend %liStyle;
                 letter-spacing: fontSize(16px);
@@ -122,90 +202,3 @@ footer {
     }
     
 }
-
-// phone mode
-@media (max-width: 640px) { 
-    .l-nav-table {
-        > .l-logo {
-            position: absolute;
-            left: 15%;
-            width: 65%;
-        }
-        > .l-nav-mainOption {
-            display: none;
-        }
-        > .dropdown {
-            display: block;
-            text-align: right;
-            top: 25%;
-            left: 80%;
-            width: 20%;
-            > #dropdownMenuButton {
-                background-color: transparent;
-                border: none;
-                > i {
-                    color: $white;
-                    font-size: fontSize(28px);
-                }
-            }
-            > .dropdown-menu {
-                > a {
-                    display: block;
-                    color: #555;
-                    font-size: fontSize(18px);
-                    font-family: $font-family-chinese2;
-                    text-align: center;
-                    &:hover {
-                        background-color: #eee;
-                    } 
-                }
-            }
-        }
-    }
-    .l-footer-table {
-        > .l-footer-widthCalc {
-            > .l-logo2 {
-                display: none;
-            }
-            > .l-footer-icon {
-                margin: 0;
-                left: 10%;
-                position: relative;
-            }
-        }
-    }
- }
-
- // iPad mode
- @media (min-width: 641px) and (max-width: 960px) {
-    .l-nav-table {
-        height: 15vh;
-        > .l-logo {
-            position: absolute;
-            top: 10%;
-            width: 30%;
-        }
-        > .l-nav-mainOption {
-            top: 42%;
-        }
-        > .dropdown {
-            display: none;
-        }
-    }
-    .l-footer-table {
-        > .l-footer-widthCalc {
-            > .l-logo2 {
-                padding-left: 0;
-                bottom: 25%;
-                > a {
-                    position: relative;
-                    left: 50%;
-                }
-            }
-            > .l-footer-icon {
-                left: 50%;
-                position: relative;
-            }
-        }
-    }
- }

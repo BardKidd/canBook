@@ -6,7 +6,10 @@
     padding: 5.3rem 0 0;
     background-color: $gray-100;
     @include phone {
-        display: inline-block;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
     @include pad {
         display: inline-block;
@@ -49,10 +52,12 @@
         @include phone {
             max-width: 100%;
             flex: 0 0 100%;
+            transform: none;
         }
         @include pad {
             max-width: 100%;
             flex: 0 0 100%;
+            transform: none;
         }
         > .aboutUsTitle {
             width: 80%;
@@ -61,6 +66,18 @@
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
             margin: 0 auto;
+            @include phone {
+                text-align: center;
+                padding-bottom: 2rem;
+                font-family: $font-family-chinese;
+                font-size: $fontSize-title;
+            }
+            @include pad {
+                text-align: center;
+                padding-bottom: 2rem;
+                font-family: $font-family-chinese;
+                font-size: $fontSize-title;
+            }
         }
         > .aboutUsContent {
             width: 80%;
@@ -117,16 +134,32 @@
         @include phone {
             flex: 0 0 100%;
             max-width: 100%;
+            transform: none;
         }
         @include pad {
             flex: 0 0 100%;
             max-width: 100%;
+            transform: none;
         }
         > .weAreHereTitle {
             color: $white;
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
             width: 80%;
+            @include phone {
+                text-align: center;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                font-family: $font-family-chinese;
+                font-size: $fontSize-title;
+            }
+            @include pad {
+                text-align: center;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                font-family: $font-family-chinese;
+                font-size: $fontSize-title;
+            }
         }
         > .contactInfoData {
             width: 80%;
@@ -153,9 +186,6 @@
                 text-align: center;
                 display: inline-block;
                 padding: 1rem;
-                @include phone {
-                    width: 22%;
-                }
                 @include pad {
                     width: 12%;
                 }
@@ -226,6 +256,9 @@
                 position: absolute;
                 right: 3%;
                 top: -7%;
+                @include phone {
+                    right: -1%;
+                }
             }
         }
     }

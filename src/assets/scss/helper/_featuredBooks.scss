@@ -12,6 +12,12 @@
     > img {
         transition: .5s;
         width: 100%;
+        @include phone {
+            width: 100%;
+        }
+        @include pad {
+            width: 100%;
+        }
     }
 }
 .cardBox:after {
@@ -42,7 +48,15 @@
     margin-top: 1rem;
     font-family: $font-family-chinese2;
     position: relative;
-    .moreFontStyle {
+    > p {
+        @include phone {
+            margin-top: 1.5rem;
+        }
+        @include pad {
+            margin-top: 1.5rem;
+        }
+    }
+    > .moreFontStyle {
         color: $red;
         font-size: fontSize(18px);
         font-weight: 600;
@@ -51,14 +65,17 @@
         margin-top: 1rem;
         cursor: pointer;
     }
-    .featuredBooksCardTitle {
+    > .featuredBooksCardTitle {
         font-size: fontSize(20px);
         width: 80%;
         display: inline-block;
         color: $primary;
         height: 60px;
+        @include phone {
+            width: 100%;
+        }
     }
-    span {
+    > span {
         background-color: $primary;
         position: absolute;
         right: 0;
@@ -66,6 +83,12 @@
         border-radius: 5px;
         padding: 0.1rem;
         font-size: fontSize(12px);
+        @include phone {
+            display: block;
+        }
+        @include pad {
+            display: block;
+        }
     }
 }
 .homeTitleFontStyleBox {
@@ -79,46 +102,11 @@
         color: $primary;
     }
 }
-
-// phone mode
-@media (max-width: 640px) {
-    #featuredBooks {
-        > div {
+#featuredBooks {
+    > div {
+        @include phone {
             max-width: 100%;
             flex: 0 0 100%;
-            > .cardFontStyle {
-                > p {
-                    margin-top: 1.5rem;
-                }
-                > span {
-                    display: block;
-                }
-                > .featuredBooksCardTitle {
-                    width: 100%;
-                }
-            }
-        }
-    }
-    .cardBox {
-        > img {
-            width: 100%;
-        } 
-    }
-}
-
-//iPad mode
-@media (min-width: 641px) and (max-width: 960px) {
-    .cardBox {
-        > img {
-            width: 100%;
-        } 
-    }
-    .cardFontStyle {
-        p {
-            margin-top: 1.5rem;
-        }
-        span {
-            display: block;
         }
     }
 }
