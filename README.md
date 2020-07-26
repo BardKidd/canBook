@@ -20,7 +20,7 @@
 * Vue cli 3: 建立 SPA 
 * VueRouter: 頁面路由控制，可防止一般用戶未登入進入後台
 * Webpack: 提供開發者開發環境
-* Axios: 進行 Ajax 傳遞、傳遞資料等用途
+* Axios: 進行 Ajax 串接、傳遞資料等用途
 * JavaScript: 互動式網頁
 * RWD: 手機、平板等網頁版型開發
 * HTML: 網頁基礎架構
