@@ -71,6 +71,7 @@
         display: inline-block;
         color: $primary;
         height: 60px;
+        font-weight: bolder;
         @include phone {
             width: 100%;
         }
