@@ -46,35 +46,33 @@
 
     <footer>
       <div class="l-footer-table">
-        <div class="l-footer-widthCalc">
-          <div class="l-logo2">
-            <router-link to="/">
-              <img src="../../assets/image/logo2.png" alt />
-            </router-link>
-          </div>
-          <ul class="l-footer-icon">
-            <li>
-              <a href="https://fb.me" alt="Facebook 粉絲專頁">
-                <i class="fab fa-facebook-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://line.me/zh-hant/" alt="LINE 官方帳號">
-                <i class="fab fa-line"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/?hl=zh-tw" alt="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/home?lang=zh-tw" alt="Twitter">
-                <i class="fab fa-twitter-square"></i>
-              </a>
-            </li>
-          </ul>
+        <div class="l-logo2">
+          <router-link to="/">
+            <img src="../../assets/image/logo2.png" alt />
+          </router-link>
         </div>
+        <ul class="l-footer-icon">
+          <li>
+            <a href="https://fb.me" alt="Facebook 粉絲專頁">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://line.me/zh-hant/" alt="LINE 官方帳號">
+              <i class="fab fa-line"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/?hl=zh-tw" alt="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/home?lang=zh-tw" alt="Twitter">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+          </li>
+        </ul>
       </div>
     </footer>
   </div>

@@ -66,6 +66,7 @@
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
             margin: 0 auto;
+            text-align: center;
             @include phone {
                 text-align: center;
                 padding-bottom: 2rem;
@@ -146,6 +147,7 @@
             font-family: $font-family-chinese;
             font-size: $fontSize-title;
             width: 80%;
+            text-align: center;
             @include phone {
                 text-align: center;
                 padding-top: 2rem;

@@ -111,74 +111,34 @@ html, body {
 // footer Layout
 footer {
     overflow: hidden;
-    position: relative;
-    min-height: 100%;
     @extend %boxSizing;
-    height: 75px;
-}
-.l-footer-table {
-    background-color: $primary;
-    padding-bottom: 75px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    > .l-footer-widthCalc {
+    > .l-footer-table {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $primary;
         width: 100%;
-        height: 75px;
-        position: absolute;
-        bottom: 0;
-        > div {
-            width: calc(100%/4);
-        }
         > .l-logo2 {
-            display: inline-block;
-            padding-left: 6rem;
-            height: 75px;
-            position: absolute;
-            bottom: 15%;
-            left: 5%;
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
             @include phone {
                 display: none;
             }
-            @include pad {
-                padding-left: 0;
-                bottom: 25%;
-            }
-            > a {
-                color: $white;
-                text-decoration: none;
-                width: 100%;
-                display: inline-block;
-                overflow: hidden;
-                @include pad {
-                    position: relative;
-                    left: 50%;
-                }
-                > img {
-                    width: 85%;
-                    display: inline-block;
-                    padding-left: 1.1rem;
-                }
-            }
         }
         > .l-footer-icon {
-            display: inline-block;
-            position: absolute;
-            right: 15%;
-            bottom: 0;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: stretch;
+            flex-wrap: wrap;
             @include phone {
                 margin: 0;
                 display: flex;
-                top: 20%;
-                left: -2%;
                 flex-wrap: wrap;
                 justify-content: center;
                 align-items: center;
-                position: relative;
-            }
-            @include pad {
-                left: 50%;
-                position: relative;
             }
             > li {
                 @extend %liStyle;
@@ -200,5 +160,5 @@ footer {
             }
         }
     }
-    
 }
+
