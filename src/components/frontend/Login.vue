@@ -95,6 +95,9 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       vm.$http.post(api, vm.user).then((response) => {
         if (response.data.success) {
+          const token = response.data.token;
+          const expired = response.data.expired;
+          document.cookie = `canbook=${ token }; expires=${ new Date(expired) }, 31 Dec 9999 23:59:59 GMT;`;
           vm.$router.push('/admin/products')
         }
       })

@@ -16,7 +16,7 @@
         <h2 class="homeTitleFontStyle">精選書籍</h2>
       </div>
       <div class="row mx-5 mb-5" id="featuredBooks">
-        <div class="col-4" v-for="(item, key) in featuredBooksProducts.slice(0, 3)" :key="key">
+        <div class="col-4" v-for="(item, key) in featuredBooksProductsSlice" :key="key">
           <div class="p-3 cardBox" @click.prevent="oneProductData(item.id)">
             <img :src="item.imageUrl" alt />
           </div>
@@ -40,7 +40,7 @@
 
     <!-- 最新消息 -->
     <News></News>
-    
+
   </div>
 </template>
 
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       featuredBooksProducts: {},
+      featuredBooksProductsSlice: {},
       isLoading: false,
       shopId: "",
       allRanobe: {}
@@ -71,6 +72,8 @@ export default {
       vm.isLoading = true;
       vm.$http.get(api).then(response => {
         vm.featuredBooksProducts = response.data.products;
+        vm.featuredBooksProductsSlice = vm.featuredBooksProducts.slice(0, 3);
+        console.log('featuredBooksProducts', vm.featuredBooksProducts)
         vm.isLoading = false;
       });
     },

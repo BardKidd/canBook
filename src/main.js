@@ -41,11 +41,8 @@ const myValidate = {
 Validator.extend('phone', myValidate)
 
 Vue.component('loading', Loading)
-
-axios.defaults.withCredentials = true
-
 Vue.filter('currency', currency)
-
+axios.defaults.withCredentials = true
 new Vue({
   i18n,
   router,

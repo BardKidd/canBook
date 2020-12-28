@@ -237,7 +237,7 @@
 
 <script>
 import $ from 'jquery'
-import Pagination from '@/components/frontend/Pagination'
+import Pagination from '@/components/frontend/Pagination.vue'
 
 export default {
   components: {
@@ -262,6 +262,7 @@ export default {
         vm.products = response.data.products
         vm.isLoading = false
         vm.pagination = response.data.pagination
+        console.log(response.data)
       })
     },
     openProductModal (isNew, item) {
