@@ -73,7 +73,6 @@ export default {
       vm.$http.get(api).then(response => {
         vm.featuredBooksProducts = response.data.products;
         vm.featuredBooksProductsSlice = vm.featuredBooksProducts.slice(0, 3);
-        console.log('featuredBooksProducts', vm.featuredBooksProducts)
         vm.isLoading = false;
       });
     },
