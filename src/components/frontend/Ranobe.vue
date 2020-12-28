@@ -3,7 +3,7 @@
     <div class="row">
       <h2 class="col-12 ranobeTitle">- 嶄新的青春群像小說，故事邁向最終章 -</h2>
       <div class="row mx-5 mb-5">
-        <div class="col-4 ranobeBox" v-for="(item, key) in allRanobe.slice(-4, -1)" :key="key">
+        <div class="col-4 ranobeBox" v-for="(item, key) in allRanobeSlice" :key="key">
           <div class="p-3 cardBox" @click.prevent="oneProductData(item.id)">
             <img :src="item.imageUrl" alt />
           </div>
@@ -27,7 +27,8 @@ export default {
     return {
       isLoading: false,
       shopId: "",
-      allRanobe: {}
+      allRanobe: {},
+      allRanobeSlice: {}
     };
   },
   methods: {
@@ -49,6 +50,7 @@ export default {
       vm.$http.get(api).then(response => {
         const totalBooks = response.data.products;
         vm.allRanobe = totalBooks.filter(item => item.category === "輕小說");
+        vm.allRanobeSlice = vm.allRanobe.slice(-4, -1);
       });
     }
   },
