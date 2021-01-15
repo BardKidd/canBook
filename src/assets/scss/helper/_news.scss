@@ -37,7 +37,7 @@
     text-shadow: 1px 1px 1px $black;
 }
 .activityImage2 {
-    background-image: url('~@/assets/image/activity2.png');
+    background-image: url('~@/assets/image/activity2.jpg');
     @extend %activityImage;
 }
 .activityFontStyle3 {
@@ -45,6 +45,6 @@
     text-shadow: 1px 1px 1px $black;
 }
 .activityImage3 {
-    background-image: url('~@/assets/image/activity6.png');
+    background-image: url('~@/assets/image/activity6.jpg');
     @extend %activityImage;
 }
